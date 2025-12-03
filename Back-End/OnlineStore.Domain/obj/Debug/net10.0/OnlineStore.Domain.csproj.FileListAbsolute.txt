@@ -13,3 +13,4 @@ C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Domain\bin\Debug
 C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Domain\bin\Debug\net10.0\SharedKernel.pdb
 C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Domain\obj\Debug\net10.0\OnlineStore.Domain.csproj.AssemblyReference.cache
 C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Domain\obj\Debug\net10.0\OnlineSt.835BEC06.Up2Date
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Domain\obj\Debug\net10.0\OnlineStore.Domain.sourcelink.json

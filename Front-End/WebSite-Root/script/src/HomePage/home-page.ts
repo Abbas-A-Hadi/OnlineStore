@@ -4,74 +4,76 @@ let heroTimer : number | null = null;
 
 let cart: { title: string; price: number; }[] = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-    
+document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
+
+function OnDocumentContentLoaded(): void {
+
     document.querySelectorAll(".add-product-btn")
         .forEach(b => (<HTMLButtonElement> b).addEventListener("click", addProductToCart));
-    
+
     document.querySelectorAll(".show-product-btn")
         .forEach(b => (<HTMLButtonElement> b).addEventListener("click", showProduct));
-    
+
     document.getElementById("search-btn")?.addEventListener("click", () => {
-        let searchInputElement: HTMLInputElement = 
+        let searchInputElement: HTMLInputElement =
             <HTMLInputElement> document.getElementById("search-input");
-        
+
         const query: string = searchInputElement.value.toLowerCase();
-        
+
         if (query) alert("Search: " + query);
     });
-    
+
     const indexOfHeaderActionsDivElement: number = 0;
-    let headerActionsDivElement = <HTMLDivElement> 
+    let headerActionsDivElement = <HTMLDivElement>
         document.getElementsByClassName("header-actions").item(indexOfHeaderActionsDivElement);
-    
+
     if (headerActionsDivElement !== null) {
         const indexOfOpenAccountButtonElement: number = 0;
-        let openAccountBtn = <HTMLButtonElement> 
+        let openAccountBtn = <HTMLButtonElement>
             headerActionsDivElement.children.item(indexOfOpenAccountButtonElement);
-        
+
         openAccountBtn.addEventListener("click", openAccount);
 
         const indexOfToggleCartButtonElement: number = 1;
         let toggleCartBtn = <HTMLButtonElement>
             headerActionsDivElement.children.item(indexOfToggleCartButtonElement);
-        
+
         toggleCartBtn.addEventListener("click", toggleCart);
     }
-    
+
     let hero_ctaDivElement = <HTMLDivElement> document.getElementsByClassName("hero-cta").item(0);
-    
+
     if (hero_ctaDivElement !== null) {
         let indexOfCat_ActionDivElement: number = 2;
         let cta_actionsDivElement = <HTMLDivElement> hero_ctaDivElement.children.item(indexOfCat_ActionDivElement);
-        
+
         if (cta_actionsDivElement !== null) {
             let indexOfShopNowButtenElement: number = 0;
             let shopNowBtn = <HTMLButtonElement> cta_actionsDivElement.children.item(indexOfShopNowButtenElement);
             shopNowBtn.addEventListener("click", shopNow);
-            
+
             let indexOfDealsButtenElement: number = 1;
             let dealsBtn = <HTMLButtonElement> cta_actionsDivElement.children.item(indexOfDealsButtenElement);
             dealsBtn.addEventListener("click", exploreDeals);
         }
     }
-    
+
     // section class="featured container"
-    let featuredContainerSectionElement = <HTMLTableSectionElement> 
+    let featuredContainerSectionElement = <HTMLTableSectionElement>
         document.getElementsByClassName("featured container").item(0);
-    
+
     if (featuredContainerSectionElement !== null) {
         const indexOfFeature_CardDivElement: number = 0;
         let feature_cardDivElement = <HTMLDivElement>featuredContainerSectionElement.children.item(indexOfFeature_CardDivElement);
-        
+
         if (feature_cardDivElement !== null) {
             let feature_textDivElm = <HTMLDivElement> feature_cardDivElement.querySelector("div");
-            
+
             let customizeBtn = <HTMLButtonElement> feature_textDivElm?.querySelector("button");
             customizeBtn?.addEventListener("click", shopNow)
         }
     }
-    
+
     let cart_panelDivElement = <HTMLDivElement> document.getElementById("cart-panel");
     if (cart_panelDivElement !== null) {
         const indexOfCartHeadDivElement: number = 0;
@@ -80,18 +82,18 @@ document.addEventListener("DOMContentLoaded", () => {
             let closeCartPanelBtn = cartHeadDivElement?.querySelector("button");
             closeCartPanelBtn?.addEventListener("click", toggleCart);
         }
-        
+
         const indexOfCartFootDivElement = 2;
         let cart_footDivElement = <HTMLDivElement> cart_panelDivElement.children.item(indexOfCartFootDivElement);
-        
+
         if (cart_footDivElement !== null) {
             let checkOutButton = cart_footDivElement.querySelector("button");
             checkOutButton?.addEventListener("click", checkout);
         }
     }
-    
+
     startHeroAutoplay();
-});
+}
 
 function startHeroAutoplay() : void {
     stopHeroAutoplay();
@@ -177,7 +179,8 @@ function updateCart() : void {
         
         removeItemBtn = document.createElement("button");
         removeItemBtn.innerHTML = "x";
-        removeItemBtn.addEventListener("click", () => removeItemFromCart);
+        // removeItemBtn.addEventListener("click", () => removeItemFromCart.bind(i));
+        removeItemBtn.onclick = () => {removeItemFromCart(i)};
         // background:transparent;border:none;color:var(--neon);cursor:pointer"
         removeItemBtn.style.background = "transparent";
         removeItemBtn.style.border = "none";

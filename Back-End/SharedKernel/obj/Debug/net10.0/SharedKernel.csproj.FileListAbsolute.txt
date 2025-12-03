@@ -9,3 +9,4 @@ C:\GitHub-Projects\University\Online-Store\Back-End\SharedKernel\obj\Debug\net10
 C:\GitHub-Projects\University\Online-Store\Back-End\SharedKernel\obj\Debug\net10.0\refint\SharedKernel.dll
 C:\GitHub-Projects\University\Online-Store\Back-End\SharedKernel\obj\Debug\net10.0\SharedKernel.pdb
 C:\GitHub-Projects\University\Online-Store\Back-End\SharedKernel\obj\Debug\net10.0\ref\SharedKernel.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\SharedKernel\obj\Debug\net10.0\SharedKernel.sourcelink.json

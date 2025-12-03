@@ -393,5 +393,15 @@ GO
 
 ----////////////////////////////
 
-
+CREATE TABLE Transactions
+(
+    Id UNIQUEIDENTIFIER NOT NULL,
+    CT VARCHAR(MAX) NOT NULL,
+    
+    ---- Constraints
+    CONSTRAINT PK_Transactions_Id PRIMARY KEY (Id),
+    
+    
+    CONSTRAINT UQ_Transactions_CT UNIQUE (CT),
+);
 GO
