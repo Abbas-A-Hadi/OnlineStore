@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Alpha Shop</title>
+    <link rel="stylesheet" href="../style/home-page.css" />
+    <script type="module" src="../script/dist/HomePage/home-page.js" defer></script>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="container topbar-inner">
+            <div class="brand">
+                <div class="logo">ALPHA<span>SHOP</span></div>
+                <div class="tag">Cyber Deals</div>
+            </div>
+    
+            <div class="search-wrap">
+                <input id="search-input" placeholder="Search products, brands and more..." />
+                <button id="search-btn">Search</button>
+            </div>
+    
+            <div class="header-actions">
+                <button class="icon-btn">👤</button>
+                <button class="icon-btn">🛒 <span id="cart-count-span">0</span></button>
+            </div>
+        </div>
+    
+        <nav class="category-bar">
+            <div class="container categories">
+                <button class="cat">Monitors</button>
+                <button class="cat">Keyboards</button>
+                <button class="cat">Motherboards</button>
+                <button class="cat">Graphics</button>
+                <button class="cat">Storage</button>
+                <button class="cat">Accessories</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="hero">
+            <div class="container hero-inner">
+    
+                <div class="hero-slider-wrap">
+                    <button class="arrow left" onclick="slide(-1)">&#10094;</button>
+    
+                    <div class="hero-slider" id="hero-slider-div">
+                        <div class="slide"><img src="../images/RK-M87-BLUE-1-150x150.webp" alt="RK-M87 BLUE 1"></div>
+                        <div class="slide"><img src="../images/RK-M87-BLUE-2-150x150.webp" alt="RK-M87 BLUE 2"></div>
+                        <div class="slide"><img src="../images/RK-M87-BLUE-5-150x150.webp" alt="RK-M87 BLUE 5"></div>
+                    </div>
+    
+                    <button class="arrow right" onclick="slide(1)">&#10095;</button>
+                </div>
+    
+                <div class="hero-cta">
+                    <h1>Top Neon Deals — Limited Time</h1>
+                    <p>Curated gaming & tech gear with cyber glow — fast shipping.</p>
+                    <div class="cta-actions">
+                        <button class="primary">Shop Now</button>
+                        <button class="ghost">Deals</button>
+                    </div>
+                </div>
+    
+            </div>
+        </section>
+
+        <section class="featured container">
+    
+            <div class="feature-card">
+                <img src="img/magicwand.jpeg" />
+                <div class="feature-text">
+                    <h3>Build your rig</h3>
+                    <p>Neon-optimized picks for peak performance.</p>
+                    <button class="outline">Customize</button>
+                </div>
+            </div>
+    
+            <div class="deals">
+                <h2>Hot Deals</h2>
+                <div class="deal-row">
+    
+                    <div class="deal-card">
+                        <img src="img/redragon-k512.jpeg" />
+                        <h4>Redragon K512</h4>
+                        <div class="price">IQD 30,000</div>
+                        <button class="add-product-btn">Add to Cart</button>
+                    </div>
+    
+                    <div class="deal-card">
+                        <img src="img/venom-2.jpeg" />
+                        <h4>Venom Pro</h4>
+                        <div class="price">IQD 12,000</div>
+                        <button class="add-product-btn">Add to Cart</button>
+                    </div>
+    
+                    <div class="deal-card">
+                        <img src="img/lol-logtec.jpeg" />
+                        <h4>Logtec RGB Pad</h4>
+                        <div class="price">IQD 8,500</div>
+                        <button class="add-product-btn">Add to Cart</button>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </section>
+    
+        <section id="products" class="container product-section">
+    
+            <div class="section-head">
+                <h2>Keyboards</h2>
+                <a class="viewall" href="#">View all</a>
+            </div>
+    
+            <div class="product-grid">
+    
+                <div class="product-card">
+                    <div class="img-wrap"><img src="img/images17.jpeg"></div>
+                    <h3>Redragon SHIVA</h3>
+                    <div class="price">IQD 30,000</div>
+                    <div class="card-actions">
+                        <button class="add-product-btn">Add to Cart</button>
+                        <button class="show-product-btn">Show Product</button>
+                    </div>
+                </div>
+    
+                <div class="product-card">
+                    <div class="img-wrap"><img src="img/download7.jpeg"></div>
+                    <h3>Magic-Wand SE</h3>
+                    <div class="price">IQD 40,000</div>
+                    <div class="card-actions">
+                        <button class="add-product-btn">Add to Cart</button>
+                        <button class="show-product-btn">Show Product</button>
+                    </div>
+                </div>
+    
+                <div class="product-card">
+                    <div class="img-wrap"><img src="img/venom-2.jpeg"></div>
+                    <h3>Gamer Pro X</h3>
+                    <div class="price">IQD 245,000</div>
+                    <div class="card-actions">
+                        <button class="add-product-btn">Add to Cart</button>
+                        <button class="show-product-btn">Show Product</button>
+                    </div>
+                </div>
+    
+                <div class="product-card">
+                    <div class="img-wrap"><img src="img/magicwand.jpeg"></div>
+                    <h3>Venom RGB</h3>
+                    <div class="price">IQD 300,000</div>
+                    <div class="card-actions">
+                        <button class="add-product-btn">Add to Cart</button>
+                        <button class="show-product-btn">Show Product</button>
+                    </div>
+                </div>
+    
+            </div>
+
+        </section>
+    </main>
+
+
+
+    <div id="cart-panel">
+    
+        <div class="cart-head">
+            <h3>Your Cart</h3>
+            <button>✕</button>
+        </div>
+    
+        <ul id="cart-items-ul"></ul>
+    
+        <div class="cart-foot">
+            <div class="total">Total: <span id="cart-total-span">0</span> IQD</div>
+            <button class="primary">Checkout</button>
+        </div>
+    
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>&copy 2025 AlphaShop</div>
+            <div class="socials">Follow: Twitter • Instagram • Discord</div>
+        </div>
+    </footer>
+
+</body>
+</html>

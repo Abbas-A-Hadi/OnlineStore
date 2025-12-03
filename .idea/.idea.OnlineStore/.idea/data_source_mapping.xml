@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/.idea/.idea.OnlineStore/.idea/queries/Query.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetAllActiveUsersFullInfo.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetMainInfoById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Activate_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Create.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Deactivate_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Delete_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ByUserNameAndPassword.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Undelete_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Update.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Addresses.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Brands.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Cart_Items.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Carts.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Categories.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Cities.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Countries.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Order_Lines.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Orders.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Payments.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/People.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Products.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/ProductsImagesURLs.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Reviews.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Suppliers.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Users.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+  </component>
+</project>

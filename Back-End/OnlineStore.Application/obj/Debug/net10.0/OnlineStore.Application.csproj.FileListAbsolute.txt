@@ -1,0 +1,17 @@
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\OnlineStore.Application.deps.json
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\OnlineStore.Application.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\OnlineStore.Application.pdb
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.AssemblyInfoInputs.cache
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.AssemblyInfo.cs
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.csproj.CoreCompileInputs.cache
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\refint\OnlineStore.Application.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.pdb
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\ref\OnlineStore.Application.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineStore.Application.csproj.AssemblyReference.cache
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\OnlineStore.Domain.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\SharedKernel.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\OnlineStore.Domain.pdb
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\bin\Debug\net10.0\SharedKernel.pdb
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Application\obj\Debug\net10.0\OnlineSt.92656711.Up2Date

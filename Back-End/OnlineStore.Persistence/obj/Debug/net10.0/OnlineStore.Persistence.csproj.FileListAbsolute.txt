@@ -1,0 +1,12 @@
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\bin\Debug\net10.0\OnlineStore.Persistence.deps.json
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\bin\Debug\net10.0\OnlineStore.Persistence.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\bin\Debug\net10.0\OnlineStore.Persistence.pdb
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.AssemblyInfoInputs.cache
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.AssemblyInfo.cs
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.csproj.CoreCompileInputs.cache
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\refint\OnlineStore.Persistence.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.pdb
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\ref\OnlineStore.Persistence.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Persistence\obj\Debug\net10.0\OnlineStore.Persistence.csproj.AssemblyReference.cache
