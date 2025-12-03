@@ -2,7 +2,8 @@ const HERO_AUTOPLAY_MS = 4000;
 let heroIndex = 0;
 let heroTimer = null;
 let cart = [];
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
+function OnDocumentContentLoaded() {
     var _a;
     document.querySelectorAll(".add-product-btn")
         .forEach(b => b.addEventListener("click", addProductToCart));
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     startHeroAutoplay();
-});
+}
 function startHeroAutoplay() {
     stopHeroAutoplay();
     heroTimer = setInterval(() => slide(1), HERO_AUTOPLAY_MS);
@@ -132,7 +133,7 @@ function updateCart() {
         priceDiv.innerText = item.price.toString();
         removeItemBtn = document.createElement("button");
         removeItemBtn.innerHTML = "x";
-        removeItemBtn.addEventListener("click", () => removeItemFromCart);
+        removeItemBtn.onclick = () => { removeItemFromCart(i); };
         removeItemBtn.style.background = "transparent";
         removeItemBtn.style.border = "none";
         removeItemBtn.style.color = "var(--neon)";

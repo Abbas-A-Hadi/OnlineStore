@@ -16,15 +16,5 @@
     "C:\\Users\\mraba\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
     "C:\\Users\\mraba\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Presentation\\OnlineStore.Presentation.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Presentation\\OnlineStore.Presentation.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

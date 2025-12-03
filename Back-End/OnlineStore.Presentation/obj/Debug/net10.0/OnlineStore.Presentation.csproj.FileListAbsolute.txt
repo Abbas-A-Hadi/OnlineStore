@@ -46,3 +46,4 @@ C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Presentation\obj
 C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Presentation\obj\Debug\net10.0\OnlineStore.Presentation.pdb
 C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Presentation\obj\Debug\net10.0\OnlineStore.Presentation.genruntimeconfig.cache
 C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Presentation\obj\Debug\net10.0\ref\OnlineStore.Presentation.dll
+C:\GitHub-Projects\University\Online-Store\Back-End\OnlineStore.Presentation\obj\Debug\net10.0\OnlineStore.Presentation.sourcelink.json

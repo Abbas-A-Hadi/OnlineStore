@@ -1,4 +1,4 @@
-let heroProductId = null;
+let heroProductId;
 const products = {
     keyboard1: {
         id: "keyboard1",
@@ -93,36 +93,39 @@ function renderProduct(product) {
     const stockEl = document.getElementById("product-stock");
     const reviewsEl = document.getElementById("product-reviews");
     const thumbsEl = document.getElementById("thumbs");
-    nameEl.textContent = product.name;
-    skuEl.textContent = "Model: " + product.sku;
-    priceEl.textContent = product.priceText;
-    buyPriceEl.textContent = product.priceText;
-    stockEl.textContent = product.stock;
-    shortEl.textContent = product.short;
-    longEl.textContent = product.long;
-    reviewsEl.textContent = product.reviewsText;
+    nameEl === null || nameEl === void 0 ? void 0 : nameEl.innerText.concat(product.name);
+    skuEl === null || skuEl === void 0 ? void 0 : skuEl.innerText.concat("Model: " + product.sku);
+    priceEl === null || priceEl === void 0 ? void 0 : priceEl.innerText.concat(product.priceText);
+    buyPriceEl === null || buyPriceEl === void 0 ? void 0 : buyPriceEl.innerText.concat(product.priceText);
+    stockEl === null || stockEl === void 0 ? void 0 : stockEl.innerText.concat(product.stock);
+    shortEl === null || shortEl === void 0 ? void 0 : shortEl.innerText.concat(product.short);
+    longEl === null || longEl === void 0 ? void 0 : longEl.innerText.concat(product.long);
+    reviewsEl === null || reviewsEl === void 0 ? void 0 : reviewsEl.innerText.concat(product.reviewsText);
     featEl.innerHTML = "";
-    product.features.forEach(f => {
-        const li = document.createElement("li");
-        li.textContent = f;
-        featEl.appendChild(li);
+    let newListItemElm;
+    product.features.forEach((feature) => {
+        newListItemElm = document.createElement("li");
+        newListItemElm.innerText = feature;
+        featEl.appendChild(newListItemElm);
     });
     thumbsEl.innerHTML = "";
+    let newDivElm;
+    let newImageElm;
     product.images.forEach((src, idx) => {
-        const t = document.createElement("div");
-        t.className = "thumb-item" + (idx === 0 ? " active" : "");
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = product.name + " image " + (idx + 1);
-        t.appendChild(img);
-        t.addEventListener("click", () => {
+        newDivElm = document.createElement("div");
+        newDivElm.className = "thumb-item" + (idx === 0 ? " active" : "");
+        newImageElm = document.createElement("img");
+        newImageElm.src = src;
+        newImageElm.alt = product.name + " image " + (idx + 1);
+        newDivElm.appendChild(newImageElm);
+        newDivElm.addEventListener("click", () => {
             document
                 .querySelectorAll(".thumb-item")
                 .forEach(el => el.classList.remove("active"));
-            t.classList.add("active");
+            newDivElm.classList.add("active");
             mainImg.src = src;
         });
-        thumbsEl.appendChild(t);
+        thumbsEl.appendChild(newDivElm);
     });
     mainImg.src = product.images[0];
     mainImg.alt = product.name;
@@ -130,7 +133,7 @@ function renderProduct(product) {
 function renderRelated() {
     const container = document.getElementById("related-list");
     container.innerHTML = "";
-    Object.values(products).forEach(p => {
+    products.forEach(p => {
         if (p.id === heroProductId)
             return;
         const card = document.createElement("a");

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$PROJECT_DIR$/.idea/.idea.OnlineStore/.idea/queries/Query.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetAllActiveUsersFullInfo.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetMainInfoById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
