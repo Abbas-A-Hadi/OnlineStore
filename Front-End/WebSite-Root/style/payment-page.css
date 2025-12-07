@@ -29,7 +29,6 @@ body {
     min-height: 100vh;
 }
 
-/* Background grid lines */
 .bg-grid {
     position: fixed;
     inset: 0;
@@ -42,7 +41,6 @@ body {
     z-index: -1;
 }
 
-/* HEADER */
 .checkout-header {
     position: sticky;
     top: 0;
@@ -79,11 +77,6 @@ body {
     gap: 0.3rem;
     color: var(--accent);
     text-shadow: 0 0 12px rgba(0, 224, 255, 0.8);
-}
-
-.logo::before {
-    content: "🦊";
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
 }
 
 .steps {
@@ -127,7 +120,6 @@ body {
     letter-spacing: 0.04em;
 }
 
-/* LAYOUT */
 .checkout-wrapper {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(290px, 1fr);
@@ -143,7 +135,6 @@ body {
     margin-bottom: 1.2rem;
 }
 
-/* Neon glow edges */
 .neon-card {
     position: relative;
     overflow: hidden;
@@ -166,7 +157,6 @@ body {
     mix-blend-mode: screen;
 }
 
-/* Form basics */
 .checkout-left h2 {
     margin: 0 0 0.9rem;
     font-size: 1.1rem;
@@ -216,7 +206,6 @@ select:focus {
     background: rgba(5, 10, 28, 1);
 }
 
-/* Radio rows */
 .radio-row {
     display: flex;
     align-items: center;
@@ -263,14 +252,12 @@ select:focus {
     font-size: 1.1rem;
 }
 
-/* Card details */
 .card-details {
     margin-top: 0.9rem;
     border-top: 1px dashed rgba(255, 255, 255, 0.15);
     padding-top: 0.9rem;
 }
 
-/* Buttons */
 .primary-btn {
     width: 100%;
     padding: 0.9rem 1rem;
@@ -330,7 +317,6 @@ select:focus {
     text-decoration: underline;
 }
 
-/* Right side: order summary */
 .order-card h2 {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -410,7 +396,6 @@ select:focus {
     color: var(--text-muted);
 }
 
-/* Info card */
 .info-card {
     font-size: 0.82rem;
 }
@@ -420,14 +405,12 @@ select:focus {
     margin-bottom: 0.4rem;
 }
 
-/* Sticky action */
 .sticky-actions {
     position: sticky;
     bottom: 0;
     background: linear-gradient(180deg, rgba(5, 8, 22, 0.9), rgba(5, 8, 22, 1));
 }
 
-/* Toast messages */
 .toast {
     position: fixed;
     bottom: 1.4rem;
@@ -444,16 +427,15 @@ select:focus {
     align-items: center;
     gap: 0.5rem;
     z-index: 50;
-    animation: floatUp 0.25s ease-out;
 }
 
 .toast.hidden {
     display: none;
 }
 
-.toast::before {
-    content: "⚡";
-    font-size: 1rem;
+.order-empty {
+    font-size: 0.85rem;
+    color: var(--text-muted);
 }
 
 @keyframes floatUp {
@@ -467,7 +449,6 @@ select:focus {
     }
 }
 
-/* Responsive */
 @media (max-width: 900px) {
     .checkout-wrapper {
         grid-template-columns: 1fr;

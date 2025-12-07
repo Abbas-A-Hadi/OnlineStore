@@ -4,7 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Alpha Shop</title>
+    
     <link rel="stylesheet" href="../style/home-page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
     <script type="module" src="../script/dist/HomePage/home-page.js" defer></script>
 </head>
 
@@ -46,7 +51,7 @@
             <div class="container hero-inner">
     
                 <div class="hero-slider-wrap">
-                    <button class="arrow left" onclick="slide(-1)">&#10094;</button>
+                        <button name="slideToPrevious" class="arrow left" >&#10094;</button>
     
                     <div class="hero-slider" id="hero-slider-div">
                         <div class="slide"><img src="../images/RK-M87-BLUE-1-150x150.webp" alt="RK-M87 BLUE 1"></div>
@@ -54,7 +59,7 @@
                         <div class="slide"><img src="../images/RK-M87-BLUE-5-150x150.webp" alt="RK-M87 BLUE 5"></div>
                     </div>
     
-                    <button class="arrow right" onclick="slide(1)">&#10095;</button>
+                    <button name="slideToNext" class="arrow right" >&#10095;</button>
                 </div>
     
                 <div class="hero-cta">
@@ -164,24 +169,42 @@
         </section>
     </main>
 
-
-
+    
     <div id="cart-panel">
-    
-        <div class="cart-head">
-            <h3>Your Cart</h3>
-            <button>✕</button>
-        </div>
-    
-        <ul id="cart-items-ul"></ul>
-    
-        <div class="cart-foot">
-            <div class="total">Total: <span id="cart-total-span">0</span> IQD</div>
-            <button class="primary">Checkout</button>
-        </div>
-    
-    </div>
+        <div class="cart-modal">
 
+            <div class="cart-header">
+                <div class="cart-header-left">
+                    <h2 class="cart-title-main">
+                        Cart <span class="cart-badge" id="cart-count-badge">0</span>
+                    </h2>
+                </div>
+                <button class="cart-close">✕</button>
+            </div>
+
+            <div class="cart-body">
+                <ul id="cart-items"></ul>
+            </div>
+
+            <div class="cart-summary">
+                <div class="cart-summary-left">
+                    <div class="cart-summary-title">Total</div>
+                    <div class="cart-summary-note">
+                        Taxes and shipping calculated at checkout
+                    </div>
+                </div>
+                <div class="cart-summary-total">
+                    <span id="cart-total">0</span> IQD
+                </div>
+            </div>
+
+            <div class="cart-actions-bar">
+                <button class="cart-secondary">View cart</button>
+                <button class="cart-primary">Checkout</button>
+            </div>
+
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container footer-inner">
