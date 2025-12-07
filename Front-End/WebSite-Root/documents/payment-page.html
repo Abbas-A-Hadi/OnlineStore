@@ -2,37 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Payment | My Store</title>
+    <title>Payment | alpha shop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Font (same vibe as your store) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../style/payment-page.css" />
-    <script type="module" src="../.././WebSite-Root/script/dist/PaymentPage/payment-page.js" ></script>
-    <script type="module" src="../.././WebSite-Root/script/dist/DataTypes/OrderItem.js" ></script>
+    <script type="module" src="../.././WebSite-Root/script/dist/PaymentPage/payment-page.js" defer></script>
+    <script type="module" src="../.././WebSite-Root/script/dist/DataTypes/OrderItem.js" defer></script>
 </head>
 <body>
-    <!-- Neon background grid -->
+
     <div class="bg-grid"></div>
 
     <!-- HEADER -->
     <header class="checkout-header">
         <div class="header-left">
-            <div class="logo">My Store</div>
+            <div class="logo">alpha shop</div>
             <div class="steps">
                 <span class="step done">Cart</span>
                 <span class="step done">Details</span>
                 <span class="step active">Payment</span>
                 <span class="step">Review</span>
             </div>
-        </div>
-    
-        <div class="header-right">
-            <span class="secure-icon">🔒</span>
-            <span class="secure-text">Secure Neon Checkout</span>
         </div>
     </header>
 
@@ -94,31 +88,7 @@
                     </select>
                 </div>
             </div>
-    
-            <!-- Shipping method -->
-            <div class="card neon-card">
-                <h2>Shipping method</h2>
-    
-                <label class="radio-row">
-                    <input type="radio" name="shipping" value="standard" checked />
-                    <div class="radio-body">
-                        <div class="radio-title">Standard shipping</div>
-                        <div class="radio-sub">3 – 7 business days</div>
-                    </div>
-                    <div class="radio-price">FREE</div>
-                </label>
-    
-                <label class="radio-row">
-                    <input type="radio" name="shipping" value="express" />
-                    <div class="radio-body">
-                        <div class="radio-title">Express shipping</div>
-                        <div class="radio-sub">1 – 3 business days</div>
-                    </div>
-                    <div class="radio-price">$7.99</div>
-                </label>
-            </div>
-    
-            <!-- Payment method -->
+        
             <div class="card neon-card">
                 <h2>Payment method</h2>
     
@@ -129,9 +99,7 @@
                             <div class="radio-title">Credit / Debit card</div>
                             <div class="radio-sub">Visa, MasterCard, etc.</div>
                         </div>
-                        <div class="card-icons">
-                            💳
-                        </div>
+                        <div class="card-icons">💳</div>
                     </label>
     
                     <label class="radio-row">
@@ -140,24 +108,10 @@
                             <div class="radio-title">Cash on delivery</div>
                             <div class="radio-sub">Pay when your order arrives</div>
                         </div>
-                        <div class="card-icons">
-                            💵
-                        </div>
-                    </label>
-    
-                    <label class="radio-row">
-                        <input type="radio" name="payment" value="paypal" />
-                        <div class="radio-body">
-                            <div class="radio-title">PayPal</div>
-                            <div class="radio-sub">Fast & secure payment</div>
-                        </div>
-                        <div class="card-icons">
-                            🅿️
-                        </div>
+                        <div class="card-icons">💵</div>
                     </label>
                 </div>
     
-                <!-- Card details (shown only if card selected) -->
                 <div id="card-details" class="card-details">
                     <div class="field-row">
                         <label for="card-number">Card number</label>
@@ -182,25 +136,21 @@
                 </div>
             </div>
     
-            <!-- Place order button -->
             <div class="card neon-card sticky-actions">
-                <button id="pay-btn" class="primary-btn">
-                    Complete Order
-                </button>
-                <p class="terms">
-                    By placing your order you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
-                </p>
-            </div>
+            <button id="pay-btn" class="primary-btn">
+                Complete Order
+            </button>
+            <p class="terms">
+                By placing your order you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+            </p>
+        </div>
         </section>
-    
-        <!-- RIGHT: ORDER SUMMARY -->
+
         <aside class="checkout-right">
             <div class="card neon-card order-card">
                 <h2>Order summary</h2>
     
-                <div id="order-items" class="order-items">
-                    <!-- JS will inject items here -->
-                </div>
+                <div id="order-items" class="order-items"></div>
     
                 <div class="summary-row">
                     <span>Subtotal</span>
@@ -219,22 +169,10 @@
                     <input id="coupon-input" type="text" placeholder="Coupon code" />
                     <button id="apply-coupon-btn" class="secondary-btn">Apply</button>
                 </div>
-                <p class="small-note">
-                    Prices shown in USD (example). Adjust in code for your real currency.
-                </p>
-            </div>
-    
-            <div class="card neon-card info-card">
-                <h3>Why this page looks neon?</h3>
-                <p>
-                    This payment screen is styled to match your neon theme while keeping a clean layout
-                    similar to big stores like Amazon.
-                </p>
             </div>
         </aside>
     </main>
 
-    <!-- Toast / message -->
     <div id="toast" class="toast hidden">
         <span id="toast-message"></span>
     </div>

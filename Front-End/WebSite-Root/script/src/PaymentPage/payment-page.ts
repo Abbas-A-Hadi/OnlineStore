@@ -46,15 +46,18 @@ function OnDocumentContentLoaded() {
     handlePaymentChange(); // set initial state
 
     // Coupon
-    const couponBtn = <HTMLButtonElement> document.getElementById("apply-coupon-btn");
-    couponBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        handleApplyCoupon();
-    });
+    (<HTMLButtonElement> document.getElementById("apply-coupon-btn"))
+        ?.addEventListener("click", (e) => {
+            e.preventDefault();
+            handleApplyCoupon();
+        });
 
     // Pay button
-    const payBtn = <HTMLButtonElement> document.getElementById("pay-btn");
-    payBtn.addEventListener("click", handlePayClick);
+    (<HTMLButtonElement> document.getElementById("pay-btn"))
+        ?.addEventListener("click", handlePayClick);
+    
+    // Remove this method after done it work to clean some memory space and plus speed up.
+    document.removeEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 }
 
 function goHome(): void {
@@ -70,13 +73,22 @@ function renderOrderItems() {
     const container = <HTMLDivElement> document.getElementById("order-items");
     container.innerHTML = "";
 
-    let subtotal = 0;
+    let subtotal: number = 0;
 
-    orderItems.forEach((item) => {
-        const lineTotal = item.price * item.qty;
+    if (!Array.isArray(orderItems) || orderItems.length === 0) {
+        const empty: HTMLDivElement = document.createElement("div");
+        empty.className = "order-empty";
+        empty.textContent = "Your cart is empty.";
+        container.appendChild(empty);
+        updateTotals(0);
+        return;
+    }
+
+    orderItems.forEach((item: OrderItem) => {
+        const lineTotal: number = item.price * item.qty;
         subtotal += lineTotal;
 
-        const row = document.createElement("div");
+        const row: HTMLDivElement = document.createElement("div");
         row.className = "order-item-row";
         row.innerHTML = `
       <div class="order-thumb">${item.emoji}</div>
@@ -133,7 +145,10 @@ function handlePaymentChange(): void {
     const selected = <HTMLInputElement> document.querySelector('input[name="payment"]:checked');
     const cardDetails = <HTMLDivElement> document.getElementById("card-details");
 
-    if (!selected) return;
+    if (!selected) {
+        cardDetails.style.display = "none";
+        return;
+    }
 
     if (selected.value === "card") {
         cardDetails.style.display = "block";
@@ -149,7 +164,7 @@ function showToast(message: string): void {
     msg.textContent = message;
     toast.classList.remove("hidden");
 
-    setTimeout(() => {
+    setTimeout(function addHiddenToClassOf_toast_DivElm() {
         toast.classList.add("hidden");
     }, 2800);
 }
@@ -175,7 +190,10 @@ function handleApplyCoupon(): void {
         showToast("Invalid coupon code.");
     }
 
-    let subtotal = orderItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+    let subtotal: number = Array.isArray(orderItems) 
+        ? orderItems.reduce((sum, item) => sum + item.price * item.qty, 0)
+        : 0;
+    
     updateTotals(subtotal);
 }
 

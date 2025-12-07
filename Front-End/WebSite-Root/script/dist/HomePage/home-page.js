@@ -1,10 +1,11 @@
+import { CartProduct } from "../DataTypes/CartProduct";
 const HERO_AUTOPLAY_MS = 4000;
 let heroIndex = 0;
 let heroTimer = null;
 let cart = [];
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
-    var _a;
+    var _a, _b, _c, _d, _e;
     document.querySelectorAll(".add-product-btn")
         .forEach(b => b.addEventListener("click", addProductToCart));
     document.querySelectorAll(".show-product-btn")
@@ -15,6 +16,12 @@ function OnDocumentContentLoaded() {
         if (query)
             alert("Search: " + query);
     });
+    const indexOfButtenSliderToNext = 0, sliderToNextAsValue = 1;
+    const slideToNextHandler = function slideByOneToNext() { slide(sliderToNextAsValue); };
+    (_b = document.getElementsByName("slideToNext")[indexOfButtenSliderToNext]) === null || _b === void 0 ? void 0 : _b.addEventListener("click", slideToNextHandler);
+    const indexOfButtenSliderToPrevious = 0, sliderToPreviousAsValue = -1;
+    const slideToPreviousHandler = function slideByOneToPrevious() { slide(sliderToPreviousAsValue); };
+    (_c = document.getElementsByName("slideToPrevious")[indexOfButtenSliderToPrevious]) === null || _c === void 0 ? void 0 : _c.addEventListener("click", slideToPreviousHandler);
     const indexOfHeaderActionsDivElement = 0;
     let headerActionsDivElement = document.getElementsByClassName("header-actions").item(indexOfHeaderActionsDivElement);
     if (headerActionsDivElement !== null) {
@@ -25,16 +32,18 @@ function OnDocumentContentLoaded() {
         let toggleCartBtn = headerActionsDivElement.children.item(indexOfToggleCartButtonElement);
         toggleCartBtn.addEventListener("click", toggleCart);
     }
-    let hero_ctaDivElement = document.getElementsByClassName("hero-cta").item(0);
-    if (hero_ctaDivElement !== null) {
+    const indexOfHero_CtaDivElm = 0;
+    let hero_ctaDivElm = document.getElementsByClassName("hero-cta")
+        .item(indexOfHero_CtaDivElm);
+    if (hero_ctaDivElm !== null) {
         let indexOfCat_ActionDivElement = 2;
-        let cta_actionsDivElement = hero_ctaDivElement.children.item(indexOfCat_ActionDivElement);
-        if (cta_actionsDivElement !== null) {
-            let indexOfShopNowButtenElement = 0;
-            let shopNowBtn = cta_actionsDivElement.children.item(indexOfShopNowButtenElement);
+        let cta_actionsDivElm = hero_ctaDivElm.children.item(indexOfCat_ActionDivElement);
+        if (cta_actionsDivElm !== null) {
+            let indexOfShopNowButtenElm = 0;
+            let shopNowBtn = cta_actionsDivElm.children.item(indexOfShopNowButtenElm);
             shopNowBtn.addEventListener("click", shopNow);
-            let indexOfDealsButtenElement = 1;
-            let dealsBtn = cta_actionsDivElement.children.item(indexOfDealsButtenElement);
+            let indexOfDealsButtenElm = 1;
+            let dealsBtn = cta_actionsDivElm.children.item(indexOfDealsButtenElm);
             dealsBtn.addEventListener("click", exploreDeals);
         }
     }
@@ -48,22 +57,21 @@ function OnDocumentContentLoaded() {
             customizeBtn === null || customizeBtn === void 0 ? void 0 : customizeBtn.addEventListener("click", shopNow);
         }
     }
-    let cart_panelDivElement = document.getElementById("cart-panel");
-    if (cart_panelDivElement !== null) {
-        const indexOfCartHeadDivElement = 0;
-        let cartHeadDivElement = cart_panelDivElement.children.item(indexOfCartHeadDivElement);
-        if (cartHeadDivElement !== null) {
-            let closeCartPanelBtn = cartHeadDivElement === null || cartHeadDivElement === void 0 ? void 0 : cartHeadDivElement.querySelector("button");
-            closeCartPanelBtn === null || closeCartPanelBtn === void 0 ? void 0 : closeCartPanelBtn.addEventListener("click", toggleCart);
-        }
-        const indexOfCartFootDivElement = 2;
-        let cart_footDivElement = cart_panelDivElement.children.item(indexOfCartFootDivElement);
-        if (cart_footDivElement !== null) {
-            let checkOutButton = cart_footDivElement.querySelector("button");
-            checkOutButton === null || checkOutButton === void 0 ? void 0 : checkOutButton.addEventListener("click", checkout);
-        }
+    let cartPanelDivElm = document.getElementById("cart-panel");
+    if (cartPanelDivElm !== null) {
+        const indexOfCartModelDivElm = 0;
+        const cartModelDivElm = cartPanelDivElm.children.item(indexOfCartModelDivElm);
+        const indexOfCartHeadDivElm = 0;
+        const indexOfCloseCartPanelBtn = 1;
+        let cartHeaderDivElm = cartModelDivElm.children.item(indexOfCartHeadDivElm);
+        (_d = cartHeaderDivElm.children.item(indexOfCloseCartPanelBtn)) === null || _d === void 0 ? void 0 : _d.addEventListener("click", toggleCart);
+        const indexOfCartActionBarDivElm = 3;
+        const indexOfCheckoutBtn = 1;
+        const cartActionBarDivElm = cartModelDivElm.children.item(indexOfCartActionBarDivElm);
+        (_e = cartActionBarDivElm === null || cartActionBarDivElm === void 0 ? void 0 : cartActionBarDivElm.children.item(indexOfCheckoutBtn)) === null || _e === void 0 ? void 0 : _e.addEventListener("click", checkout);
     }
     startHeroAutoplay();
+    document.removeEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 }
 function startHeroAutoplay() {
     stopHeroAutoplay();
@@ -97,23 +105,32 @@ function showProduct() {
     window.location.href = "../.././WebSite-Root/documents/product-page.html";
 }
 function addProductToCart(e) {
-    var _a;
-    const eventTarget = e.target;
-    if (eventTarget === null)
+    var _a, _b;
+    if (e.target === null)
         return;
-    const card = eventTarget.closest(".product-card, .deal-card");
+    const eventTargetAsButtenElm = e.target;
+    const card = eventTargetAsButtenElm.closest(".product-card, .deal-card");
     if (card === null)
         return;
-    const titleHeadingElement = card.querySelector("h3, h4");
-    let title = (_a = titleHeadingElement.textContent) !== null && _a !== void 0 ? _a : "";
-    const priceDivElement = card.querySelector(".price");
-    const priceAsText = priceDivElement.innerText || "0";
+    const titleHeadingElm = card.querySelector("h3, h4");
+    const priceDivElm = card.querySelector(".price");
+    const productImage_ImageElm = card.querySelector("img");
+    let title = (_a = titleHeadingElm.textContent) !== null && _a !== void 0 ? _a : "";
+    const priceAsText = (_b = priceDivElm === null || priceDivElm === void 0 ? void 0 : priceDivElm.innerText) !== null && _b !== void 0 ? _b : "0";
     const price = parseFloat(priceAsText.replace(/[^\d.]/g, "")) || 0;
-    cart.push({ title, price });
+    const productImagePath = productImage_ImageElm
+        ? productImage_ImageElm.getAttribute("src") : "";
+    const existingProduct = cart.find(p => p.name === title && p.imagePath === productImagePath);
+    if (existingProduct) {
+        existingProduct.quantity += (existingProduct.quantity || 1) + 1;
+    }
+    else {
+        cart.push(new CartProduct(title, price, 1, productImagePath));
+    }
     updateCart();
 }
 function updateCart() {
-    const items = document.getElementById("cart-items-ul");
+    const items = document.getElementById("cart-items");
     items.innerHTML = "";
     let total = 0;
     let titleDiv;
@@ -124,7 +141,7 @@ function updateCart() {
         total += item.price;
         let new_ListItem = document.createElement("li");
         titleDiv = document.createElement("div");
-        titleDiv.innerHTML = item.title;
+        titleDiv.innerHTML = item.name;
         containerPriceDiv = document.createElement("div");
         containerPriceDiv.style.display = "flex";
         containerPriceDiv.style.gap = "8px";
@@ -146,7 +163,7 @@ function updateCart() {
     });
     document.getElementById("cart-count-span")
         .innerHTML = cart.length.toString();
-    document.getElementById("cart-total-span")
+    document.getElementById("cart-total")
         .innerText = total.toLocaleString();
 }
 function removeItemFromCart(index) {
@@ -163,5 +180,4 @@ function checkout() {
     else
         alert("Proceed to checkout (demo)");
 }
-export {};
 //# sourceMappingURL=home-page.js.map

@@ -1,28 +1,46 @@
+import {CartProduct} from "../DataTypes/CartProduct";
+
 const HERO_AUTOPLAY_MS: number = 4000;
 let heroIndex : number = 0;
 let heroTimer : number | null = null;
 
-let cart: { title: string; price: number; }[] = [];
+let cart: CartProduct[] = [];
 
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 
 function OnDocumentContentLoaded(): void {
-
+    // Add event listener on click event to addProduct buttons.
     document.querySelectorAll(".add-product-btn")
         .forEach(b => (<HTMLButtonElement> b).addEventListener("click", addProductToCart));
 
+    // Add event listener on click event to showProduct buttons.
     document.querySelectorAll(".show-product-btn")
         .forEach(b => (<HTMLButtonElement> b).addEventListener("click", showProduct));
 
+    // Add event listener on click event to search button. (optional)
     document.getElementById("search-btn")?.addEventListener("click", () => {
-        let searchInputElement: HTMLInputElement =
-            <HTMLInputElement> document.getElementById("search-input");
+        let searchInputElement = <HTMLInputElement> document.getElementById("search-input");
 
         const query: string = searchInputElement.value.toLowerCase();
 
         if (query) alert("Search: " + query);
     });
 
+
+    const indexOfButtenSliderToNext = 0, sliderToNextAsValue = 1;
+    const slideToNextHandler = function slideByOneToNext() { slide(sliderToNextAsValue) };
+    
+    (<HTMLButtonElement> document.getElementsByName("slideToNext")[indexOfButtenSliderToNext])
+        ?.addEventListener("click", slideToNextHandler);
+    
+    const indexOfButtenSliderToPrevious = 0, sliderToPreviousAsValue = -1;
+    const slideToPreviousHandler = function slideByOneToPrevious() { slide(sliderToPreviousAsValue) };
+    
+    (<HTMLButtonElement> document.getElementsByName("slideToPrevious")[indexOfButtenSliderToPrevious])
+        ?.addEventListener("click", slideToPreviousHandler);
+    
+    
+    /* Add event listeners on click to children of header div. */  
     const indexOfHeaderActionsDivElement: number = 0;
     let headerActionsDivElement = <HTMLDivElement>
         document.getElementsByClassName("header-actions").item(indexOfHeaderActionsDivElement);
@@ -35,29 +53,33 @@ function OnDocumentContentLoaded(): void {
         openAccountBtn.addEventListener("click", openAccount);
 
         const indexOfToggleCartButtonElement: number = 1;
-        let toggleCartBtn = <HTMLButtonElement>
-            headerActionsDivElement.children.item(indexOfToggleCartButtonElement);
-
+        let toggleCartBtn = <HTMLButtonElement> headerActionsDivElement.children.item(indexOfToggleCartButtonElement);
+        
         toggleCartBtn.addEventListener("click", toggleCart);
     }
+    
+    
+    /* Add event listeners on click to children of hero_cta div. */
+    const indexOfHero_CtaDivElm: number = 0;
+    let hero_ctaDivElm = <HTMLDivElement> document.getElementsByClassName("hero-cta")
+        .item(indexOfHero_CtaDivElm);
 
-    let hero_ctaDivElement = <HTMLDivElement> document.getElementsByClassName("hero-cta").item(0);
-
-    if (hero_ctaDivElement !== null) {
+    if (hero_ctaDivElm !== null) {
         let indexOfCat_ActionDivElement: number = 2;
-        let cta_actionsDivElement = <HTMLDivElement> hero_ctaDivElement.children.item(indexOfCat_ActionDivElement);
+        let cta_actionsDivElm = <HTMLDivElement> hero_ctaDivElm.children.item(indexOfCat_ActionDivElement);
 
-        if (cta_actionsDivElement !== null) {
-            let indexOfShopNowButtenElement: number = 0;
-            let shopNowBtn = <HTMLButtonElement> cta_actionsDivElement.children.item(indexOfShopNowButtenElement);
+        if (cta_actionsDivElm !== null) {
+            let indexOfShopNowButtenElm: number = 0;
+            let shopNowBtn = <HTMLButtonElement> cta_actionsDivElm.children.item(indexOfShopNowButtenElm);
             shopNowBtn.addEventListener("click", shopNow);
 
-            let indexOfDealsButtenElement: number = 1;
-            let dealsBtn = <HTMLButtonElement> cta_actionsDivElement.children.item(indexOfDealsButtenElement);
+            let indexOfDealsButtenElm: number = 1;
+            let dealsBtn = <HTMLButtonElement> cta_actionsDivElm.children.item(indexOfDealsButtenElm);
             dealsBtn.addEventListener("click", exploreDeals);
         }
     }
 
+    
     // section class="featured container"
     let featuredContainerSectionElement = <HTMLTableSectionElement>
         document.getElementsByClassName("featured container").item(0);
@@ -74,25 +96,39 @@ function OnDocumentContentLoaded(): void {
         }
     }
 
-    let cart_panelDivElement = <HTMLDivElement> document.getElementById("cart-panel");
-    if (cart_panelDivElement !== null) {
-        const indexOfCartHeadDivElement: number = 0;
-        let cartHeadDivElement = <HTMLDivElement> cart_panelDivElement.children.item(indexOfCartHeadDivElement);
-        if (cartHeadDivElement !== null) {
-            let closeCartPanelBtn = cartHeadDivElement?.querySelector("button");
-            closeCartPanelBtn?.addEventListener("click", toggleCart);
-        }
+    
+    let cartPanelDivElm = <HTMLDivElement> document.getElementById("cart-panel");
+    if (cartPanelDivElm !== null) {
+        /* Get Model Cart div element. */        
+        const indexOfCartModelDivElm: number = 0; // <div class="cart-modal">
+        const cartModelDivElm = <HTMLDivElement> cartPanelDivElm.children.item(indexOfCartModelDivElm);
 
-        const indexOfCartFootDivElement = 2;
-        let cart_footDivElement = <HTMLDivElement> cart_panelDivElement.children.item(indexOfCartFootDivElement);
 
-        if (cart_footDivElement !== null) {
-            let checkOutButton = cart_footDivElement.querySelector("button");
-            checkOutButton?.addEventListener("click", checkout);
-        }
+        /* Get Header Cart div element. */
+        const indexOfCartHeadDivElm: number = 0; // <div class="cart-header">
+        const indexOfCloseCartPanelBtn: number = 1; // <button class="cart-close">✕</button>
+        
+        let cartHeaderDivElm = <HTMLDivElement> cartModelDivElm.children.item(indexOfCartHeadDivElm);
+
+        (<HTMLButtonElement> cartHeaderDivElm.children.item(indexOfCloseCartPanelBtn))
+            // Will return close cart button.
+            ?.addEventListener("click", toggleCart);
+
+
+        /* Get Action Bar of Cart div element. */
+        const indexOfCartActionBarDivElm: number = 3; // <div class="cart-actions-bar">
+        const indexOfCheckoutBtn: number = 1; // <button class="cart-primary">Checkout</button>
+        
+        const cartActionBarDivElm = <HTMLDivElement> cartModelDivElm.children.item(indexOfCartActionBarDivElm);
+
+        (<HTMLButtonElement> cartActionBarDivElm?.children.item(indexOfCheckoutBtn))
+        // will return checkout button.
+            ?.addEventListener("click", checkout);
     }
 
     startHeroAutoplay();
+    
+    document.removeEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 }
 
 function startHeroAutoplay() : void {
@@ -107,9 +143,11 @@ function stopHeroAutoplay() : void {
 
 function slide(dir: number) : void {
     const slider = <HTMLDivElement> document.getElementById("hero-slider-div");
-    const total = slider.children.length;
+    const total: number = slider.children.length;
     heroIndex = (heroIndex + dir + total) % total;
     slider.style.transform = `translateX(${-heroIndex * 100}%)`;
+
+    // restart autoplay after manual click
     stopHeroAutoplay();
     setTimeout(startHeroAutoplay, HERO_AUTOPLAY_MS);
 }
@@ -133,25 +171,37 @@ function showProduct() : void {
 }
 
 function addProductToCart(e: Event) : void {
-    const eventTarget = e.target;
-    if (eventTarget === null) return;
+    if (e.target === null) return;
     
-    const card = <HTMLButtonElement | null> (<HTMLElement> eventTarget).closest(".product-card, .deal-card");
+    const eventTargetAsButtenElm = <HTMLButtonElement> e.target;
+    
+    const card = <HTMLButtonElement> eventTargetAsButtenElm.closest(".product-card, .deal-card");
     if (card === null) return;
     
-    const titleHeadingElement: HTMLHeadingElement = <HTMLHeadingElement> card.querySelector("h3, h4");
-    let title = titleHeadingElement.textContent ?? "";
+    const titleHeadingElm: HTMLHeadingElement = <HTMLHeadingElement> card.querySelector("h3, h4");
+    const priceDivElm = <HTMLDivElement> card.querySelector(".price");
+    const productImage_ImageElm = <HTMLImageElement> card.querySelector("img");
     
-    const priceDivElement = <HTMLDivElement> card.querySelector(".price");
-    const priceAsText = priceDivElement.innerText || "0";
-    const price = parseFloat(priceAsText.replace(/[^\d.]/g, "")) || 0;
+    let title: string = titleHeadingElm.textContent ?? "";
+    const priceAsText: string = priceDivElm?.innerText ?? "0";
+    const price: number = parseFloat(priceAsText.replace(/[^\d.]/g, "")) || 0;
     
-    cart.push({ title, price });
+    const productImagePath: string = productImage_ImageElm 
+        ? <string> productImage_ImageElm.getAttribute("src") : ""; 
+    
+    const existingProduct = cart.find(p => p.name === title && p.imagePath === productImagePath);
+    if (existingProduct) {
+        existingProduct.quantity += (existingProduct.quantity || 1)+ 1;
+    }
+    else {
+        cart.push(new CartProduct(title, price, 1, productImagePath));
+    }
+    
     updateCart();
 }
 
 function updateCart() : void {
-    const items = <HTMLUListElement> document.getElementById("cart-items-ul");
+    const items = <HTMLUListElement> document.getElementById("cart-items");
     items.innerHTML = "";
     let total: number = 0;
     
@@ -161,12 +211,12 @@ function updateCart() : void {
     let priceDiv: HTMLDivElement;
     let removeItemBtn: HTMLButtonElement;
     
-    cart.forEach((item, i: number) => {
+    cart.forEach((item: CartProduct, i: number) => {
         total += item.price;
         let new_ListItem: HTMLLIElement = document.createElement("li");
         
         titleDiv = document.createElement("div");
-        titleDiv.innerHTML = item.title;
+        titleDiv.innerHTML = item.name;
         
         containerPriceDiv = document.createElement("div");
         // "display:flex;gap:8px;align-items:center"
@@ -206,7 +256,7 @@ function updateCart() : void {
     (<HTMLSpanElement> document.getElementById("cart-count-span"))
         .innerHTML = cart.length.toString();
 
-    (<HTMLSpanElement>document.getElementById("cart-total-span"))
+    (<HTMLSpanElement>document.getElementById("cart-total"))
         .innerText = total.toLocaleString();
 }
 

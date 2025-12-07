@@ -19,7 +19,7 @@ let shippingCost = 0;
 let couponDiscount = 0;
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f, _g;
     renderOrderItems();
     const indexOfHeader_LeftDivElm = 0, indexOfLogoDivElm = 0;
     (_e = (_d = (_c = (_b = (_a = document.querySelector("header")) === null || _a === void 0 ? void 0 : _a.children) === null || _b === void 0 ? void 0 : _b.item(indexOfHeader_LeftDivElm)) === null || _c === void 0 ? void 0 : _c.children) === null || _d === void 0 ? void 0 : _d.item(indexOfLogoDivElm)) === null || _e === void 0 ? void 0 : _e.addEventListener("click", goHome);
@@ -30,13 +30,12 @@ function OnDocumentContentLoaded() {
         input.addEventListener("change", handlePaymentChange);
     });
     handlePaymentChange();
-    const couponBtn = document.getElementById("apply-coupon-btn");
-    couponBtn.addEventListener("click", (e) => {
+    (_f = document.getElementById("apply-coupon-btn")) === null || _f === void 0 ? void 0 : _f.addEventListener("click", (e) => {
         e.preventDefault();
         handleApplyCoupon();
     });
-    const payBtn = document.getElementById("pay-btn");
-    payBtn.addEventListener("click", handlePayClick);
+    (_g = document.getElementById("pay-btn")) === null || _g === void 0 ? void 0 : _g.addEventListener("click", handlePayClick);
+    document.removeEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 }
 function goHome() {
     window.location.href = "../.././WebSite-Root/documents/home-page.html";
@@ -48,6 +47,14 @@ function renderOrderItems() {
     const container = document.getElementById("order-items");
     container.innerHTML = "";
     let subtotal = 0;
+    if (!Array.isArray(orderItems) || orderItems.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "order-empty";
+        empty.textContent = "Your cart is empty.";
+        container.appendChild(empty);
+        updateTotals(0);
+        return;
+    }
     orderItems.forEach((item) => {
         const lineTotal = item.price * item.qty;
         subtotal += lineTotal;
@@ -89,8 +96,10 @@ function handleShippingChange() {
 function handlePaymentChange() {
     const selected = document.querySelector('input[name="payment"]:checked');
     const cardDetails = document.getElementById("card-details");
-    if (!selected)
+    if (!selected) {
+        cardDetails.style.display = "none";
         return;
+    }
     if (selected.value === "card") {
         cardDetails.style.display = "block";
     }
@@ -103,7 +112,7 @@ function showToast(message) {
     const msg = document.getElementById("toast-message");
     msg.textContent = message;
     toast.classList.remove("hidden");
-    setTimeout(() => {
+    setTimeout(function addHiddenToClassOf_toast_DivElm() {
         toast.classList.add("hidden");
     }, 2800);
 }
@@ -126,7 +135,9 @@ function handleApplyCoupon() {
         couponDiscount = 0;
         showToast("Invalid coupon code.");
     }
-    let subtotal = orderItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+    let subtotal = Array.isArray(orderItems)
+        ? orderItems.reduce((sum, item) => sum + item.price * item.qty, 0)
+        : 0;
     updateTotals(subtotal);
 }
 function validateForm() {

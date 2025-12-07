@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at 10% 20%, #111, #000 90%);
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 380px;
+    background: rgba(15, 15, 30, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 2.5rem;
+    animation: glowPulse 4s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 35px rgba(0, 255, 255, 0.6);
+    }
+}
+
+.form {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.form.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.neon-text {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #00e0ff;
+    text-shadow: 0 0 8px #00e0ff, 0 0 16px #00bfff;
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.3rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid rgba(0, 255, 255, 0.4);
+    background: transparent;
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+    transition: 0.25s;
+}
+
+.input-group label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    transition: 0.25s ease;
+    transform-origin: left top;
+}
+
+
+.input-group input:focus,
+.input-group input:not(:placeholder-shown) {
+    border-color: #00e0ff;
+    box-shadow: 0 0 10px #00e0ff;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: -8px;
+    left: 10px;
+    background: #0f0f1e;
+    padding: 0 6px;
+    font-size: 0.78rem;
+    color: #00e0ff;
+    transform: translateY(0);
+}
+
+.label-date {
+    top: -8px !important;
+    font-size: 0.8rem !important;
+    color: #00e0ff !important;
+    background: #0f0f1e;
+    padding: 0 4px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #00e0ff, #00bfff);
+    color: #111;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #00bfff, #00e0ff);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+.switch {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.switch a {
+    color: #00e0ff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.switch a:hover {
+    text-decoration: underline;
+}
