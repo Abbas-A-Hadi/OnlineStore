@@ -1,19 +1,7 @@
 import { OrderItem } from "../DataTypes/OrderItem";
 const orderItems = [
-    {
-        name: "Fox Plush Toy",
-        qty: 1,
-        price: 19.99,
-        emoji: "🦊",
-        variant: "Orange / Medium",
-    },
-    {
-        name: "Neon Fox Pillow",
-        qty: 2,
-        price: 14.5,
-        emoji: "✨",
-        variant: "Glow Edition",
-    },
+    new OrderItem("Fox Plush Toy", 1, 19.99, "🦊", "Orange / Medium"),
+    new OrderItem("Neon Fox Pillow", 2, 14.5, "✨", "Glow Edition"),
 ];
 let shippingCost = 0;
 let couponDiscount = 0;

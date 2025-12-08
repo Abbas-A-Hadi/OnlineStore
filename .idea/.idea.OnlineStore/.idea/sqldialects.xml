@@ -2,8 +2,8 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Addresses.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Categories.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/People.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Users.sql" dialect="TSQL" />
   </component>
 </project>

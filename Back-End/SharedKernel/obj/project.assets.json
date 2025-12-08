@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj",
+      "projectUniqueName": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj",
       "projectName": "SharedKernel",
-      "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj",
+      "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj",
       "packagesPath": "C:\\Users\\mraba\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\obj\\",
+      "outputPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mraba\\AppData\\Roaming\\NuGet\\NuGet.Config"
