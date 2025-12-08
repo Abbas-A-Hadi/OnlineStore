@@ -103,9 +103,9 @@ CREATE TABLE Users
 (
     ---- Main Attributes
     Id UNIQUEIDENTIFIER NOT NULL,
-    UserName VARCHAR(20) NOT NULL,
+    Email VARCHAR(40) NOT NULL,
     Password VARCHAR(255) NOT NULL,
-    Role SMALLINT NOT NULL, -- Customer = 0, Admin = 1, etc... 
+    DateOfBirth Date NOT NULL,
     CreatedAt DATETIME2(3) NOT NULL,
     IsActive BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1,
     IsDeleted BIT NOT NULL CONSTRAINT DF_Users_IsDeleted DEFAULT 0, -- For Soft Deletion.
@@ -122,11 +122,10 @@ CREATE TABLE Users
         REFERENCES People(Id),
 
 
-    CONSTRAINT UQ_Users_UserName UNIQUE (UserName),
-
-
-    CONSTRAINT CH_Users_UserName CHECK (UserName LIKE '@%'),
-
+    CONSTRAINT UQ_Users_Email UNIQUE (Email),
+    
+    
+    CONSTRAINT CH_Users_PasswordLength CHECK (LEN(Password) BETWEEN 8 AND 50),
     ---- This syntax will not work such as other constraints syntax.
     ----  the correct one is to write it as the above
     -- CONSTRAINT DF_Users_IsDeleted DEFAULT 0 FOR IsDeleted
@@ -145,7 +144,7 @@ GO
 
 CREATE TABLE Categories
 (
-    Id INT NOT NULL IDENTITY,
+    Id SMALLINT NOT NULL IDENTITY,
     Name VARCHAR(50) NOT NULL,
     Description VARCHAR(MAX) NOT NULL
 

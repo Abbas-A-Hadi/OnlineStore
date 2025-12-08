@@ -6,10 +6,10 @@ public interface IUserRepository
 {
     Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken);
     
-    Task<User?> GetUserByUserNameAndPasswordHashAsync(string username, string passwordHash, CancellationToken cancellationToken);
+    Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
     
     Task<bool> IsUserExistsAsync(Guid userId, CancellationToken cancellationToken);
-    Task<bool> IsUserExistsAsync(string username, string passwordHash, CancellationToken cancellationToken);
+    Task<bool> IsUserExistsAsync(string email, string passwordHash, CancellationToken cancellationToken);
     
     Task<bool> CreateUserAsync(User user, CancellationToken cancellationToken);
     

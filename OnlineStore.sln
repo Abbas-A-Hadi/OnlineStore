@@ -4,13 +4,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Domain", "Back-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Application", "Back-End\OnlineStore.Application\OnlineStore.Application.csproj", "{AAE1A924-D965-4B05-9DD6-EC210E8423DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Persistence", "Back-End\OnlineStore.Persistence\OnlineStore.Persistence.csproj", "{8BBAB7E8-5188-4893-B410-BCB6D4F1D381}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Infrastructure", "Back-End\OnlineStore.Infrastructure\OnlineStore.Infrastructure.csproj", "{8BBAB7E8-5188-4893-B410-BCB6D4F1D381}"
 EndProject
 Project("{42EA0DBD-9CF1-443E-919E-BE9C484E4577}") = "OnlineStore.DB_SQL_Server", "Back-End\OnlineStore.DB_SQL_Server\OnlineStore.DB_SQL_Server.sqlproj", "{B0C67612-196F-44BD-B87B-4ECF30BBE4C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "Back-End\SharedKernel\SharedKernel.csproj", "{77D4DE3D-D339-4C72-B7ED-82BC82884E3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Presentation", "Back-End\OnlineStore.Presentation\OnlineStore.Presentation.csproj", "{DF075892-C0EE-44B3-A173-4A393716E5D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore.Web.Api", "Back-End\OnlineStore.Web.Api\OnlineStore.Web.Api.csproj", "{DF075892-C0EE-44B3-A173-4A393716E5D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

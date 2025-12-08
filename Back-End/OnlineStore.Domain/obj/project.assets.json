@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
+      "projectUniqueName": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
       "projectName": "OnlineStore.Domain",
-      "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
+      "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
       "packagesPath": "C:\\Users\\mraba\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\obj\\",
+      "outputPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mraba\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -51,8 +51,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj": {
-              "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj"
+            "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj": {
+              "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj"
             }
           }
         }

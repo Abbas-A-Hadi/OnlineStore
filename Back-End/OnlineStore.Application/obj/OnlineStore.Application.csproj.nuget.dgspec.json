@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj": {}
+    "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj": {}
   },
   "projects": {
-    "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj": {
+    "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj",
+        "projectUniqueName": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj",
         "projectName": "OnlineStore.Application",
-        "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj",
+        "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj",
         "packagesPath": "C:\\Users\\mraba\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Application\\obj\\",
+        "outputPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mraba\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,11 +26,11 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj": {
-                "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj"
+              "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj": {
+                "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj"
               },
-              "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj": {
-                "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj"
+              "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj": {
+                "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj"
               }
             }
           }
@@ -54,6 +54,18 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[12.1.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.1.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "Scrutor": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -350,14 +362,14 @@
         }
       }
     },
-    "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj": {
+    "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
+        "projectUniqueName": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
         "projectName": "OnlineStore.Domain",
-        "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
+        "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj",
         "packagesPath": "C:\\Users\\mraba\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\OnlineStore.Domain\\obj\\",
+        "outputPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mraba\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -372,8 +384,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj": {
-                "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj"
+              "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj": {
+                "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj"
               }
             }
           }
@@ -687,14 +699,14 @@
         }
       }
     },
-    "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj": {
+    "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj",
+        "projectUniqueName": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj",
         "projectName": "SharedKernel",
-        "projectPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\SharedKernel.csproj",
+        "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\SharedKernel.csproj",
         "packagesPath": "C:\\Users\\mraba\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub-Projects\\University\\Online-Store\\Back-End\\SharedKernel\\obj\\",
+        "outputPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\SharedKernel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mraba\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -3,20 +3,20 @@ import {OrderItem} from "../DataTypes/OrderItem";
 // Simple demo data for order items.
 // Later you can replace this with real cart data from your main site.
 const orderItems: OrderItem[] = [
-    {
-        name: "Fox Plush Toy",
-        qty: 1,
-        price: 19.99,
-        emoji: "🦊",
-        variant: "Orange / Medium",
-    },
-    {
-        name: "Neon Fox Pillow",
-        qty: 2,
-        price: 14.5,
-        emoji: "✨",
-        variant: "Glow Edition",
-    },
+    new OrderItem(
+        "Fox Plush Toy",
+        1,
+        19.99,
+        "🦊",
+        "Orange / Medium"
+    ),
+    new OrderItem(
+        "Neon Fox Pillow",
+        2,
+        14.5,
+        "✨",
+        "Glow Edition",
+    ),
 ];
 
 let shippingCost: number = 0;
