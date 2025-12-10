@@ -6,17 +6,35 @@ using SharedKernel;
 namespace Application.Products.GetAll;
 
 internal sealed class GetAllProductsQueryHandler(IProductRepository repository)
-    : IQueryHandler<GetAllProductsQuery, List<Product>>
+    : IQueryHandler<GetAllProductsQuery, List<ProductResponse>>
 {
-    public async Task<Result<List<Product>>> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
+    public async Task<Result<List<ProductResponse>>> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
     {
         List<Product> products = await repository.GetAllAsync(cancellationToken);
 
         if (products is { Count: < 1 })
         {
-            return Result.Failure<List<Product>>(ProductErrors.NoProductFound);
+            return Result.Failure<List<ProductResponse>>(ProductErrors.NoProductFound);
         }
         
-        return Result.Success(products);
+        List<ProductResponse> productResponses = new List<ProductResponse>(products.Count);
+        
+        foreach (Product product in products)
+        {
+            productResponses.Add(new ProductResponse(
+                Id: product.Id.Value,
+                Name: product.Name,
+                Sku: product.Sku,
+                Price: product.Price,
+                Currency: product.Currency,
+                Reviews: product.Reviews,
+                StockStatus: product.StockStatus,
+                ShortDescription: product.ShortDescription,
+                LongDescription: product.LongDescription,
+                Features: product.Features,
+                ImagePaths: product.ImagePaths));
+        }
+        
+        return Result.Success(productResponses);
     }
 }

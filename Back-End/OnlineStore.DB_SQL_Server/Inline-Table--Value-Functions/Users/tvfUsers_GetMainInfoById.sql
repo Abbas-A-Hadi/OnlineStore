@@ -1,6 +1,3 @@
-USE OnlineStore_DB;
-GO
-
 CREATE FUNCTION tvfUsers_GetMainInfoById(@UserId UNIQUEIDENTIFIER)
 RETURNS TABLE 
 AS

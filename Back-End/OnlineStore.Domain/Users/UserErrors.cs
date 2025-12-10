@@ -4,6 +4,10 @@ namespace Domain.Users;
 
 public static class UserErrors
 {
+    public static Error UpdateFailure(Guid userId, string email) => Error.Failure(
+        "Users.UpdateFailure",
+        $"User with id = '{userId}' and email = '{email}' had not updated");
+    
     public static Error CreationConflict(string email, string firstName, string lastName) => Error.Conflict(
         "Users.CreationConflict",
         $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had creation conflict");

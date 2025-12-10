@@ -1,12 +1,13 @@
 CREATE TABLE Categories
 (
-    Id SMALLINT NOT NULL IDENTITY,
+    Id TINYINT NOT NULL IDENTITY,
     Name VARCHAR(50) NOT NULL,
-    Description VARCHAR(MAX) NOT NULL
+    Description VARCHAR(500) NOT NULL
 
-    ---- Constraints
-    CONSTRAINT PK_Categories_Id PRIMARY KEY (Id),
-    
-    
-    CONSTRAINT UQ_Categories_Name UNIQUE (Name),    
+        ---- Constraints
+        CONSTRAINT PK_Categories_Id PRIMARY KEY (Id),
+
+
+    CONSTRAINT UQ_Categories_Name UNIQUE (Name),
 );
+GO

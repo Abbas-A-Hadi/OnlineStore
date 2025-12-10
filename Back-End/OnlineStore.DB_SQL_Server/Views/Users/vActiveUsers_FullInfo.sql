@@ -1,6 +1,3 @@
-USE OnlineStore_DB;
-GO
-
 CREATE VIEW vActiveUsers_FullInfo
 AS 
 (

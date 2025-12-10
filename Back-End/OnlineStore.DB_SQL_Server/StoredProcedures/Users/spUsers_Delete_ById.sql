@@ -1,6 +1,3 @@
-USE OnlineStore_DB;
-GO
-
 CREATE PROCEDURE spUsers_Delete_ById
     @UserId UNIQUEIDENTIFIER
 AS

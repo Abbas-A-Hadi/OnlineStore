@@ -3,5 +3,5 @@ using Domain.Users;
 
 namespace Application.Users.Register;
 
-public sealed record RegisterUserCommand(string Email, string FirstName, string LastName, string Password, DateOnly BirthOfDate) 
+public sealed record RegisterUserCommand(string Email, string Password, string FirstName, string LastName, DateOnly DateOfBirth, string Role) 
     : ICommand<Guid>;

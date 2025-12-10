@@ -3,11 +3,11 @@ CREATE TABLE ProductsImagesURLs
     Id INT NOT NULL IDENTITY,
     Url VARCHAR(75) NOT NULL, -- In future it will be 75 size.
     ---- Foreign Keys Attributes
-    ProductId UNIQUEIDENTIFIER NOT NULL,
+    ProductId INT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_ProductsImagesURLs_Id PRIMARY KEY (Id),
-    
+
     CONSTRAINT FK_ProductsImagesURLs_ProductId FOREIGN KEY (ProductId)
         REFERENCES Products(Id)
 );

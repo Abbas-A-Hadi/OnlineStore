@@ -1,4 +1,4 @@
-namespace Infrastructure.Database.Categories;
+namespace Application.Repository;
 
 public interface ICategoryRepository
 {

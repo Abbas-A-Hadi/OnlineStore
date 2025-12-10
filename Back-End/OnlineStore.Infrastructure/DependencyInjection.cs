@@ -1,6 +1,11 @@
 using System.Text;
 using Application.Abstractions.Authentication;
+using Application.Repository;
 using Infrastructure.Authentication;
+using Infrastructure.Database;
+using Infrastructure.Database.Categories;
+using Infrastructure.Database.Products;
+using Infrastructure.Database.Users;
 using Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -12,33 +17,24 @@ namespace Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         => services
             .AddServices()
-            .AddDatabase(configuration)
             .AddAuthenticationInternal(configuration)
             .AddAuthorizationInternal();
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+        services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+        services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IProductRepository, ProductRepository>();
+        services.AddSingleton<ICategoryRepository, CategoryRepository>();
         
         return services;
     }
-    
-    private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
-    {
-        string? connectionString = configuration.GetConnectionString("Database");
-        
-        return services;
-    }
-    
 
-    private static IServiceCollection AddAuthenticationInternal(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    private static IServiceCollection AddAuthenticationInternal(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -51,9 +47,6 @@ public static class DependencyInjection
                         ValidAudience = configuration["Jwt:Audience"],
                         ClockSkew = TimeSpan.Zero,
                         ValidateIssuerSigningKey = true,
-                        ValidateLifetime = true,
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
                     };
                 });
 
@@ -61,6 +54,8 @@ public static class DependencyInjection
         services.AddScoped<IUserContext, UserContext>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<ITokenProvider, TokenProvider>();
+        services.AddScoped<IRefreshTokenProvider, RefreshTokenProvider>();
+        services.AddScoped<IAuthService, AuthService>();
         
         return services;
     }

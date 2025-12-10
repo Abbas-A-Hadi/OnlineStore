@@ -10,7 +10,8 @@ internal sealed class GetProductByCategoryTypeQueryHandler(IProductRepository pr
 {
     public async Task<Result<List<Product>>> Handle(GetProductByCategoryTypeQuery query, CancellationToken cancellationToken)
     {
-        List<Product> products = await productRepository.GetByCategoryAsync(query.CategoryType, cancellationToken);
+        List<Product> products = 
+            await productRepository.GetByCategoryAsync(query.CategoryType, cancellationToken);
 
         return products is { Count: < 1 } 
             ? Result.Failure<List<Product>>(ProductErrors.NoProductFound) 

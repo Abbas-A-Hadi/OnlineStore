@@ -2,8 +2,33 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetAllActiveUsersFullInfo.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetMainInfoById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Tables-Creation.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromStringToSingleByte.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Activate_ById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Create.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Deactivate_ById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Delete_ById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ByEmailAndPassword.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Undelete_ById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Update.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Addresses.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Brands.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Cart_Items.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Carts.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Categories.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/People.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Cities.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Countries.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Order_Lines.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Orders.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Payments.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Products.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/ProductsImagesURLs.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Reviews.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Users.sql" dialect="TSQL" />
   </component>
 </project>
