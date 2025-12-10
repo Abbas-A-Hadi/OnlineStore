@@ -264,26 +264,6 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Configuration/10.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0",
-          "Microsoft.Extensions.Primitives": "10.0.0"
-        },
-        "compile": {
-          "lib/net10.0/Microsoft.Extensions.Configuration.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net10.0/Microsoft.Extensions.Configuration.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
-        }
-      },
       "Microsoft.Extensions.Configuration.Abstractions/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -719,16 +699,6 @@
           "bin/placeholder/OnlineStore.Application.dll": {}
         }
       },
-      "OnlineStore.DB_SQL_Server/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "compile": {
-          "bin/placeholder/OnlineStore.DB_SQL_Server.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/OnlineStore.DB_SQL_Server.dll": {}
-        }
-      },
       "OnlineStore.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
@@ -1054,35 +1024,6 @@
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.xml",
         "microsoft.extensions.caching.memory.9.0.5.nupkg.sha512",
         "microsoft.extensions.caching.memory.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
-    },
-    "Microsoft.Extensions.Configuration/10.0.0": {
-      "sha512": "H4SWETCh/cC5L1WtWchHR6LntGk3rDTTznZMssr4cL8IbDmMWBxY+MOGDc/ASnqNolLKPIWHWeuC1ddiL/iNPw==",
-      "type": "package",
-      "path": "microsoft.extensions.configuration/10.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "PACKAGE.md",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/Microsoft.Extensions.Configuration.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net8.0/_._",
-        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Configuration.targets",
-        "lib/net10.0/Microsoft.Extensions.Configuration.dll",
-        "lib/net10.0/Microsoft.Extensions.Configuration.xml",
-        "lib/net462/Microsoft.Extensions.Configuration.dll",
-        "lib/net462/Microsoft.Extensions.Configuration.xml",
-        "lib/net8.0/Microsoft.Extensions.Configuration.dll",
-        "lib/net8.0/Microsoft.Extensions.Configuration.xml",
-        "lib/net9.0/Microsoft.Extensions.Configuration.dll",
-        "lib/net9.0/Microsoft.Extensions.Configuration.xml",
-        "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Configuration.xml",
-        "microsoft.extensions.configuration.10.0.0.nupkg.sha512",
-        "microsoft.extensions.configuration.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -1787,11 +1728,6 @@
       "path": "../OnlineStore.Application/OnlineStore.Application.csproj",
       "msbuildProject": "../OnlineStore.Application/OnlineStore.Application.csproj"
     },
-    "OnlineStore.DB_SQL_Server/1.0.0": {
-      "type": "project",
-      "path": "../OnlineStore.DB_SQL_Server/OnlineStore.DB_SQL_Server.sqlproj",
-      "msbuildProject": "../OnlineStore.DB_SQL_Server/OnlineStore.DB_SQL_Server.sqlproj"
-    },
     "OnlineStore.Domain/1.0.0": {
       "type": "project",
       "path": "../OnlineStore.Domain/OnlineStore.Domain.csproj",
@@ -1808,9 +1744,8 @@
       "Dapper >= 2.1.66",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.0",
       "Microsoft.Data.SqlClient >= 7.0.0-preview2.25289.6",
-      "Microsoft.Extensions.Configuration >= 10.0.0",
-      "OnlineStore.Application >= 1.0.0",
-      "OnlineStore.DB_SQL_Server >= 1.0.0"
+      "Microsoft.Extensions.Configuration.Abstractions >= 10.0.0",
+      "OnlineStore.Application >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1840,9 +1775,6 @@
           "projectReferences": {
             "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj": {
               "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj"
-            },
-            "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj": {
-              "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj"
             }
           }
         }
@@ -1875,7 +1807,7 @@
             "target": "Package",
             "version": "[7.0.0-preview2.25289.6, )"
           },
-          "Microsoft.Extensions.Configuration": {
+          "Microsoft.Extensions.Configuration.Abstractions": {
             "target": "Package",
             "version": "[10.0.0, )"
           }

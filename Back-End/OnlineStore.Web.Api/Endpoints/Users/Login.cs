@@ -8,12 +8,12 @@ namespace Web.Api.Endpoints.Users;
 
 internal sealed class Login : IEndpoint
 {
-    public sealed record Request(string Email, string Password);
+    public sealed record LoginUserRequest(string Email, string Password);
     
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("users/login", async (
-            Request request,
+            LoginUserRequest request,
             ICommandHandler<LoginUserCommand, string> handler,
             CancellationToken cancellationToken) =>
             {
@@ -23,6 +23,8 @@ internal sealed class Login : IEndpoint
 
                 return result.Match(Results.Ok, CustomResults.Problem);
             })
-            .WithTags(Tags.Users);
+            .WithTags(Tags.Users)
+            //.WithName("LoginUser")
+            ;
     }
 }

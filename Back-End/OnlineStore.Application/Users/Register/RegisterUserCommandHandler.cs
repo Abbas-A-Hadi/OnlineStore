@@ -18,21 +18,15 @@ internal sealed class RegisterUserCommandHandler(IUserRepository userRepository,
             return Result.Failure<Guid>(UserErrors.EmailNotUnique);
         }
         
-        User? user = User.CreateNew(
+        User user = User.CreateNew(
             email: command.Email,
+            passwordHash: passwordHashed,
             firstName: command.FirstName,
             lastName: command.LastName,
-            passwordHash: passwordHashed);
+            dateOfBirth: command.DateOfBirth,
+            role: command.Role);
 
-        if (user is null)
-        {
-            return Result.Failure<Guid>(
-                UserErrors.CreationConflict(command.Email, command.FirstName, command.LastName));
-        }
-
-        bool isUserCreated = await userRepository.CreateUserAsync(user, cancellationToken);
-
-        if (!isUserCreated)
+        if (!await userRepository.RegisterUserAsync(user, cancellationToken))
         {
             return Result.Failure<Guid>(
                 UserErrors.CreationConflict(command.Email, command.FirstName, command.LastName));

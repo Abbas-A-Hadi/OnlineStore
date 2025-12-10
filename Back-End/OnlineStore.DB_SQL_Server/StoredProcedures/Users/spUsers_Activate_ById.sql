@@ -1,6 +1,3 @@
-USE OnlineStore_DB;
-GO
-
 ALTER PROCEDURE spUsers_Activate_ById
     @UserId UNIQUEIDENTIFIER
 AS

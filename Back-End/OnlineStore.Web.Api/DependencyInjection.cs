@@ -11,6 +11,21 @@ public static class DependencyInjection
 
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
+
+        string myLocalServerAddressHttps = "https://localhost:7044";
+        string myLocalServerAddressHttp = "http://localhost:5145";
+        
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy",policy =>
+                {
+                    policy.WithOrigins(myLocalServerAddressHttps, myLocalServerAddressHttp)
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                }
+            );
+        });
         
         return services;
     }

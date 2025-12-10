@@ -362,60 +362,6 @@
         }
       }
     },
-    "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj",
-        "projectName": "OnlineStore.DB_SQL_Server",
-        "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj",
-        "packagesPath": "C:\\Users\\mraba\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\mraba\\AppData\\Roaming\\NuGet\\NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.1"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netstandard2.1": {
-            "targetAlias": "netstandard2.1",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "noWarn": [
-            "NU5128"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.100"
-      },
-      "frameworks": {
-        "netstandard2.1": {
-          "targetAlias": "netstandard2.1",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Domain\\OnlineStore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -777,9 +723,6 @@
             "projectReferences": {
               "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj": {
                 "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.Application\\OnlineStore.Application.csproj"
-              },
-              "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj": {
-                "projectPath": "C:\\GitHub-Projects\\University\\OnlineStore\\Back-End\\OnlineStore.DB_SQL_Server\\OnlineStore.DB_SQL_Server.sqlproj"
               }
             }
           }
@@ -812,7 +755,7 @@
               "target": "Package",
               "version": "[7.0.0-preview2.25289.6, )"
             },
-            "Microsoft.Extensions.Configuration": {
+            "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[10.0.0, )"
             }
@@ -1165,6 +1108,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[10.0.1, )"
             }
           },
           "imports": [

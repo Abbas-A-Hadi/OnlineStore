@@ -11,7 +11,7 @@ public interface IUserRepository
     Task<bool> IsUserExistsAsync(Guid userId, CancellationToken cancellationToken);
     Task<bool> IsUserExistsAsync(string email, string passwordHash, CancellationToken cancellationToken);
     
-    Task<bool> CreateUserAsync(User user, CancellationToken cancellationToken);
+    Task<bool> RegisterUserAsync(User user, CancellationToken cancellationToken);
     
     Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken);
     

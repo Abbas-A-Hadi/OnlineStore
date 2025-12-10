@@ -12,27 +12,25 @@ internal sealed class TokenProvider(IConfiguration configuration) : ITokenProvid
 {
     public string Create(User user)
     {
-        string secretKey = configuration["jwt:Secret"]!;
-        SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(secretKey));
+        SymmetricSecurityKey securityKey = new(
+            Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:Secret")!));
 
         SigningCredentials credentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
         SecurityTokenDescriptor tokenDescriptor = new()
         {
             Subject = new ClaimsIdentity([
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.Value.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
             ]),
-            Expires = DateTime.UtcNow.AddMinutes(configuration.GetValue<int>("jwt:ExpirationInMinutes")),
+            Expires = DateTime.UtcNow.AddMinutes(configuration.GetValue<int>("Jwt:ExpirationInMinutes")),
             SigningCredentials = credentials,
-            Issuer = configuration["jwt:Issuer"],
-            Audience = configuration["jwt:Audience"],
+            Issuer = configuration.GetValue<string>("Jwt:Issuer"),
+            Audience = configuration.GetValue<string>("Jwt:Audience"),
         };
 
-        JsonWebTokenHandler handler = new();
-
-        string token = handler.CreateToken(tokenDescriptor);
-
-        return token;
+        return new JsonWebTokenHandler()
+            .CreateToken(tokenDescriptor);
     }
 }

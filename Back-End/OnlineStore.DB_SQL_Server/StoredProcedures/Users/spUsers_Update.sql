@@ -1,23 +1,27 @@
 CREATE PROCEDURE spUsers_Update
     @Id UNIQUEIDENTIFIER,
-    @UserName VARCHAR(20),
-    @Password VARCHAR(255),
-    @Role SMALLINT,
-    @FullName VARCHAR(50),
-    @Email VARCHAR(50),
-    @Phone VARCHAR(12)
+    @FirstName VARCHAR(20),
+    @LastName VARCHAR(20),
+    @Email VARCHAR(40),
+    @PasswordHash VARCHAR(255),
+    @DateOfBirth Date,
+    @RefreshToken VARCHAR(50),
+    @RefreshTokenExpirationTime DATETIME2(3),
+    @Role VARCHAR(20)
 AS
 BEGIN 
     SET NOCOUNT ON;
     
     UPDATE Users
     SET 
-        UserName = @UserName,
-        Password = @Password,
-        Role = @Role,
-        FullName = @FullName,
+        FirstName = @FirstName,
+        LastName = @LastName,
         Email = @Email,
-        Phone = @Phone
+        PasswordHash = @PasswordHash,
+        DateOfBirth = @DateOfBirth,
+        Role = dbo.ConvertUserRoleFromVarcharToTinyInt(@Role),
+        RefreshToken = @RefreshToken,
+        RefreshTokenExpirationTime = @RefreshTokenExpirationTime
     WHERE Id = @Id;
     
     RETURN @@ROWCOUNT;

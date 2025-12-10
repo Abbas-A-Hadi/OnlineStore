@@ -1,6 +1,7 @@
-@OnlineStore.Web.Api_HostAddress = http://localhost:5145
+@HttpOnlineStore.Web.Api_HostAddress = http://localhost:5145
+@HttpsOnlineStore.Web.Api_HostAddress = https://localhost:7044
 
-GET {{OnlineStore.Web.Api_HostAddress}}/weatherforecast/
+GET https://localhost:7044/users/login
 Accept: application/json
 
 ###

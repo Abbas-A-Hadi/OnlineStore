@@ -1,28 +1,52 @@
+using Domain.Users;
 using FluentValidation;
 
 namespace Application.Users.Register;
 
 internal sealed class RegisterUserCommandValidator: AbstractValidator<RegisterUserCommand>
 {
-    public static int MinimumPasswordLength = 8;
-    public static int MaximumPasswordLength = 50;
-        
     public RegisterUserCommandValidator()
     {
-        RuleFor(c => c.FirstName).NotEmpty();
+        RuleFor(c => c.FirstName)
+            .NotEmpty()
+                .WithMessage("First name is required")
+            .Length(User.MinFirstNameLength, User.MaxFirstNameLength)
+                .WithMessage("First name length must be between {min} and {max}");
         
-        RuleFor(c => c.LastName).NotEmpty();
+        RuleFor(c => c.LastName)
+            .NotEmpty()
+                .WithMessage("Last name is required")
+            .Length(User.MinLastNameLength, User.MaxLastNameLength)
+                .WithMessage("Last name length must be between {min} and {max}");
         
+        RuleFor(u => u.DateOfBirth)
+            .Must(IsNotValidDateOfBirth)
+                .WithMessage("Date of birth is in future")
+            .Must(IsUserUnder18Years)
+                .WithMessage("User age is under 18");
+
         RuleFor(c => c.Email)
             .NotEmpty()
                 .WithMessage("Email is required")
             .EmailAddress()
-                .WithMessage("Invalid Email");
+                .WithMessage("Invalid Email")
+            .Length(User.MinEmailLength, User.MaxEmailLength)
+                .WithMessage("Email length must be between {min} and {max}");
         
         RuleFor(c => c.Password)
             .NotEmpty()
                 .WithMessage("Password is required")
-            .Length(MinimumPasswordLength, MaximumPasswordLength)
-                .WithMessage("Password must be between {min} and {max}");
+            .Length(User.MinPasswordLength, User.MaxPasswordLength)
+                .WithMessage("Password length must be between {min} and {max}");
+    }
+    
+    public static bool IsNotValidDateOfBirth(DateOnly dateOfBirth)
+    {
+        return dateOfBirth > DateOnly.FromDateTime(DateTime.Now.Date);
+    }
+    
+    public static bool IsUserUnder18Years(DateOnly dateOfBirth)
+    {
+        return dateOfBirth.AddYears(18) > DateOnly.FromDateTime(DateTime.Now.Date);
     }
 }

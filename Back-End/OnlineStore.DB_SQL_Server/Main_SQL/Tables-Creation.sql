@@ -1,5 +1,5 @@
-USE OnlineStore_DB;
-GO
+--USE OnlineStore_DB;
+--GO
 
 /*
     ===========================
@@ -9,7 +9,7 @@ GO
 
 CREATE TABLE Countries
 (
-    Id INT NOT NULL IDENTITY,
+    Id TINYINT NOT NULL IDENTITY,
     Name VARCHAR(25) NOT NULL,
 
     ---- Constraints
@@ -24,10 +24,10 @@ GO
 
 CREATE TABLE Cities
 (
-    Id INT NOT NULL IDENTITY,
+    Id SMALLINT NOT NULL IDENTITY,
     Name VARCHAR(100) NOT NULL,
     ---- Foreign Keys Attributes
-    CountryId INT NOT NULL,
+    CountryId TINYINT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Cities_Id PRIMARY KEY (Id),
@@ -48,10 +48,10 @@ CREATE TABLE Addresses
     Id INT NOT NULL IDENTITY,
     FullyAsString VARCHAR(150) NOT NULL,
     PostCode INT NULL, -- Optional
-    Street NVARCHAR(30) NOT NULL,
+    --Street NVARCHAR(30) NOT NULL, -- I remove it because it stored in FullyAsString Attribute.
     ---- Foreign Keys Attributes
-    CountryId INT NOT NULL,
-    CityId INT NOT NULL,
+    CountryId TINYINT NOT NULL,
+    CityId SMALLINT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Addresses_Id PRIMARY KEY (Id),
@@ -67,70 +67,41 @@ GO
 
 ----////////////////////////////
 
-CREATE TABLE People
-(
-    Id UNIQUEIDENTIFIER NOT NULL,
-    FullName VARCHAR(50) NOT NULL,
-    DateOfBirth DATETIME2 NOT NULL,
-    Email VARCHAR(50) NOT NULL,
-    Phone VARCHAR(15) NOT NULL,
-    AddressId INT NULL, -- Foreign Keys Attribute.
-    IsDeleted BIT NOT NULL CONSTRAINT DF_People_IsDeleted DEFAULT 0, -- For Soft Deletion.
-
-
-    ---- Constraints
-    CONSTRAINT PK_People_Id PRIMARY KEY (Id),
-
-
-    CONSTRAINT FK_People_AddressId FOREIGN KEY (AddressId)
-        REFERENCES Addresses(Id),
-
-
-    CONSTRAINT UQ_People_FullName UNIQUE (FullName),
-    CONSTRAINT UQ_People_Email UNIQUE (Email),
-    CONSTRAINT UQ_People_Phone UNIQUE (Phone),
-
-
-    CONSTRAINT CH_People_DateOfBirth_18YearsOld CHECK (
-        DateOfBirth <= GETDATE() - 18
-        ),
-);
-GO
-
-----////////////////////////////
-
 CREATE TABLE Users
 (
-    ---- Main Attributes
     Id UNIQUEIDENTIFIER NOT NULL,
+    FirstName VARCHAR(20) NOT NULL,
+    LastName VARCHAR(20) NOT NULL,
     Email VARCHAR(40) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
+    Role TINYINT NOT NULL, ---- 0: User, 1: Admin, ....
     DateOfBirth Date NOT NULL,
-    CreatedAt DATETIME2(3) NOT NULL,
+    RefreshToken VARCHAR NULL,
+    RefreshTokenExpirationTime DATETIME2(3) NULL,
+    CreatedAt DATETIME2(3) NOT NULL CONSTRAINT DF_Users_CreatedAt DEFAULT GETDATE(),
     IsActive BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1,
     IsDeleted BIT NOT NULL CONSTRAINT DF_Users_IsDeleted DEFAULT 0, -- For Soft Deletion.
-
-    -- Foreign Keys Attribute
-    PersonId UNIQUEIDENTIFIER NOT NULL,
 
 
     ---- Constraints
     CONSTRAINT PK_Users_Id PRIMARY KEY (Id),
 
 
-    CONSTRAINT FK_Users_PersonId FOREIGN KEY (PersonId)
-        REFERENCES People(Id),
-
-
     CONSTRAINT UQ_Users_Email UNIQUE (Email),
-    
-    
-    CONSTRAINT CH_Users_PasswordLength CHECK (LEN(Password) BETWEEN 8 AND 50),
+
+
+    CONSTRAINT CH_Users_Email_NotEmpty CHECK (LEN(Email) > 0),
+    CONSTRAINT CH_Users_Password_NotEmpty CHECK (LEN(PasswordHash) > 0),
+    CONSTRAINT CH_Users_FirstName_NotEmptyOrLessThenTwo CHECK (LEN(FirstName) > 2),
+    CONSTRAINT CH_Users_LastName_NotEmptyOrLessThenTwo CHECK (LEN(LastName) > 2),
+    CONSTRAINT CH_Users_DateOfBirth_MoreOrEqualTo18Years
+        CHECK (DateOfBirth <= DATEADD(YEAR, -18, GETDATE())),
+
     ---- This syntax will not work such as other constraints syntax.
     ----  the correct one is to write it as the above
     -- CONSTRAINT DF_Users_IsDeleted DEFAULT 0 FOR IsDeleted
 );
--- GO
+--GO
 
 -- -- I have used this way to add 'IsActive' column to 'Users' table because i had created 'Users' table 
 -- --   and SQL Server prevent me to modify the 'Users' table.
@@ -144,9 +115,9 @@ GO
 
 CREATE TABLE Categories
 (
-    Id SMALLINT NOT NULL IDENTITY,
+    Id TINYINT NOT NULL IDENTITY,
     Name VARCHAR(50) NOT NULL,
-    Description VARCHAR(MAX) NOT NULL
+    Description VARCHAR(500) NOT NULL
 
     ---- Constraints
     CONSTRAINT PK_Categories_Id PRIMARY KEY (Id),
@@ -160,10 +131,11 @@ GO
 
 CREATE TABLE Brands
 (
-    Id INT NOT NULL IDENTITY,
+    Id SMALLINT NOT NULL IDENTITY,
     Name VARCHAR(25) NOT NULL,
+    Description VARCHAR(500) NOT NULL,
     ---- Foreign Keys Attributes
-    CountryId INT NOT NULL,
+    CountryId TINYINT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Brands_Id PRIMARY KEY (Id),
@@ -181,14 +153,15 @@ GO
 
 CREATE TABLE Products
 (
-    Id UNIQUEIDENTIFIER NOT NULL,
+    Id INT NOT NULL,
     Name VARCHAR(50) NOT NULL,
-    Description VARCHAR(MAX) NOT NULL,
-    Price REAL NOT NULL,
+    Description VARCHAR(255) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    Currency VARCHAR(3) NOT NULL CONSTRAINT DF_Products_Currency DEFAULT 'USD',
     StockQuantity INT NOT NULL,
     ---- Foreign Keys Attributes
-    CategoryId INT NOT NULL,
-    BrandId INT NOT NULL,
+    CategoryId TINYINT NOT NULL,
+    BrandId SMALLINT NOT NULL,
 --     SupplierId INT NOT NULL, -- For Later Updates.
 
     ---- Constraints
@@ -208,6 +181,7 @@ CREATE TABLE Products
     CONSTRAINT UQ_Products_Name UNIQUE (Name),
 
 
+    CONSTRAINT CH_Products_Currency_MustItConsistOfThreeLetters CHECK (LEN(Currency) = 3),
     CONSTRAINT CH_Products_Price_MoreThenZero CHECK (Price > 0),
 
     CONSTRAINT CH_Products_StockQuantity_MoreThenOrEqualZero CHECK (StockQuantity >= 0),
@@ -218,7 +192,7 @@ GO
 
 CREATE TABLE Carts
 (
-    Id UNIQUEIDENTIFIER NOT NULL,
+    Id INT NOT NULL,
     CreatedAt DATETIME2(3) NOT NULL,
     ---- Foreign Keys Attributes
     UserId UNIQUEIDENTIFIER NOT NULL,
@@ -239,8 +213,8 @@ CREATE TABLE CartItems
     Id INT NOT NULL IDENTITY,
     Quantity INT NOT NULL,
     ---- Foreign Keys Attributes
-    CartId UNIQUEIDENTIFIER NOT NULL,
-    ProductId UNIQUEIDENTIFIER NOT NULL,
+    CartId INT NOT NULL,
+    ProductId INT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_CartItems_Id PRIMARY KEY (Id),
@@ -264,7 +238,7 @@ CREATE TABLE ProductsImagesURLs
     Id INT NOT NULL IDENTITY,
     Url VARCHAR(75) NOT NULL, -- In future it will be 75 size.
     ---- Foreign Keys Attributes
-    ProductId UNIQUEIDENTIFIER NOT NULL,
+    ProductId INT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_ProductsImagesURLs_Id PRIMARY KEY (Id),
@@ -292,12 +266,12 @@ GO
 CREATE TABLE Reviews
 (
     Id INT NOT NULL IDENTITY,
-    Rating REAL NOT NULL,
-    Comment NVARCHAR(MAX) NOT NULL,
+    Rating INT NOT NULL,
+    Comment NVARCHAR(999) NOT NULL,
     CreatedAt DATETIME2(3) NOT NULL,
     ---- Foreign Keys Attributes
     UserID UNIQUEIDENTIFIER NOT NULL,
-    ProductID UNIQUEIDENTIFIER NOT NULL,
+    ProductID INT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Reviews_Id PRIMARY KEY (Id),
@@ -315,13 +289,14 @@ GO
 
 CREATE TABLE Orders
 (
-    Id UNIQUEIDENTIFIER NOT NULL,
-    Date DATETIME2(3) NOT NULL,
-    Status SMALLINT NOT NULL,
+    Id INT NOT NULL,
+    CreationDate DATETIME2(3) NOT NULL,
+    Status TINYINT NOT NULL,
     TotalAmount DECIMAL(10, 2) NOT NULL,
     ---- Foreign Keys Attributes
     UserId UNIQUEIDENTIFIER NOT NULL,
---     ShippingId UNIQUEIDENTIFIER NOT NULL, -- For Later Updates.
+    AddressId INT NOT NULL,
+--     ShippingId INT NOT NULL, -- For Later Updates. And i Will ove it to Shippings Table.
 
     ---- Constraints
     CONSTRAINT PK_Orders_Id PRIMARY KEY (Id),
@@ -330,27 +305,29 @@ CREATE TABLE Orders
     CONSTRAINT FK_Orders_UserId FOREIGN KEY (UserId)
         REFERENCES Users(Id),
 
+    CONSTRAINT FK_Orders_AddressId FOREIGN KEY (AddressId)
+        REFERENCES Addresses(Id),
+
 --     CONSTRAINT FK_Orders_ShippingId FOREIGN KEY (Shipping_Id)
 --         REFERENCES Shippings(Id), -- For Later Updates.
 
 
-    CONSTRAINT CH_Orders_Date_MoreThenZero CHECK (Date <= GETDATE()),
+    CONSTRAINT CH_Orders_Date_MoreThenZero CHECK (CreationDate <= GETDATE()),
 
     CONSTRAINT CH_Orders_TotalAmount_MoreThenZero CHECK (TotalAmount > 0),
 );
-GO
 
 ----////////////////////////////
 
 CREATE TABLE Order_Lines
 (
     Id INT NOT NULL IDENTITY,
-    Quantity INT NOT NULL,
-    UnitePrice REAL NOT NULL,
+    Quantity TINYINT NOT NULL,
+    UnitePrice DECIMAL(10, 2) NOT NULL,
 
     ---- Foreign Keys Attributes
-    OrderId UNIQUEIDENTIFIER NOT NULL,
-    ProductId UNIQUEIDENTIFIER NOT NULL,
+    OrderId INT NOT NULL,
+    ProductId INT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_OrderItems_Id PRIMARY KEY (Id),
@@ -373,13 +350,13 @@ GO
 
 CREATE TABLE Payments
 (
-    Id UNIQUEIDENTIFIER NOT NULL,
-    Method SMALLINT NOT NULL,
-    Status SMALLINT NOT NULL,
+    Id INT NOT NULL,
+    Method TINYINT NOT NULL,
+    Status TINYINT NOT NULL,
     PaidAt DATETIME2(3) NOT NULL,
-    Transaction_Id UNIQUEIDENTIFIER NOT NULL,
+    TransactionOperationId BIGINT NOT NULL,
     ---- Foreign Keys Attributes
-    OrderId UNIQUEIDENTIFIER NOT NULL,
+    OrderId INT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Payments_Id PRIMARY KEY (Id),
@@ -387,20 +364,5 @@ CREATE TABLE Payments
 
     CONSTRAINT FK_Payments_OrderId FOREIGN KEY (OrderId)
         REFERENCES Orders(Id),
-);
-GO
-
-----////////////////////////////
-
-CREATE TABLE Transactions
-(
-    Id UNIQUEIDENTIFIER NOT NULL,
-    CT VARCHAR(MAX) NOT NULL,
-    
-    ---- Constraints
-    CONSTRAINT PK_Transactions_Id PRIMARY KEY (Id),
-    
-    
-    CONSTRAINT UQ_Transactions_CT UNIQUE (CT),
 );
 GO

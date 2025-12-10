@@ -1,5 +1,5 @@
-USE OnlineStore_DB;
-GO
+--USE OnlineStore_DB;
+--GO
 
 /*
     ======================================

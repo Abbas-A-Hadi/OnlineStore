@@ -4,7 +4,7 @@ using Domain.Products;
 
 namespace Infrastructure.Database.Products;
 
-public sealed class ProductRepository : IProductRepository
+public sealed class ProductRepository(ISqlDataAccess db) : IProductRepository
 {
     public Task<Product> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {

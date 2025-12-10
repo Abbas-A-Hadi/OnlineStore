@@ -12,15 +12,17 @@ internal sealed class GetById : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("products/{Id:guid}", async (
-            Guid productId,
-            IQueryHandler<GetProductByIdQuery, ProductResponse> handler,
-            CancellationToken cancellationToken) =>
-        {
-            GetProductByIdQuery query = new(productId);
-            
-            Result<ProductResponse> result = await handler.Handle(query, cancellationToken);
-            
-            return result.Match(Results.Ok, CustomResults.Problem);
-        }).WithTags(Tags.Products);
+                Guid productId,
+                IQueryHandler<GetProductByIdQuery, ProductResponse> handler,
+                CancellationToken cancellationToken) =>
+            {
+                GetProductByIdQuery query = new(productId);
+
+                Result<ProductResponse> result = await handler.Handle(query, cancellationToken);
+
+                return result.Match(Results.Ok, CustomResults.Problem);
+            })
+            .WithTags(Tags.Products)
+            .WithName("GetProductById");
     }
 }

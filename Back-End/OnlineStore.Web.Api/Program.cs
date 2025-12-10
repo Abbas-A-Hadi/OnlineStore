@@ -6,10 +6,13 @@ using Web.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseKestrel(options => options.AddServerHeader = false);
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 //builder.Services.AddSwaggerGenWithAuth(); // It will enable Swagger.
+
 builder.Services
     .AddApplication()
     .AddPresentation()
@@ -25,8 +28,15 @@ app.MapEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "Open Api V1");
+    });
 }
 
+app.UseCors("CorsPolicy");
+app.UseHttpsRedirection();
 app.UseExceptionHandler();
 app.UseAuthentication();
 app.UseAuthorization();

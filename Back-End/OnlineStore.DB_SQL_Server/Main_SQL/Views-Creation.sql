@@ -1,5 +1,5 @@
-USE OnlineStore_DB;
-GO
+--USE OnlineStore_DB;
+--GO
 
 /*
     ==========================
@@ -14,27 +14,11 @@ CREATE VIEW vAddresses
 AS
 (
     SELECT
-        a.Id AS [AddressId], a.FullyAsString AS [AddressAsString], a.PostCode, a.Street,
+        a.Id AS [AddressId], a.FullyAsString AS [AddressAsString], a.PostCode, 
         co.Name AS [CountryName], ci.Name AS [CityName]
     FROM Addresses AS a
          INNER JOIN Countries AS co ON a.CountryId = co.Id
          INNER JOIN Cities AS ci ON a.CityId = ci.Id
-);
-GO
-
-
-----////////////////////////
----- People
-CREATE VIEW vNonDeletedPeople
-AS
-(
-    SELECT
-        p.Id AS [PersonId], p.FullName, p.DateOfBirth, p.Email, p.Phone,
-        vA.AddressAsString, vA.PostCode, vA.Street,
-        vA.CountryName, vA.CityName
-    FROM People AS p
-         INNER JOIN vAddresses AS vA ON p.AddressId = vA.AddressId
-    WHERE p.IsDeleted = 0
 );
 GO
 
@@ -45,11 +29,10 @@ CREATE VIEW vActiveUsers_FullInfo
 AS
 (
     SELECT
-        u.Id AS [UserId], u.UserName, u.Role,
-        vP.FullName, vP.DateOfBirth, vP.Email, vP.Phone,
-        vP.AddressAsString, vP.PostCode, vP.Street, vP.CountryName, vP.CityName
+        u.Id AS [UserId], u.FirstName, u.LastName, u.DateOfBirth, u.Email, vA.Phone,
+        vA.AddressAsString, vA.PostCode, vA.CountryName, vA.CityName
     FROM Users AS u
-         INNER JOIN vNonDeletedPeople AS vP ON u.PersonId = vP.PersonId
+         INNER JOIN vAddresses AS vA ON u.PersonId = vA.PersonId
     WHERE u.IsActive = 1 AND u.IsDeleted = 0
 );
 GO
