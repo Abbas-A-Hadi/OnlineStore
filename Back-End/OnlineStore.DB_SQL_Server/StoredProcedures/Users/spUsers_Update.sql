@@ -23,6 +23,6 @@ BEGIN
         RefreshToken = @RefreshToken,
         RefreshTokenExpirationTime = @RefreshTokenExpirationTime
     WHERE Id = @Id;
-    
-    RETURN @@ROWCOUNT;
+
+    SELECT @@ROWCOUNT;
 END;

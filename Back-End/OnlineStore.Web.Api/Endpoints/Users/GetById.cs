@@ -10,19 +10,21 @@ internal sealed class GetById : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("users/{userId}", async (
-                Guid userId,
-                IQueryHandler<GetUserByIdQuery, UserResponse> handler,
-                CancellationToken cancellationToken) =>
-            {
-                var query = new GetUserByIdQuery(userId);
-
-                Result<UserResponse> result = await handler.Handle(query, cancellationToken);
-
-                return result.Match(Results.Ok, CustomResults.Problem);
-            })
+        app.MapGet("users/{userId:guid}", GetUserByIdAsync)
             .HasPermission(Permissions.UsersAccess)
             .WithTags(Tags.Users)
             .WithName("GetUserById");
+    }
+    
+    private async Task<IResult> GetUserByIdAsync(
+        Guid userId,
+        IQueryHandler<GetUserByIdQuery, UserResponse> handler,
+        CancellationToken cancellationToken)
+    {
+        GetUserByIdQuery query = new(userId);
+
+        Result<UserResponse> result = await handler.Handle(query, cancellationToken);
+
+        return result.Match(Results.Ok, CustomResults.Problem);
     }
 }

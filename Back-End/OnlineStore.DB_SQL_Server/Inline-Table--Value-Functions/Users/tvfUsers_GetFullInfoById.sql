@@ -1,11 +1,11 @@
 CREATE FUNCTION tvfUsers_GetFullInfoById(@UserId UNIQUEIDENTIFIER)
-RETURNS TABLE
-AS
+RETURNS TABLE 
+AS 
 RETURN (
     SELECT TOP 1
-        vU.UserName, vU.Role,
-        vU.FullName, vU.DateOfBirth, vU.Email, vU.Phone,
-        vU.AddressAsString, vU.PostCode, vU.Street, vU.CountryName, vU.CityName
+        vU.Id, vU.Email, 
+        vU.FirstName, vU.LastName, vU.DateOfBirth,
+        vU.RefreshToken, vU.RefreshTokenExpirationTime, vU.Role
     FROM vActiveUsers_FullInfo AS vU
-    WHERE vU.UserId = @UserId
+    WHERE vU.Id = @UserId
 );

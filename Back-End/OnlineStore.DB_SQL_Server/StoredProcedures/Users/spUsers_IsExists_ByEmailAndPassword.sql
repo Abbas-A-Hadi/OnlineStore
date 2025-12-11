@@ -10,8 +10,8 @@ BEGIN
         FROM Users AS u
         WHERE u.Email = @Email AND u.PasswordHash = @PasswordHash
     ) BEGIN
-        RETURN 1;
+        SELECT 1;
     END;
-    
-    RETURN 0;
+
+    SELECT 0;
 END;

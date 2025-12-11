@@ -8,9 +8,9 @@ internal sealed class PasswordHasher : IPasswordHasher
     private const int SaltSize = 16;
     private const int HashSize = 32;
     private const int Iterations = 500000;
-    
-    private static readonly HashAlgorithmName Algorithm =  HashAlgorithmName.SHA512;
-    
+
+    private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
+
     public string Hash(string password)
     {
         byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
@@ -25,8 +25,8 @@ internal sealed class PasswordHasher : IPasswordHasher
         byte[] hash = Convert.FromHexString(parts[0]);
         byte[] salt = Convert.FromHexString(parts[1]);
 
-        byte[] input = Rfc2898DeriveBytes.Pbkdf2(password, salt, Iterations, Algorithm, HashSize);
+        byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(password, salt, Iterations, Algorithm, HashSize);
         
-        return CryptographicOperations.FixedTimeEquals(hash, salt);
+        return CryptographicOperations.FixedTimeEquals(hash, inputHash);
     }
 }

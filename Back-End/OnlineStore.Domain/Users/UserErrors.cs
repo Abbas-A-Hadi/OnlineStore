@@ -27,4 +27,8 @@ public static class UserErrors
     public static readonly Error EmailNotUnique = Error.Conflict(
         "Users.EmailNotUnique",
         "The provided email is not unique");
+
+    public static Error FailedToDelete(Guid userId) => Error.Failure(
+        "Users.FailedToDelete",
+        $"User with id = '{userId}' was not deleted");
 }

@@ -1,9 +1,7 @@
 using System.Data;
-using System.Diagnostics;
 using Application.Repository;
 using Dapper;
 using Domain.Users;
-using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Database.Users;
 
@@ -11,22 +9,26 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
 {
     public async Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken) 
     {
-        IEnumerable<User> users = await db.LoadData<User, Guid>(
-            sqlQuery: "SELECT * FROM ", 
-            parameters: userId, 
-            cancellationToken);
+        using IDbConnection dbConnection = db.GetSqlConnection();
+
+        UserDbRow? row = await dbConnection.QueryFirstOrDefaultAsync<UserDbRow>(new CommandDefinition(
+            commandText: "SELECT * FROM dbo.tvfUsers_GetById(@userId)",
+            parameters: new { UserId = userId }, commandType: CommandType.Text,
+            cancellationToken: cancellationToken));
         
-        return users.FirstOrDefault();
+         return row?.MapToUser();
     }
     
     public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        IEnumerable<User> users = await db.LoadData<User, string>(
-            sqlQuery: "SELECT * FROM ",
-            parameters: email,
-            cancellationToken);
+        using IDbConnection dbConnection = db.GetSqlConnection();
+
+        UserDbRow? row = await dbConnection.QueryFirstOrDefaultAsync<UserDbRow>(new CommandDefinition(
+            commandText: "SELECT * FROM dbo.tvfUsers_GetByEmail(@email)",
+            parameters: new { Email = email }, commandType: CommandType.Text,
+            cancellationToken: cancellationToken));
         
-        return users.FirstOrDefault();
+        return row?.MapToUser();
     }
     
     public async Task<bool> IsUserExistsAsync(Guid userId, CancellationToken cancellationToken)
@@ -35,13 +37,13 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
 
         using IDbConnection dbConnection = db.GetSqlConnection();
 
-        CommandDefinition commandDefinition = new CommandDefinition(
+        int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
             commandText: storedProcedure,
-            parameters: new { UserId = userId },
+            parameters: userId,
             commandType: CommandType.StoredProcedure,
-            cancellationToken: cancellationToken);
-        
-        return await dbConnection.ExecuteAsync(commandDefinition) > 0;
+            cancellationToken: cancellationToken));
+
+        return isFoundAsInt is 1;
     }
     
     public async Task<bool> IsUserExistsAsync(string email, string passwordHash, CancellationToken cancellationToken) 
@@ -50,41 +52,47 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
 
         using IDbConnection dbConnection = db.GetSqlConnection();
 
-        CommandDefinition commandDefinition = new CommandDefinition(
+        int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
             commandText: storedProcedure,
             parameters: new { Email = email, PasswordHash = passwordHash },
             commandType: CommandType.StoredProcedure,
-            cancellationToken: cancellationToken);
-        
-        return await dbConnection.ExecuteAsync(commandDefinition) > 0;
+            cancellationToken: cancellationToken));
+
+        return isFoundAsInt is 1;
     }
     
     public async Task<bool> RegisterUserAsync(User user, CancellationToken cancellationToken) 
     {
-        int rowsAffected = await db.SaveData<User>(
-            storedProcedure: "spUsers_Create",
-            parameters: user,
-            cancellationToken);
+        using IDbConnection dbConnection = db.GetSqlConnection();
+        
+        int rowsAffected = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
+            commandText: "spUsers_Create", parameters: user, 
+            commandType: CommandType.StoredProcedure, 
+            cancellationToken: cancellationToken)); 
 
         return rowsAffected > 0;
     }
     
     public async Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken) 
     {
-        int rowsAffected = await db.SaveData<User>(
-            storedProcedure: "spUsers_Update",
-            parameters: user,
-            cancellationToken);
+        using IDbConnection dbConnection = db.GetSqlConnection();
+        
+        int rowsAffected = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
+            commandText: "spUsers_Update", parameters: user, 
+            commandType: CommandType.StoredProcedure, 
+            cancellationToken: cancellationToken)); 
 
         return rowsAffected > 0;
     }
     
     public async Task<bool> DeleteUserAsync(Guid userId, CancellationToken cancellationToken) 
     {
-        int rowsAffected = await db.SaveData<Guid>(
-            storedProcedure: "spUsers_Delete_ById",
-            parameters: userId,
-            cancellationToken);
+        using IDbConnection dbConnection = db.GetSqlConnection();
+        
+        int rowsAffected = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
+            commandText: "spUsers_Delete_ById", parameters: userId, 
+            commandType: CommandType.StoredProcedure, 
+            cancellationToken: cancellationToken)); 
 
         return rowsAffected > 0;
     }

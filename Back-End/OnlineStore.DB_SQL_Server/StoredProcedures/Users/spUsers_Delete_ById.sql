@@ -8,5 +8,5 @@ BEGIN
     SET IsDeleted = 1
     WHERE Users.Id = @UserId
 
-    RETURN @@ROWCOUNT;
+    SELECT @@ROWCOUNT;
 END;

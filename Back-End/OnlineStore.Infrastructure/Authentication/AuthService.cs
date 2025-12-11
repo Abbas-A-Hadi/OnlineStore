@@ -70,22 +70,22 @@ internal sealed class AuthService(
 
     public async Task<Result<TokenDto>> RefreshTokensAsync(RefreshTokenDto refreshTokenDto, CancellationToken cancellationToken)
     {
-        User? user = await userRepository.GetUserByIdAsync(refreshTokenDto.UserId, cancellationToken);
+        User? restoredUser = await userRepository.GetUserByIdAsync(refreshTokenDto.UserId, cancellationToken);
         
-        if (user is null)
+        if (restoredUser is null)
             return Result.Failure<TokenDto>(UserErrors.NotFound(refreshTokenDto.UserId));
 
-        string accessToken = tokenProvider.Create(user);
-        string refreshToken = refreshTokenProvider.Create(user);
+        string accessToken = tokenProvider.Create(restoredUser);
+        string refreshToken = refreshTokenProvider.Create(restoredUser);
 
-        User updatedUser = user with
+        User updatedUser = restoredUser with
         {
             RefreshToken = refreshToken,
             RefreshTokenExpirationTime = dateTimeProvider.UtcNow.AddDays(7)
         };
 
         if (!await userRepository.UpdateUserAsync(updatedUser, cancellationToken))
-            return Result.Failure<TokenDto>(UserErrors.UpdateFailure(user.Id.Value, user.Email));
+            return Result.Failure<TokenDto>(UserErrors.UpdateFailure(restoredUser.Id.Value, restoredUser.Email));
 
         return new TokenDto()
         {
