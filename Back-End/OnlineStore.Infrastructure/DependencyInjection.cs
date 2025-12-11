@@ -1,9 +1,11 @@
 using System.Text;
 using Application.Abstractions.Authentication;
 using Application.Repository;
+using Dapper;
 using Infrastructure.Authentication;
 using Infrastructure.Database;
 using Infrastructure.Database.Categories;
+using Infrastructure.Database.DapperSqlMapperTypeHandler;
 using Infrastructure.Database.Products;
 using Infrastructure.Database.Users;
 using Infrastructure.Time;
@@ -19,6 +21,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         => services
+            .AddDapperTypeHandlers()
             .AddServices()
             .AddAuthenticationInternal(configuration)
             .AddAuthorizationInternal();
@@ -30,6 +33,14 @@ public static class DependencyInjection
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<IProductRepository, ProductRepository>();
         services.AddSingleton<ICategoryRepository, CategoryRepository>();
+        
+        return services;
+    }
+
+    private static IServiceCollection AddDapperTypeHandlers(this IServiceCollection services)
+    {
+        SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+        SqlMapper.AddTypeHandler(new UserIdTypeHandler());
         
         return services;
     }
@@ -60,9 +71,17 @@ public static class DependencyInjection
         return services;
     }
     
+    private const string UserAccessPermission = "users:access"; 
+
     private static IServiceCollection AddAuthorizationInternal(this IServiceCollection services)
     {
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy(UserAccessPermission, policy =>
+            {
+                policy.RequireClaim("permission", UserAccessPermission);
+            });
+        });
         
         return services;
     }

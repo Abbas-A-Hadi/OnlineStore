@@ -66,18 +66,20 @@ CREATE TABLE Addresses
 GO
 
 ----////////////////////////////
-
+SELECT * FROM dbo.tvfUsers_GetAllActiveUsers();
+DELETE FROM DBO.UserS WHERE Users.Id = 'b055e0c5-09b2-4c8a-970b-e66cf815d6de';   
+--DELETE FROM Users WHERE FirstName LIKE 'j%'
 CREATE TABLE Users
 (
     Id UNIQUEIDENTIFIER NOT NULL,
-    FirstName VARCHAR(20) NOT NULL,
-    LastName VARCHAR(20) NOT NULL,
     Email VARCHAR(40) NOT NULL,
     PasswordHash VARCHAR(255) NOT NULL,
-    Role TINYINT NOT NULL, ---- 0: User, 1: Admin, ....
+    FirstName VARCHAR(20) NOT NULL,
+    LastName VARCHAR(20) NOT NULL,
     DateOfBirth Date NOT NULL,
-    RefreshToken VARCHAR NULL,
+    RefreshToken VARCHAR(50) NULL,
     RefreshTokenExpirationTime DATETIME2(3) NULL,
+    Role TINYINT NOT NULL, ---- 0: User, 1: Admin, ....
     CreatedAt DATETIME2(3) NOT NULL CONSTRAINT DF_Users_CreatedAt DEFAULT GETDATE(),
     IsActive BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1,
     IsDeleted BIT NOT NULL CONSTRAINT DF_Users_IsDeleted DEFAULT 0, -- For Soft Deletion.

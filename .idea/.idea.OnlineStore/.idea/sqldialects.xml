@@ -2,8 +2,10 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetAllActiveUsersFullInfo.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetMainInfoById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetAllActiveUsers.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetByEmail.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetById.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetFullInfoById.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Tables-Creation.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" dialect="TSQL" />
@@ -30,5 +32,6 @@
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/ProductsImagesURLs.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Reviews.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Users.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Users/vActiveUsers_FullInfo.sql" dialect="TSQL" />
   </component>
 </project>

@@ -8,5 +8,5 @@ BEGIN
     SET IsActive = 0
     WHERE Users.Id = @UserId;
     
-    RETURN @@ROWCOUNT;
+    SELECT @@ROWCOUNT;
 END;

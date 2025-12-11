@@ -9,8 +9,8 @@ BEGIN
         FROM Users AS u
         WHERE u.Id = @UserID
     ) BEGIN
-        RETURN 1;
+        SELECT 1;
     END;
 
-    RETURN 0;
+    SELECT 0;
 END;

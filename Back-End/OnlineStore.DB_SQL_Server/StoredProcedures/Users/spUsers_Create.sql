@@ -1,4 +1,4 @@
-CREATE PROCEDURE spUsers_Create
+ALTER PROCEDURE spUsers_Create
     @Id UNIQUEIDENTIFIER,
     @FirstName VARCHAR(20),
     @LastName VARCHAR(20),
@@ -7,8 +7,7 @@ CREATE PROCEDURE spUsers_Create
     @Role VARCHAR(20), 
     @DateOfBirth Date,
     @RefreshToken VARCHAR(50),
-    @RefreshTokenExpirationTime DATETIME2(3),
-    @CreatedAt DATETIME2(3)
+    @RefreshTokenExpirationTime DATETIME2(3)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -21,7 +20,7 @@ BEGIN
             Role, RefreshToken, RefreshTokenExpirationTime, CreatedAt)
     VALUES 
         (@Id, @FirstName, @LastName, @Email, @PasswordHash, @DateOfBirth, 
-            @roleAsTinyInt, @RefreshToken, @RefreshTokenExpirationTime, @CreatedAt);
+            @roleAsTinyInt, @RefreshToken, @RefreshTokenExpirationTime, GETDATE());
     
-    RETURN @@ROWCOUNT;
+    SELECT @@ROWCOUNT;
 END;
