@@ -8,13 +8,10 @@ public sealed record User
     public string FirstName { get; init; }
     public string LastName { get; init; }
     public DateOnly DateOfBirth { get; init; }
-    public string? RefreshToken { get; init; }
-    public DateTime? RefreshTokenExpirationTime { get; init; }
     public string Role { get; init; }
 
     internal User(UserId userId, string email, string passwordHash, 
-        string firstName, string lastName, DateOnly dateOfBirth, 
-        string? refreshToken, DateTime? refreshTokenExpirationTime, string role)
+        string firstName, string lastName, DateOnly dateOfBirth, string role)
     {
         Id = userId;
         Email = email;
@@ -22,8 +19,6 @@ public sealed record User
         FirstName = firstName;
         LastName = lastName;
         DateOfBirth = dateOfBirth;
-        RefreshToken = refreshToken;
-        RefreshTokenExpirationTime = refreshTokenExpirationTime;
         Role = role;
     }
     

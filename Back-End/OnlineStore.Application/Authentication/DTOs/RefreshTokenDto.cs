@@ -1,4 +1,4 @@
-namespace Application.Authentication;
+namespace Application.Authentication.DTOs;
 
 public sealed class RefreshTokenDto
 {

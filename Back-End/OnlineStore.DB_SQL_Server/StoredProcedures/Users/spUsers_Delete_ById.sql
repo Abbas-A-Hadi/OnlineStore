@@ -6,7 +6,7 @@ BEGIN
 
     UPDATE Users
     SET IsDeleted = 1
-    WHERE Users.Id = @UserId
+    WHERE Id = @UserId
 
     SELECT @@ROWCOUNT;
 END;

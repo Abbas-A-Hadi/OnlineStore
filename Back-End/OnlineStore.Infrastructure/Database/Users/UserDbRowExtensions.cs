@@ -12,7 +12,5 @@ internal static class UserDbRowExtensions
             firstName: row.FirstName,
             lastName: row.LastName,
             dateOfBirth: row.DateOfBirth,
-            refreshToken: row.RefreshToken,
-            refreshTokenExpirationTime: row.RefreshTokenExpirationTime,
             role: row.Role);
 }

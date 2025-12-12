@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetAllActiveUsers.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetByEmail.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Value-Functions/Users/tvfUsers_GetFullInfoById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="dbSrc:///8372319c/efe69488-0307-42d7-ae57-43aa027766c8/database/OnlineStore_DB/schema/dbo/routine/tvfUsers_GetAllActiveUsers.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="dbSrc:///8372319c/efe69488-0307-42d7-ae57-43aa027766c8/database/OnlineStore_DB/schema/dbo/view/vActiveUsers_FullInfo.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/.idea/.idea.OnlineStore/.idea/queries/Query.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/RefreshTokens/tvfRefreshTokens_GetById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/RefreshTokens/tvfRefreshTokens_GetByToken.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetAllActiveUsers.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetByEmail.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetFullInfoById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Tables-Creation.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromStringToSingleByte.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromTinyIntToVarchar.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_Create.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_DeleteAllForUserWithId.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_DeleteById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_UpdateById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Activate_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Create.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Deactivate_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Delete_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ByEmailAndPassword.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ByEmailOnly.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_IsExists_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Undelete_ById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Users/spUsers_Update.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />

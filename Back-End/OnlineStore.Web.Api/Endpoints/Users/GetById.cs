@@ -12,6 +12,7 @@ internal sealed class GetById : IEndpoint
     {
         app.MapGet("users/{userId:guid}", GetUserByIdAsync)
             .HasPermission(Permissions.UsersAccess)
+            .RequireAuthorization()
             .WithTags(Tags.Users)
             .WithName("GetUserById");
     }

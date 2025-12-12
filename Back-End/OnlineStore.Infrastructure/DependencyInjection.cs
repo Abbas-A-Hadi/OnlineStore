@@ -2,11 +2,13 @@ using System.Text;
 using Application.Abstractions.Authentication;
 using Application.Repository;
 using Dapper;
+using Domain.RefreshTokens;
 using Infrastructure.Authentication;
 using Infrastructure.Database;
 using Infrastructure.Database.Categories;
 using Infrastructure.Database.DapperSqlMapperTypeHandler;
 using Infrastructure.Database.Products;
+using Infrastructure.Database.RefreshTokens;
 using Infrastructure.Database.Users;
 using Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,6 +33,7 @@ public static class DependencyInjection
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
         services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddSingleton<IProductRepository, ProductRepository>();
         services.AddSingleton<ICategoryRepository, CategoryRepository>();
         
@@ -41,6 +44,7 @@ public static class DependencyInjection
     {
         SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
         SqlMapper.AddTypeHandler(new UserIdTypeHandler());
+        SqlMapper.AddTypeHandler(new RefreshTokenIdTypeHandler());
         
         return services;
     }

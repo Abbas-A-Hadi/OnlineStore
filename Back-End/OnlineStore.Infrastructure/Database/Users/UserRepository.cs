@@ -39,7 +39,22 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
 
         int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
             commandText: storedProcedure,
-            parameters: userId,
+            parameters: new { UserId = userId },
+            commandType: CommandType.StoredProcedure,
+            cancellationToken: cancellationToken));
+
+        return isFoundAsInt is 1;
+    }
+    
+    public async Task<bool> IsUserExistsAsync(string email, CancellationToken cancellationToken) 
+    {
+        string storedProcedure = "spUsers_IsExists_ByEmailOnly";
+
+        using IDbConnection dbConnection = db.GetSqlConnection();
+
+        int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
+            commandText: storedProcedure,
+            parameters: new { Email = email },
             commandType: CommandType.StoredProcedure,
             cancellationToken: cancellationToken));
 
@@ -90,7 +105,7 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
         using IDbConnection dbConnection = db.GetSqlConnection();
         
         int rowsAffected = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
-            commandText: "spUsers_Delete_ById", parameters: userId, 
+            commandText: "spUsers_Delete_ById", parameters: new { UserId = userId }, 
             commandType: CommandType.StoredProcedure, 
             cancellationToken: cancellationToken)); 
 
