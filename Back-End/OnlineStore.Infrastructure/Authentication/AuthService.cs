@@ -16,11 +16,9 @@ internal sealed class AuthService(
     IDateTimeProvider dateTimeProvider) 
     : IAuthService
 {
-    public async Task<Result<User>> RegisterAsync(RegisterUserDto registerUserDto, CancellationToken cancellationToken)
+    public async Task<Result<User>> RegisterUserAsync(RegisterUserDto registerUserDto, CancellationToken cancellationToken)
     {
-        User? restoredUser = await userRepository.GetUserByEmailAsync(registerUserDto.Email, cancellationToken);
-        
-        if (restoredUser is not null)
+        if (await userRepository.IsUserExistsAsync(registerUserDto.Email, cancellationToken))
         {
             return Result.Failure<User>(UserErrors.EmailNotUnique);
         }
@@ -41,7 +39,7 @@ internal sealed class AuthService(
         return user;
     }
 
-    public async Task<Result<TokenDto>> LoginAsync(LoginUserDto loginUserDto, CancellationToken cancellationToken)
+    public async Task<Result<TokenDto>> LoginUserAsync(LoginUserDto loginUserDto, CancellationToken cancellationToken)
     {
         User? restoredUser = await userRepository.GetUserByEmailAsync(loginUserDto.Email, cancellationToken);
 

@@ -10,7 +10,7 @@ internal sealed class GetAll : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("products/", async (
+        app.MapGet("api/products/", async (
                 IQueryHandler<GetAllProductsQuery, List<ProductResponse>> handler,
                 CancellationToken cancellationToken) =>
             {

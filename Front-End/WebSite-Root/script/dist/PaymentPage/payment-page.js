@@ -1,10 +1,22 @@
-import { OrderItem } from "../DataTypes/OrderItem";
 const orderItems = [
-    new OrderItem("Fox Plush Toy", 1, 19.99, "🦊", "Orange / Medium"),
-    new OrderItem("Neon Fox Pillow", 2, 14.5, "✨", "Glow Edition"),
+    {
+        name: "Fox Plush Toy",
+        qty: 1,
+        price: 19.99,
+        emoji: "🦊",
+        variant: "Orange / Medium"
+    },
+    {
+        name: "Neon Fox Pillow",
+        qty: 2,
+        price: 14.5,
+        emoji: "✨",
+        variant: "Glow Edition",
+    },
 ];
 let shippingCost = 0;
 let couponDiscount = 0;
+let totalCost = 0;
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
     var _a, _b, _c, _d, _e, _f, _g;
@@ -78,8 +90,8 @@ function handleShippingChange() {
     if (!selected)
         return;
     shippingCost = selected.value === "express" ? 7.99 : 0;
-    let subtotal = orderItems.reduce((sum, item) => sum + item.price * item.qty, 0);
-    updateTotals(subtotal);
+    totalCost = orderItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+    updateTotals(totalCost);
 }
 function handlePaymentChange() {
     const selected = document.querySelector('input[name="payment"]:checked');
@@ -109,6 +121,11 @@ function handleApplyCoupon() {
     const code = input.value.trim().toUpperCase();
     if (!code) {
         showToast("Enter a coupon code first.");
+        let totalSpan = document.getElementById("total-amount");
+        if (Number(totalSpan.textContent) !== totalCost) {
+            let subtotal = document.getElementById("subtotal-amount");
+            totalSpan.innerText = subtotal.textContent;
+        }
         return;
     }
     if (code === "FOX10") {
@@ -177,4 +194,5 @@ function handlePayClick(e) {
         showToast("Payment simulated successfully. Thank you! 💳");
     }
 }
+export {};
 //# sourceMappingURL=payment-page.js.map

@@ -12,7 +12,7 @@ internal sealed class UpdateById : IEndpoint
     
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("users/{userId:guid}", UpdateUserByIdAsync)
+        app.MapPut("api/users/{userId:guid}", UpdateUserByIdAsync)
             .RequireAuthorization()
             .WithTags(Tags.Users)
             .WithName("UpdateUserById");

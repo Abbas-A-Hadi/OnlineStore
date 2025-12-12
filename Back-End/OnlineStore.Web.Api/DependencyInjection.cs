@@ -14,12 +14,13 @@ public static class DependencyInjection
 
         string myLocalServerAddressHttps = "https://localhost:7044";
         string myLocalServerAddressHttp = "http://localhost:5145";
+        string myLocalFrontEndAddress = "http://localhost:63342";
         
         services.AddCors(options =>
         {
             options.AddPolicy("CorsPolicy",policy =>
                 {
-                    policy.WithOrigins(myLocalServerAddressHttps, myLocalServerAddressHttp)
+                    policy.WithOrigins(myLocalFrontEndAddress, myLocalServerAddressHttps, myLocalServerAddressHttp)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();

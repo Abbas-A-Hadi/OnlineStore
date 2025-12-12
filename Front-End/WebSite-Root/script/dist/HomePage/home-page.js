@@ -1,4 +1,3 @@
-import { CartProduct } from "../DataTypes/CartProduct";
 const HERO_AUTOPLAY_MS = 4000;
 let heroIndex = 0;
 let heroTimer = null;
@@ -125,7 +124,13 @@ function addProductToCart(e) {
         existingProduct.quantity += (existingProduct.quantity || 1) + 1;
     }
     else {
-        cart.push(new CartProduct(title, price, 1, productImagePath));
+        const newCartProduct = {
+            name: title,
+            price: price,
+            quantity: 1,
+            imagePath: productImagePath
+        };
+        cart.push(newCartProduct);
     }
     updateCart();
 }
@@ -180,4 +185,5 @@ function checkout() {
     else
         alert("Proceed to checkout (demo)");
 }
+export {};
 //# sourceMappingURL=home-page.js.map

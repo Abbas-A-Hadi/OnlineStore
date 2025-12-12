@@ -1,1 +1,1 @@
-{"version":3,"file":"OrderItem.js","sourceRoot":"","sources":["../../src/DataTypes/OrderItem.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,SAAS;IAClB,YAAmB,IAAY,EAAS,GAAU,EAAS,KAAY,EACpD,KAAa,EAAS,OAAc;QADpC,SAAI,GAAJ,IAAI,CAAQ;QAAS,QAAG,GAAH,GAAG,CAAO;QAAS,UAAK,GAAL,KAAK,CAAO;QACpD,UAAK,GAAL,KAAK,CAAQ;QAAS,YAAO,GAAP,OAAO,CAAO;IACvD,CAAC;CACJ"}
+{"version":3,"file":"OrderItem.js","sourceRoot":"","sources":["../../src/DataTypes/OrderItem.ts"],"names":[],"mappings":""}

@@ -1,4 +1,14 @@
-const homeFilePath = "../.././WebSite-Root/documents/home-page.html";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { baseApiUrl } from "../Global.js";
+import { ApiClient } from "../ApiClient.js";
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
     const loginForm = document.getElementById("loginForm");
@@ -51,19 +61,34 @@ function OnDocumentContentLoaded() {
         registerStep2.classList.remove("active");
         loginForm.classList.add("active");
     });
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = loginForm.querySelector('input[type="email"]').value.trim();
-        const password = loginForm.querySelector('input[type="password"]').value.trim();
-        if (!email || !password) {
-            alert("Please enter email and password.");
-            return;
-        }
-        window.location.href = homeFilePath;
-    });
+    loginForm.addEventListener("submit", OnLoginButtonClick);
     const regBirthdayHandler = () => formatDate.bind(regBirthdayInput);
     let regBirthdayInput = document.getElementById("regBirthday");
     regBirthdayInput === null || regBirthdayInput === void 0 ? void 0 : regBirthdayInput.addEventListener("input", regBirthdayHandler);
+    document.removeEventListener("DOMContentLoaded", OnDocumentContentLoaded);
+}
+function OnLoginButtonClick(e) {
+    return __awaiter(this, void 0, void 0, function* () {
+        e.preventDefault();
+        console.log("Login button clicked!");
+        const email = this.querySelector('input[type="email"]')
+            .value.trim();
+        const password = this.querySelector('input[type="password"]')
+            .value.trim();
+        let loginRequest = {
+            email: email,
+            password: password
+        };
+        try {
+            const api = new ApiClient(baseApiUrl);
+            const response = yield api.Post('auth/login/', loginRequest);
+            api.SetToken(response.accessToken);
+            window.location.href = "../../../../.././Front-End/WebSite-Root/documents/home-page.html";
+        }
+        catch (error) {
+            alert(error);
+        }
+    });
 }
 function formatDate(input) {
     let value = input.value.replace(/\D/g, "");
@@ -74,5 +99,4 @@ function formatDate(input) {
     else
         input.value = value;
 }
-export {};
 //# sourceMappingURL=login-page.js.map

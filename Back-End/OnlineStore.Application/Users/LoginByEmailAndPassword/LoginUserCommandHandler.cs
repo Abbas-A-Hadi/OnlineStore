@@ -12,6 +12,6 @@ internal sealed class LoginUserCommandHandler(IAuthService authService)
     {
         LoginUserDto loginUserDto = new(command.Email, command.Password);
         
-        return await authService.LoginAsync(loginUserDto, cancellationToken);
+        return await authService.LoginUserAsync(loginUserDto, cancellationToken);
     }
 }

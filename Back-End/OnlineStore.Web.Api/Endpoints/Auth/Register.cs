@@ -1,10 +1,11 @@
 using Application.Abstractions.Messaging;
 using Application.Users.Register;
+using FluentValidation;
 using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
-namespace Web.Api.Endpoints.Users;
+namespace Web.Api.Endpoints.Auth;
 
 public sealed class Register : IEndpoint
 {
@@ -12,14 +13,15 @@ public sealed class Register : IEndpoint
     
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/register", RegisterUserAsync)
+        app.MapPost("api/auth/register", RegisterUserAsync)
             .WithTags(Tags.Users)
             .WithName("RegisterUser");
     }
     
     private async Task<IResult> RegisterUserAsync(
         RegisterUserRequest request,
-        ICommandHandler<RegisterUserCommand, Guid> handler,
+        ICommandHandler<RegisterUserCommand, RegisterUserResponse> handler,
+        IValidator<RegisterUserCommand> validator,
         CancellationToken cancellationToken) 
     {
         RegisterUserCommand command = new (
@@ -29,8 +31,22 @@ public sealed class Register : IEndpoint
             LastName: request.LastName,
             DateOfBirth: request.DateOfBirth,
             Role: request.Role);
+        
+        var validationResult = await validator.ValidateAsync(command, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            HttpValidationProblemDetails problemDetails = new(validationResult.ToDictionary())
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Validation Error",
+                Detail = "One or more validation errors occurred.",
+                Instance = "RegisterUser"
+            };
+            
+            return Results.Problem(problemDetails);
+        }
                 
-        Result<Guid> result = await handler.Handle(command, cancellationToken);
+        Result<RegisterUserResponse> result = await handler.Handle(command, cancellationToken);
 
         return result.Match(Results.Ok, CustomResults.Problem);
     }

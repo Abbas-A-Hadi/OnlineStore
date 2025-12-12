@@ -1,26 +1,27 @@
-import {OrderItem} from "../DataTypes/OrderItem";
+import type {OrderItem} from "../DataTypes/OrderItem.js";
 
 // Simple demo data for order items.
 // Later you can replace this with real cart data from your main site.
 const orderItems: OrderItem[] = [
-    new OrderItem(
-        "Fox Plush Toy",
-        1,
-        19.99,
-        "🦊",
-        "Orange / Medium"
-    ),
-    new OrderItem(
-        "Neon Fox Pillow",
-        2,
-        14.5,
-        "✨",
-        "Glow Edition",
-    ),
+    {
+        name: "Fox Plush Toy",
+        qty: 1,
+        price: 19.99,
+        emoji: "🦊",
+        variant: "Orange / Medium"
+    },
+    {
+        name: "Neon Fox Pillow",
+        qty: 2,
+        price: 14.5,
+        emoji: "✨",
+        variant: "Glow Edition",
+    },
 ];
 
 let shippingCost: number = 0;
 let couponDiscount: number = 0;
+let totalCost: number = 0;
 
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 
@@ -136,9 +137,10 @@ function handleShippingChange(): void {
     shippingCost = selected.value === "express" ? 7.99 : 0;
 
     // Recompute totals
-    let subtotal = orderItems.reduce((sum: number, item: OrderItem) => sum + item.price * item.qty, 0);
+    //let subtotal = orderItems.reduce((sum: number, item: OrderItem) => sum + item.price * item.qty, 0);
+    totalCost = orderItems.reduce((sum: number, item: OrderItem) => sum + item.price * item.qty, 0);
     
-    updateTotals(subtotal);
+    updateTotals(totalCost);
 }
 
 function handlePaymentChange(): void {
@@ -175,6 +177,15 @@ function handleApplyCoupon(): void {
 
     if (!code) {
         showToast("Enter a coupon code first.");
+        
+        let totalSpan = <HTMLSpanElement> document.getElementById("total-amount");
+        
+        if (Number(totalSpan.textContent) !== totalCost)
+        {
+            let subtotal = <HTMLSpanElement> document.getElementById("subtotal-amount")!;
+            totalSpan.innerText = subtotal.textContent!;
+        }
+        
         return;
     }
 

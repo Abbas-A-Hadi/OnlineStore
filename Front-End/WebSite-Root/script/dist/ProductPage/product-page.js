@@ -1,75 +1,40 @@
+import { Product } from "../DataTypes/Products/Product.js";
 let heroProductId;
-const products = {
-    keyboard1: {
-        id: "keyboard1",
-        name: "Redragon K512 Neon Gaming Keyboard",
-        sku: "RD-K512",
-        priceText: "300,000 IQD",
-        priceNumber: 300000,
-        stock: "In stock",
-        reviewsText: "124 ratings",
-        short: "Full-size RGB gaming keyboard with neon backlight and programmable keys.",
-        long: "The Redragon K512 Neon Gaming Keyboard delivers a full-size layout with vibrant RGB lighting, anti-ghosting keys and a durable metal top plate. Designed for gamers who love a neon cyber look, it features multiple lighting presets, on-the-fly controls and soft-touch keycaps for comfortable long sessions.",
-        features: [
-            "Full-size layout with dedicated media keys",
-            "Dynamic RGB neon backlighting with multiple presets",
-            "Anti-ghosting and N-key rollover",
-            "Detachable wrist rest for extra comfort",
-            "Durable switches rated for millions of presses"
-        ],
-        images: [
-            "../homePage/img/redragon-k512.jpeg",
-            "../homePage/img/download7.jpeg",
-            "../homePage/img/download17.jpeg"
-        ]
-    },
-    keyboard2: {
-        id: "keyboard2",
-        name: "MagicWand Compact RGB Keyboard",
-        sku: "MW-68",
-        priceText: "240,000 IQD",
-        priceNumber: 240000,
-        stock: "Only a few left",
-        reviewsText: "67 ratings",
-        short: "Compact 68-key layout with per-key RGB and hot-swappable switches.",
-        long: "The MagicWand Compact RGB Keyboard brings premium features to a small footprint. With hot-swappable switches, per-key lighting and a rock-solid metal frame, it is perfect for minimalist neon setups and tight desk spaces.",
-        features: [
-            "Compact 68-key neon design",
-            "Per-key RGB lighting with custom profiles",
-            "Hot-swappable mechanical switches",
-            "USB-C detachable braided cable",
-            "Side glow diffuser strip for extra neon effect"
-        ],
-        images: [
-            "../homePage/img/magicwand.jpeg",
-            "../homePage/img/images17.jpeg",
-            "../homePage/img/download7.jpeg"
-        ]
-    },
-    keyboard3: {
-        id: "keyboard3",
-        name: "Venom-2 Cyberpunk Keyboard",
-        sku: "VNM-2",
-        priceText: "350,000 IQD",
-        priceNumber: 350000,
-        stock: "In stock",
-        reviewsText: "89 ratings",
-        short: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
-        long: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
-        features: [
-            "Layered neon RGB with side strips",
-            "Dedicated macro column with on-board memory",
-            "Aluminum top plate with cyber cutouts",
-            "Detachable USB-C cable",
-            "Tuned stabilizers for smooth large keys"
-        ],
-        images: [
-            "../homePage/img/venom-2.jpeg",
-            "../homePage/img/lol-logtec.jpeg",
-            "../homePage/img/download17.jpeg"
-        ]
-    }
-};
+const products = [
+    new Product("keyboard1", "Redragon K512 Neon Gaming Keyboard", "RD-K512", 300000, "IQD", "In stock", 124, "Full-size RGB gaming keyboard with neon backlight and programmable keys.", "The Redragon K512 Neon Gaming Keyboard delivers a full-size layout with vibrant RGB lighting, anti-ghosting keys and a durable metal top plate. Designed for gamers who love a neon cyber look, it features multiple lighting presets, on-the-fly controls and soft-touch keycaps for comfortable long sessions.", [
+        "Full-size layout with dedicated media keys",
+        "Dynamic RGB neon backlighting with multiple presets",
+        "Anti-ghosting and N-key rollover",
+        "Detachable wrist rest for extra comfort",
+        "Durable switches rated for millions of presses"
+    ], [
+        "../homePage/img/redragon-k512.jpeg",
+        "../homePage/img/download7.jpeg",
+        "../homePage/img/download17.jpeg"
+    ]),
+    new Product("keyboard2", "MagicWand Compact RGB Keyboard", "MW-68", 240000, "IQD", "Only a few left", 67, "Compact 68-key layout with per-key RGB and hot-swappable switches.", "The MagicWand Compact RGB Keyboard brings premium features to a small footprint. With hot-swappable switches, per-key lighting and a rock-solid metal frame, it is perfect for minimalist neon setups and tight desk spaces.", [
+        "Compact 68-key neon design",
+        "Per-key RGB lighting with custom profiles",
+        "Hot-swappable mechanical switches",
+        "USB-C detachable braided cable",
+        "Side glow diffuser strip for extra neon effect"
+    ], [
+        "../homePage/img/magicwand.jpeg",
+        "../homePage/img/images17.jpeg",
+        "../homePage/img/download7.jpeg"
+    ]),
+    new Product("keyboard3", "Venom-2 Cyberpunk Keyboard", "VNM-2", 350000, "IQD", "In stock", 89, "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.", "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.", [
+        "Layered neon RGB with side strips",
+        "Dedicated macro column with on-board memory",
+        "Aluminum top plate with cyber cutouts",
+        "Detachable USB-C cable",
+        "Tuned stabilizers for smooth large keys"
+    ], [
+        "../homePage/img/venom-2.jpeg",
+        "../homePage/img/lol-logtec.jpeg",
+        "../homePage/img/download17.jpeg"
+    ])
+];
 document.addEventListener("DOMContentLoaded", () => {
     loadProductFromUrl();
     renderRelated();
@@ -82,6 +47,7 @@ function loadProductFromUrl() {
     renderProduct(product);
 }
 function renderProduct(product) {
+    var _a;
     const mainImg = document.getElementById("product-image");
     const nameEl = document.getElementById("product-name");
     const skuEl = document.getElementById("product-sku");
@@ -95,12 +61,12 @@ function renderProduct(product) {
     const thumbsEl = document.getElementById("thumbs");
     nameEl === null || nameEl === void 0 ? void 0 : nameEl.innerText.concat(product.name);
     skuEl === null || skuEl === void 0 ? void 0 : skuEl.innerText.concat("Model: " + product.sku);
-    priceEl === null || priceEl === void 0 ? void 0 : priceEl.innerText.concat(product.priceText);
-    buyPriceEl === null || buyPriceEl === void 0 ? void 0 : buyPriceEl.innerText.concat(product.priceText);
-    stockEl === null || stockEl === void 0 ? void 0 : stockEl.innerText.concat(product.stock);
-    shortEl === null || shortEl === void 0 ? void 0 : shortEl.innerText.concat(product.short);
-    longEl === null || longEl === void 0 ? void 0 : longEl.innerText.concat(product.long);
-    reviewsEl === null || reviewsEl === void 0 ? void 0 : reviewsEl.innerText.concat(product.reviewsText);
+    priceEl === null || priceEl === void 0 ? void 0 : priceEl.innerText.concat(product.price.toString());
+    buyPriceEl === null || buyPriceEl === void 0 ? void 0 : buyPriceEl.innerText.concat(product.price.toString());
+    stockEl === null || stockEl === void 0 ? void 0 : stockEl.innerText.concat(product.stockStatus);
+    shortEl === null || shortEl === void 0 ? void 0 : shortEl.innerText.concat(product.shortDescription);
+    longEl === null || longEl === void 0 ? void 0 : longEl.innerText.concat(product.longDescription);
+    reviewsEl === null || reviewsEl === void 0 ? void 0 : reviewsEl.innerText.concat(product.reviews.toString());
     featEl.innerHTML = "";
     let newListItemElm;
     product.features.forEach((feature) => {
@@ -111,7 +77,7 @@ function renderProduct(product) {
     thumbsEl.innerHTML = "";
     let newDivElm;
     let newImageElm;
-    product.images.forEach((src, idx) => {
+    product.imagesPaths.forEach((src, idx) => {
         newDivElm = document.createElement("div");
         newDivElm.className = "thumb-item" + (idx === 0 ? " active" : "");
         newImageElm = document.createElement("img");
@@ -127,27 +93,28 @@ function renderProduct(product) {
         });
         thumbsEl.appendChild(newDivElm);
     });
-    mainImg.src = product.images[0];
+    mainImg.src = (_a = product.imagesPaths[0]) !== null && _a !== void 0 ? _a : "";
     mainImg.alt = product.name;
 }
 function renderRelated() {
     const container = document.getElementById("related-list");
     container.innerHTML = "";
-    products.forEach(p => {
-        if (p.id === heroProductId)
+    products.forEach(product => {
+        var _a;
+        if (product.id === heroProductId)
             return;
         const card = document.createElement("a");
         card.className = "related-card";
-        card.href = `ProtectPage.html?id=${encodeURIComponent(p.id)}`;
+        card.href = `ProtectPage.html?id=${encodeURIComponent(product.id)}`;
         const img = document.createElement("img");
-        img.src = p.images[0];
-        img.alt = p.name;
+        img.src = (_a = product.imagesPaths[0]) !== null && _a !== void 0 ? _a : "";
+        img.alt = product.name;
         const name = document.createElement("div");
         name.className = "related-name";
-        name.textContent = p.name;
+        name.textContent = product.name;
         const price = document.createElement("div");
         price.className = "related-price";
-        price.textContent = p.priceText;
+        price.textContent = product.price.toLocaleString();
         card.appendChild(img);
         card.appendChild(name);
         card.appendChild(price);
@@ -162,5 +129,4 @@ function buyNow() {
     const product = products[heroProductId] || products["keyboard1"];
     alert("Proceed to checkout for: " + product.name);
 }
-export {};
 //# sourceMappingURL=product-page.js.map

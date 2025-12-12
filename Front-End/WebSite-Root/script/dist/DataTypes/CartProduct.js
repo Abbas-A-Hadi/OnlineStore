@@ -1,9 +1,2 @@
-export class CartProduct {
-    constructor(name, price, quantity, imagePath) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.imagePath = imagePath;
-    }
-}
+export {};
 //# sourceMappingURL=CartProduct.js.map

@@ -10,7 +10,7 @@ internal sealed class GetById : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("users/{userId:guid}", GetUserByIdAsync)
+        app.MapGet("api/users/{userId:guid}", GetUserByIdAsync)
             .HasPermission(Permissions.UsersAccess)
             .RequireAuthorization()
             .WithTags(Tags.Users)
