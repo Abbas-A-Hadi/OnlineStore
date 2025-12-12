@@ -8,9 +8,9 @@ public static class UserErrors
         "Users.UpdateFailure",
         $"User with id = '{userId}' and email = '{email}' had not updated");
     
-    public static Error CreationConflict(string email, string firstName, string lastName) => Error.Conflict(
-        "Users.CreationConflict",
-        $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had creation conflict");
+    public static Error CreationFailure(string email, string firstName, string lastName) => Error.Conflict(
+        "Users.CreationFailure",
+        $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had not creation");
     
     public static Error NotFound(Guid userId) => Error.NotFound(
         "Users.NotFound",

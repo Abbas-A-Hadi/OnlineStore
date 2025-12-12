@@ -11,16 +11,14 @@ internal sealed class RegisterUserCommandHandler(IUserRepository userRepository,
 {
     public async Task<Result<Guid>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
     {
-        string passwordHashed = passwordHasher.Hash(command.Password);
-        
-        if (await userRepository.IsUserExistsAsync(command.Email, passwordHashed, cancellationToken))
+        if (await userRepository.IsUserExistsAsync(command.Email, cancellationToken))
         {
             return Result.Failure<Guid>(UserErrors.EmailNotUnique);
         }
         
         User user = User.CreateNew(
             email: command.Email,
-            passwordHash: passwordHashed,
+            passwordHash: passwordHasher.Hash(command.Password),
             firstName: command.FirstName,
             lastName: command.LastName,
             dateOfBirth: command.DateOfBirth,
@@ -29,7 +27,7 @@ internal sealed class RegisterUserCommandHandler(IUserRepository userRepository,
         if (!await userRepository.RegisterUserAsync(user, cancellationToken))
         {
             return Result.Failure<Guid>(
-                UserErrors.CreationConflict(command.Email, command.FirstName, command.LastName));
+                UserErrors.CreationFailure(command.Email, command.FirstName, command.LastName));
         }
 
         return user.Id.Value;

@@ -1,70 +1,77 @@
 using Application.Abstractions.Authentication;
-using Application.Authentication;
 using Application.Repository;
+using Application.Authentication.DTOs;
+using Domain.RefreshTokens;
 using Domain.Users;
-using Microsoft.Extensions.Configuration;
 using SharedKernel;
 
 namespace Infrastructure.Authentication;
 
 internal sealed class AuthService(
     IUserRepository userRepository,
+    IRefreshTokenRepository refreshTokenRepository,
     IPasswordHasher passwordHasher,
     ITokenProvider tokenProvider,
     IRefreshTokenProvider refreshTokenProvider,
     IDateTimeProvider dateTimeProvider) 
     : IAuthService
 {
-    public async Task<Result<User>> RegisterAsync(UserDto userDto, CancellationToken cancellationToken)
+    public async Task<Result<User>> RegisterAsync(RegisterUserDto registerUserDto, CancellationToken cancellationToken)
     {
-        string hashedPassword = passwordHasher.Hash(userDto.Password);
+        User? restoredUser = await userRepository.GetUserByEmailAsync(registerUserDto.Email, cancellationToken);
         
-        if (await userRepository.IsUserExistsAsync(userDto.Email, hashedPassword, cancellationToken))
+        if (restoredUser is not null)
+        {
             return Result.Failure<User>(UserErrors.EmailNotUnique);
+        }
 
         User user = User.CreateNew(
-            email: userDto.Email,
-            passwordHash: hashedPassword,
-            firstName: userDto.FirstName,
-            lastName: userDto.LastName,
-            dateOfBirth: userDto.DateOfBirth);
+            email: registerUserDto.Email,
+            passwordHash: passwordHasher.Hash(registerUserDto.Password),
+            firstName: registerUserDto.FirstName,
+            lastName: registerUserDto.LastName,
+            dateOfBirth: registerUserDto.DateOfBirth);
 
         if (!await userRepository.RegisterUserAsync(user, cancellationToken))
-            return Result.Failure<User>(
-                UserErrors.CreationConflict(userDto.Email, userDto.FirstName, userDto.LastName));
+        {
+            return Result.Failure<User>(UserErrors
+                .CreationFailure(registerUserDto.Email, registerUserDto.FirstName, registerUserDto.LastName));
+        }
 
         return user;
     }
 
-    public async Task<Result<TokenDto>> LoginAsync(UserDto userDto, CancellationToken cancellationToken)
+    public async Task<Result<TokenDto>> LoginAsync(LoginUserDto loginUserDto, CancellationToken cancellationToken)
     {
-        User? user = await userRepository.GetUserByEmailAsync(userDto.Email, cancellationToken);
+        User? restoredUser = await userRepository.GetUserByEmailAsync(loginUserDto.Email, cancellationToken);
 
-        if (user is null)
-            return Result.Failure<TokenDto>(UserErrors.NotFoundByEmail);
-
-        if (!passwordHasher.Verify(userDto.Password, user.PasswordHash))
-            return Result.Failure<TokenDto>(UserErrors.NotFoundByEmail);
-
-        string token = tokenProvider.Create(user);
-        string refreshToken = refreshTokenProvider.Create(user);
-
-        User updatedUser = user with
+        if (restoredUser is null)
         {
-            RefreshToken = user.RefreshToken ?? refreshToken,
-            RefreshTokenExpirationTime = 
-                user.RefreshTokenExpirationTime is not null && 
-                user.RefreshTokenExpirationTime.Value <= dateTimeProvider.UtcNow
-                    ? dateTimeProvider.UtcNow.AddDays(7)
-                    : user.RefreshTokenExpirationTime
-        };
+            return Result.Failure<TokenDto>(UserErrors.NotFoundByEmail);
+        }
+
+        if (!passwordHasher.Verify(loginUserDto.Password, restoredUser.PasswordHash))
+        {
+            return Result.Failure<TokenDto>(UserErrors.NotFoundByEmail);
+        }
+
+        string token = tokenProvider.Create(restoredUser);
+
+        RefreshToken refreshToken = RefreshToken.CreateNew(
+            token: refreshTokenProvider.Create(restoredUser),
+            expirationTime: DateTime.UtcNow.AddDays(7),
+            userId: restoredUser.Id);
         
-        await userRepository.UpdateUserAsync(updatedUser, cancellationToken);
+        if (!await refreshTokenRepository.CreateRefreshTokenAsync(refreshToken, cancellationToken))
+        {
+            return Result.Failure<TokenDto>(RefreshTokenErrors
+                .CreationFailure(refreshToken.Token));
+        }
         
         return new TokenDto()
         {
             AccessToken = token,
-            RefreshToken = refreshToken
+            RefreshToken = refreshToken.Token
         };
     }
 
@@ -73,24 +80,28 @@ internal sealed class AuthService(
         User? restoredUser = await userRepository.GetUserByIdAsync(refreshTokenDto.UserId, cancellationToken);
         
         if (restoredUser is null)
+        {
             return Result.Failure<TokenDto>(UserErrors.NotFound(refreshTokenDto.UserId));
+        }
 
         string accessToken = tokenProvider.Create(restoredUser);
-        string refreshToken = refreshTokenProvider.Create(restoredUser);
 
-        User updatedUser = restoredUser with
+        RefreshToken refreshToken = RefreshToken.CreateNew(
+            token: refreshTokenProvider.Create(restoredUser),
+            expirationTime: dateTimeProvider.UtcNow.AddDays(7),
+            userId: restoredUser.Id
+        );
+
+        if (!await refreshTokenRepository.CreateRefreshTokenAsync(refreshToken, cancellationToken))
         {
-            RefreshToken = refreshToken,
-            RefreshTokenExpirationTime = dateTimeProvider.UtcNow.AddDays(7)
-        };
-
-        if (!await userRepository.UpdateUserAsync(updatedUser, cancellationToken))
-            return Result.Failure<TokenDto>(UserErrors.UpdateFailure(restoredUser.Id.Value, restoredUser.Email));
+            return Result.Failure<TokenDto>(RefreshTokenErrors
+                .CreationFailure(refreshToken.Token));
+        }
 
         return new TokenDto()
         {
             AccessToken = accessToken,
-            RefreshToken = refreshToken
+            RefreshToken = refreshToken.Token
         };
     }
 }

@@ -5,8 +5,6 @@ CREATE PROCEDURE spUsers_Update
     @Email VARCHAR(40),
     @PasswordHash VARCHAR(255),
     @DateOfBirth Date,
-    @RefreshToken VARCHAR(50),
-    @RefreshTokenExpirationTime DATETIME2(3),
     @Role VARCHAR(20)
 AS
 BEGIN 
@@ -19,9 +17,7 @@ BEGIN
         Email = @Email,
         PasswordHash = @PasswordHash,
         DateOfBirth = @DateOfBirth,
-        Role = dbo.ConvertUserRoleFromVarcharToTinyInt(@Role),
-        RefreshToken = @RefreshToken,
-        RefreshTokenExpirationTime = @RefreshTokenExpirationTime
+        Role = dbo.ConvertUserRoleFromVarcharToTinyInt(@Role)
     WHERE Id = @Id;
 
     SELECT @@ROWCOUNT;

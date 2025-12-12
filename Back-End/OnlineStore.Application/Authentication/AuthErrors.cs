@@ -1,3 +1,4 @@
+using Application.Authentication.DTOs;
 using SharedKernel;
 
 namespace Application.Authentication;

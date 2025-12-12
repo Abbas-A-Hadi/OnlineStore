@@ -6,9 +6,6 @@ namespace Infrastructure.Authentication;
 
 internal sealed class RefreshTokenProvider : IRefreshTokenProvider
 {
-    public string Create(User user)
-    {
-        byte[] randomBytes = RandomNumberGenerator.GetBytes(32);
-        return Convert.ToBase64String(randomBytes);
-    }
+    public string Create(User user) 
+        => Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 }

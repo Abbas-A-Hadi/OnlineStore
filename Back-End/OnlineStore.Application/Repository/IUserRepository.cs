@@ -9,6 +9,7 @@ public interface IUserRepository
     Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
     
     Task<bool> IsUserExistsAsync(Guid userId, CancellationToken cancellationToken);
+    Task<bool> IsUserExistsAsync(string email, CancellationToken cancellationToken);
     Task<bool> IsUserExistsAsync(string email, string passwordHash, CancellationToken cancellationToken);
     
     Task<bool> RegisterUserAsync(User user, CancellationToken cancellationToken);

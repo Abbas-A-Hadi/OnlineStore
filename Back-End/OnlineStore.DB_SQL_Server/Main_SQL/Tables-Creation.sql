@@ -64,10 +64,11 @@ CREATE TABLE Addresses
         REFERENCES Cities(Id),
 );
 GO
-
+--DELETE FROM RefreshTokens;
 ----////////////////////////////
 SELECT * FROM dbo.tvfUsers_GetAllActiveUsers();
-DELETE FROM DBO.UserS WHERE Users.Id = 'b055e0c5-09b2-4c8a-970b-e66cf815d6de';   
+--DELETE FROM DBO.UserS WHERE Users.Id = 'b055e0c5-09b2-4c8a-970b-e66cf815d6de';
+--UPDATE Users SET IsDeleted = 0;
 --DELETE FROM Users WHERE FirstName LIKE 'j%'
 CREATE TABLE Users
 (
@@ -77,8 +78,6 @@ CREATE TABLE Users
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
     DateOfBirth Date NOT NULL,
-    RefreshToken VARCHAR(50) NULL,
-    RefreshTokenExpirationTime DATETIME2(3) NULL,
     Role TINYINT NOT NULL, ---- 0: User, 1: Admin, ....
     CreatedAt DATETIME2(3) NOT NULL CONSTRAINT DF_Users_CreatedAt DEFAULT GETDATE(),
     IsActive BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1,
@@ -111,6 +110,27 @@ CREATE TABLE Users
 -- ALTER TABLE Users
 -- ADD IsActive BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1; 
 -- GO
+GO
+
+----////////////////////////////
+
+CREATE TABLE RefreshTokens
+(
+    Id UNIQUEIDENTIFIER NOT NULL CONSTRAINT DF_RefreshTokens_Id DEFAULT NEWSEQUENTIALID(),
+    Token VARCHAR(90) NOT NULL,
+    ExpirationTime DATETIME2(3) NOT NULL,
+    UserId UNIQUEIDENTIFIER NOT NULL,
+    
+    -- Constraints.
+    CONSTRAINT PK_RefreshTokens_Id PRIMARY KEY (Id),
+    
+    
+    CONSTRAINT FK_RefreshTokens_Users_UserId FOREIGN KEY (UserId)
+        REFERENCES Users(Id),
+    
+    
+    CONSTRAINT UQ_RefreshTokens_Token UNIQUE (Token),
+);
 GO
 
 ----////////////////////////////

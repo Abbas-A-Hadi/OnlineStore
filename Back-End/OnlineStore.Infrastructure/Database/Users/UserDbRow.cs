@@ -8,7 +8,5 @@ internal sealed class UserDbRow
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateOnly DateOfBirth { get; set; }
-    public string? RefreshToken { get; set; }
-    public DateTime? RefreshTokenExpirationTime { get; set; }
     public string Role { get; set; }
 }
