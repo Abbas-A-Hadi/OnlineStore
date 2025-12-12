@@ -1,4 +1,4 @@
-import {CartProduct} from "../DataTypes/CartProduct";
+import type {CartProduct} from "../DataTypes/CartProduct.js";
 
 const HERO_AUTOPLAY_MS: number = 4000;
 let heroIndex : number = 0;
@@ -194,7 +194,13 @@ function addProductToCart(e: Event) : void {
         existingProduct.quantity += (existingProduct.quantity || 1)+ 1;
     }
     else {
-        cart.push(new CartProduct(title, price, 1, productImagePath));
+        const newCartProduct: CartProduct = {
+            name: title,
+            price: price,
+            quantity: 1,
+            imagePath: productImagePath
+        }
+        cart.push(newCartProduct);
     }
     
     updateCart();

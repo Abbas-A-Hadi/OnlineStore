@@ -8,12 +8,12 @@ public sealed class RegisterUserDto
     public string LastName { get; init; }
     public DateOnly DateOfBirth { get; init; }
     
-    internal RegisterUserDto(string email, string password, string firstName, string lastName, DateOnly dateOfBirth)
+    public RegisterUserDto(string email, string password, string firstName, string lastName, DateOnly dateOfBirth)
     {
+        Email = email;
+        Password = password;
         FirstName = firstName;
         LastName = lastName;
         DateOfBirth = dateOfBirth;
-        Email = email;
-        Password = password;
     }
 }

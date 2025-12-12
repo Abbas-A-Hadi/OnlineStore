@@ -1,35 +1,65 @@
+using System.Transactions;
 using Application.Abstractions.Authentication;
 using Application.Abstractions.Messaging;
+using Application.Authentication.DTOs;
 using Application.Repository;
+using Domain.RefreshTokens;
 using Domain.Users;
 using SharedKernel;
 
 namespace Application.Users.Register;
 
-internal sealed class RegisterUserCommandHandler(IUserRepository userRepository, IPasswordHasher passwordHasher) 
-    : ICommandHandler<RegisterUserCommand, Guid>
+internal sealed class RegisterUserCommandHandler(
+    IRefreshTokenRepository refreshTokenRepository,
+    IAuthService authService,
+    ITokenProvider tokenProvider,
+    IRefreshTokenProvider refreshTokenProvider) 
+    : ICommandHandler<RegisterUserCommand, RegisterUserResponse>
 {
-    public async Task<Result<Guid>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
+    public async Task<Result<RegisterUserResponse>> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
     {
-        if (await userRepository.IsUserExistsAsync(command.Email, cancellationToken))
+        using TransactionScope scope = new TransactionScope();
+        
+        RegisterUserDto registerUserDto = new (
+            email: command.Email,
+            password: command.Password,
+            firstName: command.FirstName, 
+            lastName: command.LastName,
+            dateOfBirth: command.DateOfBirth);
+        
+        Result<User> registeredUserResult = await authService.RegisterUserAsync(registerUserDto, cancellationToken);
+
+        if (!registeredUserResult.IsSuccess)
         {
-            return Result.Failure<Guid>(UserErrors.EmailNotUnique);
+            return Result.Failure<RegisterUserResponse>(UserErrors
+                .CreationFailure(command.Email, command.FirstName, command.LastName));
         }
         
-        User user = User.CreateNew(
-            email: command.Email,
-            passwordHash: passwordHasher.Hash(command.Password),
-            firstName: command.FirstName,
-            lastName: command.LastName,
-            dateOfBirth: command.DateOfBirth,
-            role: command.Role);
+        User registeredUser = registeredUserResult.Value;
+        string accessToken = tokenProvider.Create(registeredUser);
 
-        if (!await userRepository.RegisterUserAsync(user, cancellationToken))
+        RefreshToken refreshToken = RefreshToken.CreateNew(
+            token: refreshTokenProvider.Create(registeredUser),
+            expirationTime: DateTime.UtcNow.AddDays(7),
+            userId: registeredUser.Id);;
+
+        if (!await refreshTokenRepository.CreateRefreshTokenAsync(refreshToken, cancellationToken))
         {
-            return Result.Failure<Guid>(
-                UserErrors.CreationFailure(command.Email, command.FirstName, command.LastName));
+            return Result.Failure<RegisterUserResponse>(RefreshTokenErrors
+                .CreationFailure(refreshToken.Token));
         }
-
-        return user.Id.Value;
+        
+        scope.Complete();
+        
+        return new RegisterUserResponse()
+        {
+            UserId = registeredUser.Id.Value,
+            Email = registeredUser.Email,
+            FirstName = registeredUser.FirstName,
+            LastName = registeredUser.LastName,
+            DateOfBirth = registeredUser.DateOfBirth,
+            AccessToken = accessToken,
+            RefreshToken = refreshToken.Token
+        };
     }
 }

@@ -5,13 +5,13 @@ using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
-namespace Web.Api.Endpoints.Users;
+namespace Web.Api.Endpoints.Auth;
 
 internal sealed class LoginByRefreshToken : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/login/{refreshToken}", LoginUserByRefreshTokenAsync)
+        app.MapPost("api/auth/login/{refreshToken}", LoginUserByRefreshTokenAsync)
             .RequireAuthorization()
             .WithTags(Tags.Users)
             .WithName("LoginByRefreshToken");

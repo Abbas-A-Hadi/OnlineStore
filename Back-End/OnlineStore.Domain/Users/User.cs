@@ -28,7 +28,7 @@ public sealed record User
     public const int MinLastNameLength = 3;
     public const int MaxLastNameLength = 20;
     
-    public const int MinEmailLength = 7;
+    public const int MinEmailLength = 8;
     public const int MaxEmailLength = 40;
         
     public const int MinPasswordLength = 8;

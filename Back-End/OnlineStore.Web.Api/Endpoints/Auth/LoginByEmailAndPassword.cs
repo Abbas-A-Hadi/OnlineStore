@@ -5,7 +5,7 @@ using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
 
-namespace Web.Api.Endpoints.Users;
+namespace Web.Api.Endpoints.Auth;
 
 internal sealed class LoginByEmailAndPassword : IEndpoint
 {
@@ -13,7 +13,7 @@ internal sealed class LoginByEmailAndPassword : IEndpoint
     
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/login/", LoginUserByEmailAndPasswordAsync)
+        app.MapPost("api/auth/login/", LoginUserByEmailAndPasswordAsync)
             .WithTags(Tags.Users)
             .WithName("LoginUserByEmailAndPassword");
     }

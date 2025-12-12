@@ -6,7 +6,7 @@ namespace Application.Abstractions.Authentication;
 
 public interface IAuthService
 {
-    Task<Result<User>> RegisterAsync(RegisterUserDto registerUserDto, CancellationToken cancellationToken);
-    Task<Result<TokenDto>> LoginAsync(LoginUserDto loginUserDto, CancellationToken cancellationToken);
+    Task<Result<User>> RegisterUserAsync(RegisterUserDto registerUserDto, CancellationToken cancellationToken);
+    Task<Result<TokenDto>> LoginUserAsync(LoginUserDto loginUserDto, CancellationToken cancellationToken);
     Task<Result<TokenDto>> RefreshTokensAsync(RefreshTokenDto refreshTokenDto, CancellationToken cancellationToken);
 }

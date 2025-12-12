@@ -1,5 +1,6 @@
-export class CartProduct {
-    public constructor(public name: string, public price: number, 
-                       public quantity: number, public imagePath: string) 
-    {}
+export type CartProduct = {
+    name: string;
+    price: number;
+    quantity: number;
+    imagePath: string;
 }

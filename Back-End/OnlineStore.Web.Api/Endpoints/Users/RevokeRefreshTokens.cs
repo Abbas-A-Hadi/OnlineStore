@@ -10,7 +10,7 @@ public class RevokeRefreshTokens : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/{userId:guid}/refresh-token", RevokeRefreshTokensAsync)
+        app.MapPost("api/users/{userId:guid}/refresh-token", RevokeRefreshTokensAsync)
             .RequireAuthorization()
             .HasPermission(Permissions.UsersAccess)
             .WithTags(Tags.Users)

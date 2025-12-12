@@ -1,4 +1,4 @@
-import {Product} from "../DataTypes/Product";
+import {Product} from "../DataTypes/Products/Product.js";
 
 let heroProductId: string;
 

@@ -11,7 +11,7 @@ internal sealed class DeleteById : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapDelete("users/{userId:guid}", DeleteByUserIdAsync)
+        app.MapDelete("api/users/{userId:guid}", DeleteByUserIdAsync)
             .RequireAuthorization()
             .WithTags(Tags.Users)
             .WithName("DeleteUserById");

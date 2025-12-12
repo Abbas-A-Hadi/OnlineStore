@@ -20,9 +20,9 @@ internal sealed class RegisterUserCommandValidator: AbstractValidator<RegisterUs
                 .WithMessage("Last name length must be between {min} and {max}");
         
         RuleFor(u => u.DateOfBirth)
-            .Must(IsNotValidDateOfBirth)
+            .Must(IsDateInPast)
                 .WithMessage("Date of birth is in future")
-            .Must(IsUserUnder18Years)
+            .Must(IsUser18YearsOrOlder)
                 .WithMessage("User age is under 18");
 
         RuleFor(c => c.Email)
@@ -40,13 +40,13 @@ internal sealed class RegisterUserCommandValidator: AbstractValidator<RegisterUs
                 .WithMessage("Password length must be between {min} and {max}");
     }
     
-    public static bool IsNotValidDateOfBirth(DateOnly dateOfBirth)
+    public static bool IsDateInPast(DateOnly dateOfBirth)
     {
-        return dateOfBirth > DateOnly.FromDateTime(DateTime.Now.Date);
+        return dateOfBirth < DateOnly.FromDateTime(DateTime.UtcNow);
     }
     
-    public static bool IsUserUnder18Years(DateOnly dateOfBirth)
+    public static bool IsUser18YearsOrOlder(DateOnly dateOfBirth)
     {
-        return dateOfBirth.AddYears(18) > DateOnly.FromDateTime(DateTime.Now.Date);
+        return dateOfBirth.AddYears(18) <= DateOnly.FromDateTime(DateTime.UtcNow);
     }
 }
