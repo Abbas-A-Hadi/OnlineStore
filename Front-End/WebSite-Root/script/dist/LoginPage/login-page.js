@@ -9,59 +9,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { baseApiUrl } from "../Global.js";
 import { ApiClient } from "../ApiClient.js";
+import { GetNewEmptyRegisterUserRequest } from "../DataTypes/Users/RegisterUserRequest.js";
+const RegisterUserRequest = GetNewEmptyRegisterUserRequest();
+let LoginFormElm;
+let RegisterStep1FormElm;
+let RegisterStep2FormElm;
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
-    const loginForm = document.getElementById("loginForm");
-    const registerStep1 = document.getElementById("registerStep1");
-    const registerStep2 = document.getElementById("registerStep2");
+    LoginFormElm = document.getElementById("loginForm");
+    RegisterStep1FormElm = document.getElementById("registerStep1");
+    RegisterStep2FormElm = document.getElementById("registerStep2");
     const showRegister = document.getElementById("showRegister");
     showRegister.addEventListener("click", (e) => {
         e.preventDefault();
-        loginForm.classList.remove("active");
-        registerStep1.classList.add("active");
+        LoginFormElm.classList.remove("active");
+        RegisterStep1FormElm.classList.add("active");
     });
     const showLoginFromReg = document.getElementById("showLoginFromReg");
     showLoginFromReg.addEventListener("click", (e) => {
         e.preventDefault();
-        registerStep1.classList.remove("active");
-        loginForm.classList.add("active");
+        RegisterStep1FormElm.classList.remove("active");
+        LoginFormElm.classList.add("active");
     });
     const showLoginFromStep2 = document.getElementById("showLoginFromStep2");
     showLoginFromStep2.addEventListener("click", (e) => {
         e.preventDefault();
-        registerStep2.classList.remove("active");
-        loginForm.classList.add("active");
+        RegisterStep2FormElm.classList.remove("active");
+        LoginFormElm.classList.add("active");
     });
     const nextStep = document.getElementById("nextStep");
-    nextStep.addEventListener("click", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("regEmail").value.trim();
-        const pass = document.getElementById("regPassword").value.trim();
-        const confirm = document.getElementById("regConfirm").value.trim();
-        if (!email || !pass || !confirm) {
-            alert("Please fill in all fields.");
-            return;
-        }
-        if (pass !== confirm) {
-            alert("Passwords do not match!");
-            return;
-        }
-        registerStep1.classList.remove("active");
-        registerStep2.classList.add("active");
-    });
-    registerStep2.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const birthday = document.getElementById("regBirthday").value.trim();
-        const regex = /^\d{2}\/\d{2}\/\d{4}$/;
-        if (!regex.test(birthday)) {
-            alert("Please enter a valid date (dd/mm/yyyy)");
-            return;
-        }
-        alert("Registration complete! 🎉\nYou can now login.");
-        registerStep2.classList.remove("active");
-        loginForm.classList.add("active");
-    });
-    loginForm.addEventListener("submit", OnLoginButtonClick);
+    nextStep.addEventListener("click", OnNextStepButtonInRegisterFormClick);
+    RegisterStep2FormElm.addEventListener("submit", OnSubmitRegistrationFormClick);
+    LoginFormElm.addEventListener("submit", OnLoginButtonClick);
     const regBirthdayHandler = () => formatDate.bind(regBirthdayInput);
     let regBirthdayInput = document.getElementById("regBirthday");
     regBirthdayInput === null || regBirthdayInput === void 0 ? void 0 : regBirthdayInput.addEventListener("input", regBirthdayHandler);
@@ -70,7 +49,6 @@ function OnDocumentContentLoaded() {
 function OnLoginButtonClick(e) {
     return __awaiter(this, void 0, void 0, function* () {
         e.preventDefault();
-        console.log("Login button clicked!");
         const email = this.querySelector('input[type="email"]')
             .value.trim();
         const password = this.querySelector('input[type="password"]')
@@ -87,6 +65,73 @@ function OnLoginButtonClick(e) {
         }
         catch (error) {
             alert(error);
+        }
+    });
+}
+function OnNextStepButtonInRegisterFormClick(e) {
+    return __awaiter(this, void 0, void 0, function* () {
+        e.preventDefault();
+        const email = document.getElementById("regEmail")
+            .value.trim();
+        const password = document.getElementById("regPassword")
+            .value.trim();
+        const confirmPassword = document.getElementById("regConfirm")
+            .value.trim();
+        if (password !== confirmPassword) {
+            alert("Passwords don't match");
+            return;
+        }
+        RegisterUserRequest.email = email;
+        RegisterUserRequest.password = password;
+        RegisterStep1FormElm.classList.remove("active");
+        RegisterStep2FormElm.classList.add("active");
+    });
+}
+function OnSubmitRegistrationFormClick(e) {
+    return __awaiter(this, void 0, void 0, function* () {
+        var _a;
+        e.preventDefault();
+        const birthdayInputElm = document.getElementById("regBirthday");
+        const dateOfBirthAsDate = Date.parse(birthdayInputElm.value.trim());
+        console.log(dateOfBirthAsDate);
+        if (!dateOfBirthAsDate) {
+            birthdayInputElm.focus();
+            alert("Please enter a valid date (mm/dd/yyyy) 1");
+            return;
+        }
+        const firstNameInputElm = document.getElementById("regFirstName");
+        const lastNameInputElm = document.getElementById("regLastName");
+        if (!firstNameInputElm.value.trim()) {
+            firstNameInputElm.focus();
+            alert("First name is required");
+            return;
+        }
+        if (!lastNameInputElm.value.trim()) {
+            lastNameInputElm.focus();
+            alert("Last name is required");
+            return;
+        }
+        RegisterUserRequest.firstName = firstNameInputElm.value.trim();
+        RegisterUserRequest.lastName = lastNameInputElm.value.trim();
+        RegisterUserRequest.dateOfBirthAsDateOnlyString = ((_a = birthdayInputElm.valueAsDate) !== null && _a !== void 0 ? _a : new Date()).toISOString();
+        const d = birthdayInputElm.valueAsDate;
+        if (Object.prototype.toString.call(d) === "[object Date]") {
+            const d1 = d.toISOString().split("T")[0];
+            console.log(d1);
+            RegisterUserRequest.dateOfBirthAsDateOnlyString = d1;
+        }
+        try {
+            const api = new ApiClient(baseApiUrl);
+            console.log(api);
+            console.log(RegisterUserRequest);
+            const result = yield api.Post('auth/register', RegisterUserRequest);
+            window.sessionStorage.setItem('accessToken', result.accessToken);
+            window.sessionStorage.setItem('refreshToken', result.refreshToken);
+            alert("Registeration Operation Done.");
+            RegisterStep2FormElm.classList.remove("active");
+            LoginFormElm.classList.add("active");
+        }
+        catch (error) {
         }
     });
 }

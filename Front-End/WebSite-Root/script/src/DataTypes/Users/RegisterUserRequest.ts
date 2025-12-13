@@ -3,5 +3,10 @@ export type RegisterUserRequest = {
     password: string;
     firstName: string;
     lastName: string;
-    dateOfBirth: string;
+    dateOfBirthAsDateOnlyString: string;
 };
+
+export function GetNewEmptyRegisterUserRequest(): RegisterUserRequest
+{
+    return {email: "", password: "", firstName: "", lastName: "", dateOfBirthAsDateOnlyString: ""};
+}

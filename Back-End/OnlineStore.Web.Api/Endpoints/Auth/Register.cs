@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Application.Abstractions.Messaging;
 using Application.Users.Register;
 using FluentValidation;
@@ -9,7 +10,9 @@ namespace Web.Api.Endpoints.Auth;
 
 public sealed class Register : IEndpoint
 {
-    public sealed record RegisterUserRequest(string Email, string Password, string FirstName, string LastName, DateOnly DateOfBirth, string Role);
+    public sealed record RegisterUserRequest(string Email, string Password, string FirstName, string LastName,
+        [property: JsonPropertyName("dateOfBirthAsDateOnlyString")]
+        DateOnly DateOfBirth, string Role);
     
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
@@ -32,19 +35,19 @@ public sealed class Register : IEndpoint
             DateOfBirth: request.DateOfBirth,
             Role: request.Role);
         
-        var validationResult = await validator.ValidateAsync(command, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            HttpValidationProblemDetails problemDetails = new(validationResult.ToDictionary())
-            {
-                Status = StatusCodes.Status400BadRequest,
-                Title = "Validation Error",
-                Detail = "One or more validation errors occurred.",
-                Instance = "RegisterUser"
-            };
-            
-            return Results.Problem(problemDetails);
-        }
+        // var validationResult = await validator.ValidateAsync(command, cancellationToken);
+        // if (!validationResult.IsValid)
+        // {
+        //     HttpValidationProblemDetails problemDetails = new(validationResult.ToDictionary())
+        //     {
+        //         Status = StatusCodes.Status400BadRequest,
+        //         Title = "Validation Error",
+        //         Detail = "One or more validation errors occurred.",
+        //         Instance = "RegisterUser"
+        //     };
+        //     
+        //     return Results.Problem(problemDetails);
+        // }
                 
         Result<RegisterUserResponse> result = await handler.Handle(command, cancellationToken);
 

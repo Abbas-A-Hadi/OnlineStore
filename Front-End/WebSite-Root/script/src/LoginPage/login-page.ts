@@ -1,40 +1,44 @@
 import {baseApiUrl} from "../Global.js";
+import {ApiClient} from "../ApiClient.js";
 import type {LoginByEmailAndPasswordRequest} from "../DataTypes/Users/LoginByEmailAndPasswordRequest.js";
 import type {TokenDto} from "../DataTypes/Users/TokenDto.js";
-import {ApiClient} from "../ApiClient.js";
-import type {RegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest";
+import type {RegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
+import {GetNewEmptyRegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
 
-const registerUserRequest: RegisterUserRequest = {};
-let loginForm: HTMLFormElement;
-let registerStep1: HTMLFormElement;
-let registerStep2: HTMLFormElement;
+//const DateOfBirthRegex: RegExp = /^\d{4}\/\d{2}\/\d{2}$/;
+
+const RegisterUserRequest: RegisterUserRequest = GetNewEmptyRegisterUserRequest();
+let LoginFormElm: HTMLFormElement;
+let RegisterStep1FormElm: HTMLFormElement;
+let RegisterStep2FormElm: HTMLFormElement;
 
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 
+
 function OnDocumentContentLoaded() {
-    loginForm = <HTMLFormElement> document.getElementById("loginForm");
-    registerStep1 = <HTMLFormElement> document.getElementById("registerStep1");
-    registerStep2 = <HTMLFormElement> document.getElementById("registerStep2");
+    LoginFormElm = <HTMLFormElement> document.getElementById("loginForm");
+    RegisterStep1FormElm = <HTMLFormElement> document.getElementById("registerStep1");
+    RegisterStep2FormElm = <HTMLFormElement> document.getElementById("registerStep2");
 
     const showRegister = <HTMLParagraphElement> document.getElementById("showRegister");
     showRegister.addEventListener("click", (e) => {
         e.preventDefault();
-        loginForm.classList.remove("active");
-        registerStep1.classList.add("active");
+        LoginFormElm.classList.remove("active");
+        RegisterStep1FormElm.classList.add("active");
     });
 
     const showLoginFromReg = <HTMLParagraphElement> document.getElementById("showLoginFromReg");
     showLoginFromReg.addEventListener("click", (e) => {
         e.preventDefault();
-        registerStep1.classList.remove("active");
-        loginForm.classList.add("active");
+        RegisterStep1FormElm.classList.remove("active");
+        LoginFormElm.classList.add("active");
     });
 
     const showLoginFromStep2 = <HTMLParagraphElement> document.getElementById("showLoginFromStep2");
     showLoginFromStep2.addEventListener("click", (e) => {
         e.preventDefault();
-        registerStep2.classList.remove("active");
-        loginForm.classList.add("active");
+        RegisterStep2FormElm.classList.remove("active");
+        LoginFormElm.classList.add("active");
     });
 
     const nextStep = <HTMLButtonElement> document.getElementById("nextStep");
@@ -43,10 +47,10 @@ function OnDocumentContentLoaded() {
     nextStep.addEventListener("click", OnNextStepButtonInRegisterFormClick);
     
 
-    registerStep2.addEventListener("submit", OnSubmitRegistrationFormClick);
+    RegisterStep2FormElm.addEventListener("submit", OnSubmitRegistrationFormClick);
     
 
-    loginForm.addEventListener("submit", OnLoginButtonClick);
+    LoginFormElm.addEventListener("submit", OnLoginButtonClick);
 
     
     const regBirthdayHandler= () => formatDate.bind(regBirthdayInput);
@@ -97,33 +101,77 @@ async function OnNextStepButtonInRegisterFormClick(this: HTMLFormElement, e: Eve
     
     if (password !== confirmPassword) {
         alert("Passwords don't match");
+        return;
     }
 
-    registerUserRequest.email = email;
-    registerUserRequest.password = password;
+    RegisterUserRequest.email = email;
+    RegisterUserRequest.password = password;
     
-    registerStep1.classList.remove("active");
-    registerStep2.classList.add("active");
+    RegisterStep1FormElm.classList.remove("active");
+    RegisterStep2FormElm.classList.add("active");
 }
 
 async function OnSubmitRegistrationFormClick(this: HTMLFormElement, e: Event) {
     e.preventDefault();
     
     const birthdayInputElm = <HTMLInputElement> document.getElementById("regBirthday");
-    const regex: RegExp = /^\d{2}\/\d{2}\/\d{4}$/;
-
-    if (!regex.test(birthdayInputElm.value.trim())) {
+    
+    const dateOfBirthAsDate = Date.parse(birthdayInputElm.value.trim());
+    console.log(dateOfBirthAsDate);
+    if (!dateOfBirthAsDate) {
         birthdayInputElm.focus();
-        alert("Please enter a valid date (dd/mm/yyyy)");
+        // alert("Please enter a valid date (dd/mm/yyyy)");
+        alert("Please enter a valid date (mm/dd/yyyy) 1");
         return;
     }
     
+    const firstNameInputElm = <HTMLInputElement> document.getElementById("regFirstName"); 
+    const lastNameInputElm = <HTMLInputElement> document.getElementById("regLastName"); 
     
-    registerUserRequest.dateOfBirth = birthdayInputElm.value.trim();
+    if (!firstNameInputElm.value.trim()) {
+        firstNameInputElm.focus();
+        alert("First name is required");
+        return;
+    }
+    if (!lastNameInputElm.value.trim()) {
+        lastNameInputElm.focus();
+        alert("Last name is required");
+        return;
+    }
+    
+    RegisterUserRequest.firstName = firstNameInputElm.value.trim();
+    RegisterUserRequest.lastName = lastNameInputElm.value.trim();
+    // RegisterUserRequest.dateOfBirthAsDateOnlyString = birthdayInputElm.valueAsDate ?? new Date();
+    RegisterUserRequest.dateOfBirthAsDateOnlyString = (birthdayInputElm.valueAsDate ?? new Date()).toISOString();
+    
+    const d = birthdayInputElm.valueAsDate!;
+    
+    if (Object.prototype.toString.call(d) === "[object Date]") {
+        
+        const d1 = d.toISOString().split("T")[0]!;
 
+        console.log(d1);
+        
+        RegisterUserRequest.dateOfBirthAsDateOnlyString = d1;
+    }
     
-    registerStep2.classList.remove("active");
-    loginForm.classList.add("active");
+    try {
+        const api = new ApiClient(baseApiUrl);
+        console.log(api);
+        console.log(RegisterUserRequest);
+        const result= await api.Post<TokenDto>('auth/register', RegisterUserRequest);
+        
+        window.sessionStorage.setItem('accessToken', result.accessToken);
+        window.sessionStorage.setItem('refreshToken', result.refreshToken);
+        
+        alert("Registeration Operation Done.")
+        
+        RegisterStep2FormElm.classList.remove("active");
+        LoginFormElm.classList.add("active");
+    }
+    catch (error) {
+        
+    }
 }
 
 

@@ -69,7 +69,7 @@ GO
 SELECT * FROM dbo.tvfUsers_GetAllActiveUsers();
 --DELETE FROM DBO.UserS WHERE Users.Id = 'b055e0c5-09b2-4c8a-970b-e66cf815d6de';
 --UPDATE Users SET IsDeleted = 0;
---DELETE FROM Users WHERE Email LIKE '@%'
+--DELETE FROM Users WHERE Email LIKE 't@%'
 CREATE TABLE Users
 (
     Id UNIQUEIDENTIFIER NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE Users
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
     DateOfBirth Date NOT NULL,
-    Role TINYINT NOT NULL, ---- 0: User, 1: Admin, ....
+    Role TINYINT NOT NULL CONSTRAINT DF_Users_Role DEFAULT 0, ---- 0: User, 1: Admin, ....
     CreatedAt DATETIME2(3) NOT NULL CONSTRAINT DF_Users_CreatedAt DEFAULT GETDATE(),
     IsActive BIT NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT 1,
     IsDeleted BIT NOT NULL CONSTRAINT DF_Users_IsDeleted DEFAULT 0, -- For Soft Deletion.
