@@ -8,7 +8,7 @@ public static class UserErrors
         "Users.UpdateFailure",
         $"User with id = '{userId}' and email = '{email}' had not updated");
     
-    public static Error CreationFailure(string email, string firstName, string lastName) => Error.Conflict(
+    public static Error CreationFailure(string email, string firstName, string lastName) => Error.Failure(
         "Users.CreationFailure",
         $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had not creation");
     

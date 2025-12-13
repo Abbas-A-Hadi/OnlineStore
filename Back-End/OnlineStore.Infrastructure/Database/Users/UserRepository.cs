@@ -33,12 +33,10 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
     
     public async Task<bool> IsUserExistsAsync(Guid userId, CancellationToken cancellationToken)
     {
-        string storedProcedure = "spUsers_IsExists_ById";
-
         using IDbConnection dbConnection = db.GetSqlConnection();
 
         int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
-            commandText: storedProcedure,
+            commandText: "spUsers_IsExists_ById",
             parameters: new { UserId = userId },
             commandType: CommandType.StoredProcedure,
             cancellationToken: cancellationToken));
@@ -48,12 +46,10 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
     
     public async Task<bool> IsUserExistsAsync(string email, CancellationToken cancellationToken) 
     {
-        string storedProcedure = "spUsers_IsExists_ByEmailOnly";
-
         using IDbConnection dbConnection = db.GetSqlConnection();
 
         int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
-            commandText: storedProcedure,
+            commandText: "spUsers_IsExists_ByEmailOnly",
             parameters: new { Email = email },
             commandType: CommandType.StoredProcedure,
             cancellationToken: cancellationToken));
@@ -63,12 +59,10 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
     
     public async Task<bool> IsUserExistsAsync(string email, string passwordHash, CancellationToken cancellationToken) 
     {
-        string storedProcedure = "spUsers_IsExists_ByEmailAndPassword";
-
         using IDbConnection dbConnection = db.GetSqlConnection();
 
         int isFoundAsInt = await dbConnection.ExecuteScalarAsync<int>(new CommandDefinition(
-            commandText: storedProcedure,
+            commandText: "spUsers_IsExists_ByEmailAndPassword",
             parameters: new { Email = email, PasswordHash = passwordHash },
             commandType: CommandType.StoredProcedure,
             cancellationToken: cancellationToken));

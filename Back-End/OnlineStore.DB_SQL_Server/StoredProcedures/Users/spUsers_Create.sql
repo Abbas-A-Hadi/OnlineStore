@@ -1,11 +1,11 @@
 CREATE PROCEDURE spUsers_Create
     @Id UNIQUEIDENTIFIER,
-    @FirstName VARCHAR(20),
-    @LastName VARCHAR(20),
     @Email VARCHAR(40),
     @PasswordHash VARCHAR(255),
-    @Role VARCHAR(20), 
-    @DateOfBirth Date
+    @FirstName VARCHAR(20),
+    @LastName VARCHAR(20),
+    @DateOfBirth Date,
+    @Role VARCHAR(20) 
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -14,10 +14,10 @@ BEGIN
     DECLARE @roleAsTinyInt TINYINT = dbo.ConvertUserRoleFromVarcharToTinyInt(@Role);
     
     INSERT INTO Users 
-        (Id, FirstName, LastName, Email, PasswordHash, DateOfBirth, 
+        (Id, Email, PasswordHash, FirstName, LastName, DateOfBirth, 
             Role, CreatedAt)
     VALUES 
-        (@Id, @FirstName, @LastName, @Email, @PasswordHash, 
+        (@Id, @Email, @PasswordHash, @FirstName, @LastName, 
          @DateOfBirth, @roleAsTinyInt, GETDATE());
     
     SELECT @@ROWCOUNT;

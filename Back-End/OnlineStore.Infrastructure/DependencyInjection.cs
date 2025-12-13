@@ -2,7 +2,6 @@ using System.Text;
 using Application.Abstractions.Authentication;
 using Application.Repository;
 using Dapper;
-using Domain.RefreshTokens;
 using Infrastructure.Authentication;
 using Infrastructure.Database;
 using Infrastructure.Database.Categories;
