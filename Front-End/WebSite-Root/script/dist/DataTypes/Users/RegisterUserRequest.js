@@ -1,4 +1,4 @@
 export function GetNewEmptyRegisterUserRequest() {
-    return { email: "", password: "", firstName: "", lastName: "", dateOfBirthAsDateOnlyString: "" };
+    return { Email: "", Password: "", FirstName: "", LastName: "", DateOfBirthAsDateOnlyString: "" };
 }
 //# sourceMappingURL=RegisterUserRequest.js.map

@@ -1,3 +1,4 @@
+using System.Data;
 using Domain.Users;
 
 namespace Application.Repository;
@@ -13,6 +14,7 @@ public interface IUserRepository
     Task<bool> IsUserExistsAsync(string email, string passwordHash, CancellationToken cancellationToken);
     
     Task<bool> RegisterUserAsync(User user, CancellationToken cancellationToken);
+    Task<bool> RegisterUserAsync(User user, IDbTransaction transaction, CancellationToken cancellationToken);
     
     Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken);
     

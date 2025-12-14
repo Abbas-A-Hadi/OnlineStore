@@ -69,7 +69,7 @@ GO
 SELECT * FROM dbo.tvfUsers_GetAllActiveUsers();
 --DELETE FROM DBO.UserS WHERE Users.Id = 'b055e0c5-09b2-4c8a-970b-e66cf815d6de';
 --UPDATE Users SET IsDeleted = 0;
---DELETE FROM Users WHERE Email LIKE 't@%'
+--DELETE FROM Users WHERE Email LIKE 'test1@%'
 CREATE TABLE Users
 (
     Id UNIQUEIDENTIFIER NOT NULL,
@@ -130,6 +130,9 @@ CREATE TABLE RefreshTokens
     
     
     CONSTRAINT UQ_RefreshTokens_Token UNIQUE (Token),
+    
+    
+    CONSTRAINT CH_RefreshTokens_Token_NotEmpty CHECK (LEN(Token) > 0),
 );
 GO
 

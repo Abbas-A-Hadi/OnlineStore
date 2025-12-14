@@ -1,20 +1,20 @@
 import {Guid} from "../Guid.js";
 
 export class User {
-    private constructor(public id: Guid,public email:string, public firstName:string, public lastName:string, 
-                public dateOfBirth: Date) {}
+    private constructor(public Id: Guid, public Email: string, public FirstName: string, public LastName: string, 
+                public DateOfBirthAsDateOnlyString: string) {}
     
     static Empty(): User { 
-        return new User(Guid.Empty(), "", "", "", new Date()); 
+        return new User(Guid.Empty(), "", "", "", ""); 
     }
     
-    static CreateNew(email: string, firstName: string, lastName: string, dateOfBirth: Date): User
+    static CreateNew(email: string, firstName: string, lastName: string, dateOfBirthAsDateOnlyString: string): User
     {
-        return new User(Guid.New(), email, firstName, lastName, dateOfBirth);
+        return new User(Guid.New(), email, firstName, lastName, dateOfBirthAsDateOnlyString);
     }
     
-    static Restore(id: Guid, email: string, firstName: string, lastName: string, dateOfBirth: Date): User 
+    static Restore(id: Guid, email: string, firstName: string, lastName: string, dateOfBirthAsDateOnlyString: string): User 
     {
-        return new User(id, email, firstName, lastName, dateOfBirth);
+        return new User(id, email, firstName, lastName, dateOfBirthAsDateOnlyString);
     }
 }

@@ -1,5 +1,5 @@
 export type TokenDto = {
-    accessToken: string;
-    refreshToken: string;
+    AccessToken: string;
+    RefreshToken: string;
 };
 //# sourceMappingURL=TokenDto.d.ts.map

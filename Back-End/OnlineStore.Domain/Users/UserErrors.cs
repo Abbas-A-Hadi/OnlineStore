@@ -10,7 +10,11 @@ public static class UserErrors
     
     public static Error CreationFailure(string email, string firstName, string lastName) => Error.Failure(
         "Users.CreationFailure",
-        $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had not creation");
+        $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had fail to create");
+    
+    public static Error CreationConflict(string email, string firstName, string lastName) => Error.Conflict(
+        "Users.CreationConflict",
+        $"User with email = '{email}' and full name = '{firstName + ' ' + lastName}' had conflict with creation");
     
     public static Error NotFound(Guid userId) => Error.NotFound(
         "Users.NotFound",

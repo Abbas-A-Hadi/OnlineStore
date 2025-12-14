@@ -1,11 +1,8 @@
-import {baseApiUrl} from "../Global.js";
-import {ApiClient} from "../ApiClient.js";
+import {api, userObject} from "../Global.js";
 import type {LoginByEmailAndPasswordRequest} from "../DataTypes/Users/LoginByEmailAndPasswordRequest.js";
 import type {TokenDto} from "../DataTypes/Users/TokenDto.js";
 import type {RegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
 import {GetNewEmptyRegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
-
-//const DateOfBirthRegex: RegExp = /^\d{4}\/\d{2}\/\d{2}$/;
 
 const RegisterUserRequest: RegisterUserRequest = GetNewEmptyRegisterUserRequest();
 let LoginFormElm: HTMLFormElement;
@@ -76,13 +73,15 @@ async function OnLoginButtonClick(this: HTMLFormElement, e: Event) {
     };
     
     try {
-        const api = new ApiClient(baseApiUrl);
-        
         const response = await api.Post<TokenDto>('auth/login/', loginRequest);
         
-        api.SetToken(response.accessToken);
+        api.SetToken(response.AccessToken);
         
         window.location.href = "../../../../.././Front-End/WebSite-Root/documents/home-page.html";
+        
+        console.log(api)
+        console.log(response)
+        alert();
     }
     catch (error) {
         alert(error);
@@ -104,8 +103,8 @@ async function OnNextStepButtonInRegisterFormClick(this: HTMLFormElement, e: Eve
         return;
     }
 
-    RegisterUserRequest.email = email;
-    RegisterUserRequest.password = password;
+    RegisterUserRequest.Email = email;
+    RegisterUserRequest.Password = password;
     
     RegisterStep1FormElm.classList.remove("active");
     RegisterStep2FormElm.classList.add("active");
@@ -116,12 +115,13 @@ async function OnSubmitRegistrationFormClick(this: HTMLFormElement, e: Event) {
     
     const birthdayInputElm = <HTMLInputElement> document.getElementById("regBirthday");
     
-    const dateOfBirthAsDate = Date.parse(birthdayInputElm.value.trim());
-    console.log(dateOfBirthAsDate);
-    if (!dateOfBirthAsDate) {
+    const dateOfBirthAsDate = birthdayInputElm.valueAsDate;
+    
+    if (!dateOfBirthAsDate || 
+        Object.prototype.toString.call(dateOfBirthAsDate) !== "[object Date]") {
+        
         birthdayInputElm.focus();
-        // alert("Please enter a valid date (dd/mm/yyyy)");
-        alert("Please enter a valid date (mm/dd/yyyy) 1");
+        alert("Please enter a valid date (dd/mm/yyyy)");
         return;
     }
     
@@ -138,39 +138,39 @@ async function OnSubmitRegistrationFormClick(this: HTMLFormElement, e: Event) {
         alert("Last name is required");
         return;
     }
-    
-    RegisterUserRequest.firstName = firstNameInputElm.value.trim();
-    RegisterUserRequest.lastName = lastNameInputElm.value.trim();
-    // RegisterUserRequest.dateOfBirthAsDateOnlyString = birthdayInputElm.valueAsDate ?? new Date();
-    RegisterUserRequest.dateOfBirthAsDateOnlyString = (birthdayInputElm.valueAsDate ?? new Date()).toISOString();
-    
-    const d = birthdayInputElm.valueAsDate!;
-    
-    if (Object.prototype.toString.call(d) === "[object Date]") {
-        
-        const d1 = d.toISOString().split("T")[0]!;
 
-        console.log(d1);
-        
-        RegisterUserRequest.dateOfBirthAsDateOnlyString = d1;
-    }
+    RegisterUserRequest.FirstName = firstNameInputElm.value.trim();
+    
+    RegisterUserRequest.LastName = lastNameInputElm.value.trim();
+    
+    RegisterUserRequest.DateOfBirthAsDateOnlyString =
+        dateOfBirthAsDate?.toISOString().split("T")[0]!;
     
     try {
-        const api = new ApiClient(baseApiUrl);
         console.log(api);
         console.log(RegisterUserRequest);
+        
+        userObject.Email = RegisterUserRequest.Email;
+        userObject.FirstName = RegisterUserRequest.FirstName;
+        userObject.LastName = RegisterUserRequest.LastName;
+        userObject.DateOfBirthAsDateOnlyString = RegisterUserRequest.DateOfBirthAsDateOnlyString;
+        
         const result= await api.Post<TokenDto>('auth/register', RegisterUserRequest);
+        api.SetToken(result.AccessToken);
         
-        window.sessionStorage.setItem('accessToken', result.accessToken);
-        window.sessionStorage.setItem('refreshToken', result.refreshToken);
+        console.log(result);
+        console.log(api);
         
-        alert("Registeration Operation Done.")
+        window.sessionStorage.setItem('accessToken', result.AccessToken);
+        window.sessionStorage.setItem('refreshToken', result.RefreshToken);
+        
+        alert("Registeration Done.")
         
         RegisterStep2FormElm.classList.remove("active");
         LoginFormElm.classList.add("active");
     }
     catch (error) {
-        
+        alert(error);
     }
 }
 
