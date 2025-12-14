@@ -1,5 +1,6 @@
 using System.Text;
 using Application.Abstractions.Authentication;
+using Application.Abstractions.Database;
 using Application.Repository;
 using Dapper;
 using Infrastructure.Authentication;
@@ -31,6 +32,7 @@ public static class DependencyInjection
     {
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+        services.AddSingleton<IDbTransactionOps, DbTransactionOps>();
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddSingleton<IProductRepository, ProductRepository>();

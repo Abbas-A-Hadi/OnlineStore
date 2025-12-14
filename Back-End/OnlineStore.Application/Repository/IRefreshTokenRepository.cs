@@ -1,3 +1,4 @@
+using System.Data;
 using Domain.RefreshTokens;
 
 namespace Application.Repository;
@@ -5,6 +6,7 @@ namespace Application.Repository;
 public interface IRefreshTokenRepository
 {
     Task<bool> CreateRefreshTokenAsync(RefreshToken refreshToken, CancellationToken cancellationToken);
+    Task<bool> CreateRefreshTokenAsync(RefreshToken refreshToken, IDbTransaction transaction, CancellationToken cancellationToken);
     
     Task<RefreshToken?> GetRefreshTokenByIdAsync(Guid refreshTokenId, CancellationToken cancellationToken);
     

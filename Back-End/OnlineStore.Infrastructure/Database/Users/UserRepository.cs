@@ -82,6 +82,17 @@ public sealed class UserRepository(ISqlDataAccess db) : IUserRepository
         return rowsAffected > 0;
     }
     
+    public async Task<bool> RegisterUserAsync(User user, IDbTransaction transaction, CancellationToken cancellationToken) 
+    {
+        int rowsAffected = await transaction.Connection?.ExecuteScalarAsync<int>(new CommandDefinition(
+            commandText: "spUsers_Create", parameters: user, 
+            commandType: CommandType.StoredProcedure, 
+            transaction: transaction,
+            cancellationToken: cancellationToken))!; 
+
+        return rowsAffected > 0;
+    }
+    
     public async Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken) 
     {
         using IDbConnection dbConnection = db.GetSqlConnection();

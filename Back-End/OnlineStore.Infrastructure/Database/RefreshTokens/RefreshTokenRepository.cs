@@ -20,6 +20,18 @@ public sealed class RefreshTokenRepository(ISqlDataAccess db) : IRefreshTokenRep
         return rowsAffected > 0;
     }
 
+    public async Task<bool> CreateRefreshTokenAsync(RefreshToken refreshToken, IDbTransaction transaction, CancellationToken cancellationToken)
+    {
+        int rowsAffected = await transaction.Connection?.ExecuteScalarAsync<int>(new CommandDefinition(
+            commandText: "spRefreshTokens_Create",
+            parameters: refreshToken,
+            commandType: CommandType.StoredProcedure,
+            transaction: transaction,
+            cancellationToken: cancellationToken))!;
+        
+        return rowsAffected > 0;
+    }
+
     public async Task<RefreshToken?> GetRefreshTokenByIdAsync(Guid refreshTokenId, CancellationToken cancellationToken)
     {
         using IDbConnection dbConnection = db.GetSqlConnection();
