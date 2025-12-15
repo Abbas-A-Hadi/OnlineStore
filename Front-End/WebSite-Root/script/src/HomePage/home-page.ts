@@ -166,8 +166,12 @@ function openAccount() : void {
     window.location.href = "../.././WebSite-Root/documents/account.html";
 }
 
-function showProduct() : void {
-    window.location.href = "../.././WebSite-Root/documents/product-page.html";
+function showProduct(this: HTMLButtonElement, e: Event) : void {
+    e.preventDefault();
+    
+    const productId: number = Number(this.name);
+    
+    window.location.href = `../.././WebSite-Root/documents/product-page.html?id=${encodeURIComponent(productId)}`;
 }
 
 function addProductToCart(e: Event) : void {

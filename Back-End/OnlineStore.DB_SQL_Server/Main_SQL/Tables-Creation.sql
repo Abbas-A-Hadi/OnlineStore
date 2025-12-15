@@ -9,8 +9,8 @@
 
 CREATE TABLE Countries
 (
-    Id TINYINT NOT NULL IDENTITY,
-    Name VARCHAR(25) NOT NULL,
+    Id SMALLINT NOT NULL IDENTITY,
+    Name VARCHAR(50) NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Countries_Id PRIMARY KEY (Id),
@@ -27,7 +27,7 @@ CREATE TABLE Cities
     Id SMALLINT NOT NULL IDENTITY,
     Name VARCHAR(100) NOT NULL,
     ---- Foreign Keys Attributes
-    CountryId TINYINT NOT NULL,
+    CountryId SMALLINT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Cities_Id PRIMARY KEY (Id),
@@ -43,6 +43,47 @@ GO
 
 ----////////////////////////////
 
+CREATE TABLE Currencies
+(
+    Id SMALLINT NOT NULL,
+    ISO3 CHAR(3) NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    
+    -- Constraints
+    CONSTRAINT PK_Currencies_Id PRIMARY KEY (Id),
+
+    
+    CONSTRAINT UQ_Currencies_ISO3 UNIQUE (ISO3),
+);
+GO
+
+----////////////////////////////
+
+CREATE TABLE CountryCurrencies
+(
+    Id SMALLINT NOT NULL,
+    CountryId SMALLINT NOT NULL,
+    CurrencyId SMALLINT NOT NULL,
+    
+    -- Constraints
+    CONSTRAINT PK_CountryCurrencies_Id PRIMARY KEY (Id),
+
+    
+    CONSTRAINT FK_CountryCurrencies_CountryId FOREIGN KEY (CountryId) 
+        REFERENCES Countries(Id),
+
+    CONSTRAINT FK_CountryCurrencies_CurrencyId FOREIGN KEY (CurrencyId) 
+        REFERENCES Currencies(Id),
+
+
+    CONSTRAINT UQ_CountryCurrencies_CountryId_CurrencyId 
+        UNIQUE (CountryId, CurrencyId), 
+);
+GO
+
+
+----////////////////////////////
+
 CREATE TABLE Addresses
 (
     Id INT NOT NULL IDENTITY,
@@ -50,7 +91,7 @@ CREATE TABLE Addresses
     PostCode INT NULL, -- Optional
     --Street NVARCHAR(30) NOT NULL, -- I remove it because it stored in FullyAsString Attribute.
     ---- Foreign Keys Attributes
-    CountryId TINYINT NOT NULL,
+    CountryId SMALLINT NOT NULL,
     CityId SMALLINT NOT NULL,
 
     ---- Constraints
@@ -64,13 +105,9 @@ CREATE TABLE Addresses
         REFERENCES Cities(Id),
 );
 GO
---DELETE FROM RefreshTokens;
+
 ----////////////////////////////
-SELECT * FROM dbo.tvfUsers_GetAllActiveUsers();
-SELECT * FROM RefreshTokens;
---DELETE FROM DBO.UserS WHERE Users.Id = 'b055e0c5-09b2-4c8a-970b-e66cf815d6de';
---UPDATE Users SET IsDeleted = 0;
---DELETE FROM Users WHERE Email LIKE 'test2@%'
+
 CREATE TABLE Users
 (
     Id UNIQUEIDENTIFIER NOT NULL,
@@ -142,8 +179,8 @@ GO
 CREATE TABLE Categories
 (
     Id TINYINT NOT NULL IDENTITY,
-    Name VARCHAR(50) NOT NULL,
-    Description VARCHAR(500) NOT NULL
+    Name VARCHAR(15) NOT NULL,
+    Description VARCHAR(200) NOT NULL
 
     ---- Constraints
     CONSTRAINT PK_Categories_Id PRIMARY KEY (Id),
@@ -161,14 +198,19 @@ CREATE TABLE Brands
     Name VARCHAR(25) NOT NULL,
     Description VARCHAR(500) NOT NULL,
     ---- Foreign Keys Attributes
-    CountryId TINYINT NOT NULL,
-
+--     CountryId SMALLINT NOT NULL,
+    /* 
+        I remove it because have a Many-to-Many relationship.
+        Then i have ot create an interconnection table between
+          these two table (Brands, Countries) call BrandCountries.
+    */
+    
     ---- Constraints
     CONSTRAINT PK_Brands_Id PRIMARY KEY (Id),
 
 
-    CONSTRAINT FK_Brands_CountryId FOREIGN KEY (CountryId)
-        REFERENCES Countries(Id),
+--     CONSTRAINT FK_Brands_CountryId FOREIGN KEY (CountryId)
+--         REFERENCES Countries(Id),
 
 
     CONSTRAINT UQ_Brands_Name UNIQUE (Name),
@@ -182,8 +224,8 @@ CREATE TABLE Products
     Id INT NOT NULL,
     Name VARCHAR(50) NOT NULL,
     Description VARCHAR(255) NOT NULL,
-    Price DECIMAL(10, 2) NOT NULL,
-    Currency VARCHAR(3) NOT NULL CONSTRAINT DF_Products_Currency DEFAULT 'USD',
+    Price DECIMAL(9, 2) NOT NULL, -- 9,999,999.99
+    CurrencyId SMALLINT NOT NULL CONSTRAINT DF_Products_Currency DEFAULT 1, -- 1: AED, 59: IQD, 132: USD, ....
     StockQuantity INT NOT NULL,
     ---- Foreign Keys Attributes
     CategoryId TINYINT NOT NULL,

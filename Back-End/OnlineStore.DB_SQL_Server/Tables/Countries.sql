@@ -1,6 +1,6 @@
 CREATE TABLE Countries
 (
-    Id TINYINT NOT NULL IDENTITY,
+    Id SMALLINT NOT NULL IDENTITY,
     Name VARCHAR(25) NOT NULL,
 
     ---- Constraints

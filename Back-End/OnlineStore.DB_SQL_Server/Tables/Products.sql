@@ -3,8 +3,8 @@ CREATE TABLE Products
     Id INT NOT NULL,
     Name VARCHAR(50) NOT NULL,
     Description VARCHAR(255) NOT NULL,
-    Price DECIMAL(10, 2) NOT NULL,
-    Currency VARCHAR(3) NOT NULL CONSTRAINT DF_Products_Currency DEFAULT "USD",
+    Price DECIMAL(9, 2) NOT NULL, -- 9,999,999.99
+    CurrencyId SMALLINT NOT NULL CONSTRAINT DF_Products_Currency DEFAULT 1, -- 1: AED, 59: IQD, 132: USD, ....
     StockQuantity INT NOT NULL,
     ---- Foreign Keys Attributes
     CategoryId TINYINT NOT NULL,

@@ -1,7 +1,6 @@
-interface IProduct {
-    id: string;
+export type Product = {
+    id: number;
     name: string;
-    sku: string;
     price: number;
     currency: string;
     stockStatus: string;
@@ -10,11 +9,4 @@ interface IProduct {
     longDescription: string;
     features: string[];
     imagesPaths: string[];
-}
-
-export class Product implements IProduct {
-    constructor(public id: string, public name: string, public sku: string, public price: number,
-                public currency: string, public stockStatus: string, public reviews: number,
-                public shortDescription: string, public longDescription: string,
-                public features: string[], public imagesPaths: string[]) {}
 }
