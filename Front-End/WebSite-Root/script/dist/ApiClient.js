@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 export class ApiClient {
     constructor(baseUrl) {
-        this.token = null;
+        this.token = "";
         this.baseUrl = baseUrl;
     }
     SetToken(token) {

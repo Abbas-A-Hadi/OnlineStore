@@ -1,8 +1,12 @@
-import {api, userObject} from "../Global.js";
+import {GetNewEmptyRegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
+import {Api, CurrentUserObject} from "../Global.js";
 import type {LoginByEmailAndPasswordRequest} from "../DataTypes/Users/LoginByEmailAndPasswordRequest.js";
 import type {TokenDto} from "../DataTypes/Users/TokenDto.js";
 import type {RegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
-import {GetNewEmptyRegisterUserRequest} from "../DataTypes/Users/RegisterUserRequest.js";
+import type {RegisterUserResponse} from "../DataTypes/Users/RegisterUserResponse.js";
+import {Guid} from "../DataTypes/Guid.js";
+
+const homePagePath: string = "../../../../.././Front-End/WebSite-Root/documents/home-page.html";
 
 const RegisterUserRequest: RegisterUserRequest = GetNewEmptyRegisterUserRequest();
 let LoginFormElm: HTMLFormElement;
@@ -73,15 +77,15 @@ async function OnLoginButtonClick(this: HTMLFormElement, e: Event) {
     };
     
     try {
-        const response = await api.Post<TokenDto>('auth/login/', loginRequest);
+        const response = await Api.Post<TokenDto>('auth/login/', loginRequest);
         
-        api.SetToken(response.AccessToken);
+        Api.SetToken(response.accessToken);
         
-        window.location.href = "../../../../.././Front-End/WebSite-Root/documents/home-page.html";
+        CurrentUserObject.Email = email;
+        CurrentUserObject.AccessToken = response.accessToken;
+        CurrentUserObject.RefreshToken = response.refreshToken;
         
-        console.log(api)
-        console.log(response)
-        alert();
+        window.location.href = homePagePath;
     }
     catch (error) {
         alert(error);
@@ -147,27 +151,18 @@ async function OnSubmitRegistrationFormClick(this: HTMLFormElement, e: Event) {
         dateOfBirthAsDate?.toISOString().split("T")[0]!;
     
     try {
-        console.log(api);
-        console.log(RegisterUserRequest);
+        const result:RegisterUserResponse = await Api.Post('auth/register', RegisterUserRequest);
+        Api.SetToken(result.accessToken);
         
-        userObject.Email = RegisterUserRequest.Email;
-        userObject.FirstName = RegisterUserRequest.FirstName;
-        userObject.LastName = RegisterUserRequest.LastName;
-        userObject.DateOfBirthAsDateOnlyString = RegisterUserRequest.DateOfBirthAsDateOnlyString;
+        CurrentUserObject.Id = Guid.Restore(result.userId)!;
+        CurrentUserObject.Email = result.email;
+        CurrentUserObject.FirstName = result.firstName;
+        CurrentUserObject.LastName = result.lastName;
+        CurrentUserObject.DateOfBirthAsDateOnlyAsString = result.dateOfBirth;
+        CurrentUserObject.AccessToken = result.accessToken;
+        CurrentUserObject.RefreshToken = result.refreshToken;
         
-        const result= await api.Post<TokenDto>('auth/register', RegisterUserRequest);
-        api.SetToken(result.AccessToken);
-        
-        console.log(result);
-        console.log(api);
-        
-        window.sessionStorage.setItem('accessToken', result.AccessToken);
-        window.sessionStorage.setItem('refreshToken', result.RefreshToken);
-        
-        alert("Registeration Done.")
-        
-        RegisterStep2FormElm.classList.remove("active");
-        LoginFormElm.classList.add("active");
+        window.location.href = homePagePath;
     }
     catch (error) {
         alert(error);

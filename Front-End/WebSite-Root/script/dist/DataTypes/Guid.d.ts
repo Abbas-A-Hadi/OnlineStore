@@ -3,8 +3,9 @@ export declare class Guid {
     private static uuidRegex;
     private constructor();
     static Empty(): Guid;
-    static CreateValid(value: string): Guid | null | undefined;
-    static IsGuid(value: string): boolean;
+    private static CreateValid;
+    static Restore(value: string): Guid | null | undefined;
     static New(): Guid;
+    static IsGuid(value: string): boolean;
 }
 //# sourceMappingURL=Guid.d.ts.map

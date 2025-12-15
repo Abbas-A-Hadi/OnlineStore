@@ -10,7 +10,7 @@ export class Guid
     
     //<b>return:</b> <b>undefined</b> If value <b>null</b> or <b>empty</b> or
     // return <b>null</b> if not Guid; otherwise return <b>new valid Guid</b>.
-    static CreateValid(value: string): Guid | null | undefined {
+    private static CreateValid(value: string): Guid | null | undefined {
         return !value 
             ? undefined
             : Guid.IsGuid(value)
@@ -18,11 +18,15 @@ export class Guid
                 : null;
     }
     
-    static IsGuid(value: string): boolean {
-        return this.uuidRegex.test(value);
+    static Restore(value: string): Guid | null | undefined {
+        return Guid.CreateValid(value);
     }
     
     static New() : Guid {
         return new Guid(crypto.randomUUID());
+    }
+
+    static IsGuid(value: string): boolean {
+        return this.uuidRegex.test(value);
     }
 }
