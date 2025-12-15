@@ -12,11 +12,14 @@ export class Guid {
                 ? new Guid(value)
                 : null;
     }
-    static IsGuid(value) {
-        return this.uuidRegex.test(value);
+    static Restore(value) {
+        return Guid.CreateValid(value);
     }
     static New() {
         return new Guid(crypto.randomUUID());
+    }
+    static IsGuid(value) {
+        return this.uuidRegex.test(value);
     }
 }
 Guid.uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;

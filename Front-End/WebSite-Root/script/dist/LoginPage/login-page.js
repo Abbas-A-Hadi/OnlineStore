@@ -7,8 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { api, userObject } from "../Global.js";
 import { GetNewEmptyRegisterUserRequest } from "../DataTypes/Users/RegisterUserRequest.js";
+import { Api, CurrentUserObject } from "../Global.js";
+import { Guid } from "../DataTypes/Guid.js";
+const homePagePath = "../../../../.././Front-End/WebSite-Root/documents/home-page.html";
 const RegisterUserRequest = GetNewEmptyRegisterUserRequest();
 let LoginFormElm;
 let RegisterStep1FormElm;
@@ -57,12 +59,12 @@ function OnLoginButtonClick(e) {
             password: password
         };
         try {
-            const response = yield api.Post('auth/login/', loginRequest);
-            api.SetToken(response.AccessToken);
-            window.location.href = "../../../../.././Front-End/WebSite-Root/documents/home-page.html";
-            console.log(api);
-            console.log(response);
-            alert();
+            const response = yield Api.Post('auth/login/', loginRequest);
+            Api.SetToken(response.accessToken);
+            CurrentUserObject.Email = email;
+            CurrentUserObject.AccessToken = response.accessToken;
+            CurrentUserObject.RefreshToken = response.refreshToken;
+            window.location.href = homePagePath;
         }
         catch (error) {
             alert(error);
@@ -116,21 +118,16 @@ function OnSubmitRegistrationFormClick(e) {
         RegisterUserRequest.DateOfBirthAsDateOnlyString =
             dateOfBirthAsDate === null || dateOfBirthAsDate === void 0 ? void 0 : dateOfBirthAsDate.toISOString().split("T")[0];
         try {
-            console.log(api);
-            console.log(RegisterUserRequest);
-            userObject.Email = RegisterUserRequest.Email;
-            userObject.FirstName = RegisterUserRequest.FirstName;
-            userObject.LastName = RegisterUserRequest.LastName;
-            userObject.DateOfBirthAsDateOnlyString = RegisterUserRequest.DateOfBirthAsDateOnlyString;
-            const result = yield api.Post('auth/register', RegisterUserRequest);
-            api.SetToken(result.AccessToken);
-            console.log(result);
-            console.log(api);
-            window.sessionStorage.setItem('accessToken', result.AccessToken);
-            window.sessionStorage.setItem('refreshToken', result.RefreshToken);
-            alert("Registeration Done.");
-            RegisterStep2FormElm.classList.remove("active");
-            LoginFormElm.classList.add("active");
+            const result = yield Api.Post('auth/register', RegisterUserRequest);
+            Api.SetToken(result.accessToken);
+            CurrentUserObject.Id = Guid.Restore(result.userId);
+            CurrentUserObject.Email = result.email;
+            CurrentUserObject.FirstName = result.firstName;
+            CurrentUserObject.LastName = result.lastName;
+            CurrentUserObject.DateOfBirthAsDateOnlyAsString = result.dateOfBirth;
+            CurrentUserObject.AccessToken = result.accessToken;
+            CurrentUserObject.RefreshToken = result.refreshToken;
+            window.location.href = homePagePath;
         }
         catch (error) {
             alert(error);

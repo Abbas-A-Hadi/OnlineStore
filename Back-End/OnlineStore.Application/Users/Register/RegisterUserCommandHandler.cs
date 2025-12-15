@@ -27,7 +27,8 @@ internal sealed class RegisterUserCommandHandler(
                 password: command.Password,
                 firstName: command.FirstName, 
                 lastName: command.LastName,
-                dateOfBirth: command.DateOfBirth);
+                dateOfBirth: command.DateOfBirth, 
+                role: command.Role);
             
             // Begin Transaction Here (Start).
             transactionOps.Begin();
@@ -65,7 +66,7 @@ internal sealed class RegisterUserCommandHandler(
             if (!await refreshTokenRepository.CreateRefreshTokenAsync(refreshToken, 
                     transactionOps.GetCurrentDbTransaction(), cancellationToken))
             {
-                // TODO: Rollback The Transaction Here.
+                // Rollback The Transaction Here.
                 transactionOps.Rollback();
                 
                 return Result.Failure<RegisterUserResponse>(RefreshTokenErrors

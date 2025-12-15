@@ -1,6 +1,6 @@
 export class ApiClient {
     private readonly baseUrl: string;
-    private token: string | null = null;
+    private token: string = "";
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl;
