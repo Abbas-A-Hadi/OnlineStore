@@ -5,7 +5,7 @@ CREATE TABLE Addresses
     PostCode INT NULL, -- Optional
     --Street NVARCHAR(30) NOT NULL, -- I remove it because it stored in FullyAsString Attribute.
     ---- Foreign Keys Attributes
-    CountryId TINYINT NOT NULL,
+    CountryId SMALLINT NOT NULL,
     CityId SMALLINT NOT NULL,
 
     ---- Constraints

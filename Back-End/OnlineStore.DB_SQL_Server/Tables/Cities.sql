@@ -3,7 +3,7 @@ CREATE TABLE Cities
     Id SMALLINT NOT NULL IDENTITY,
     Name VARCHAR(100) NOT NULL,
     ---- Foreign Keys Attributes
-    CountryId TINYINT NOT NULL,
+    CountryId SMALLINT NOT NULL,
 
     ---- Constraints
     CONSTRAINT PK_Cities_Id PRIMARY KEY (Id),

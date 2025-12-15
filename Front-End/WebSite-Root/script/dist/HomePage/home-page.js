@@ -100,8 +100,10 @@ function exploreDeals() {
 function openAccount() {
     window.location.href = "../.././WebSite-Root/documents/account.html";
 }
-function showProduct() {
-    window.location.href = "../.././WebSite-Root/documents/product-page.html";
+function showProduct(e) {
+    e.preventDefault();
+    const productId = Number(this.name);
+    window.location.href = `../.././WebSite-Root/documents/product-page.html?id=${encodeURIComponent(productId)}`;
 }
 function addProductToCart(e) {
     var _a, _b;
