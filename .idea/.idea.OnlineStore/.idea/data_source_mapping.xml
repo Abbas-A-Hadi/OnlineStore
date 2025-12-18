@@ -3,6 +3,8 @@
   <component name="DataSourcePerFileMappings">
     <file url="dbSrc:///8372319c/efe69488-0307-42d7-ae57-43aa027766c8/database/OnlineStore_DB/schema/dbo/view/vActiveUsers_FullInfo.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/.idea/.idea.OnlineStore/.idea/queries/Query.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Products/tvfProducts_GetByCategoryIdPagination.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Products/tvfProducts_GetById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/RefreshTokens/tvfRefreshTokens_GetById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/RefreshTokens/tvfRefreshTokens_GetByToken.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetAllActiveUsers.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
@@ -10,13 +12,16 @@
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetFullInfoById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Brand-Seed.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Categories-Seed.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Countries-Currencies-CountryCurrencies-Seeds.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Countries-Seed.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Tables-Creation.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/ProductImageUrls-Seed.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Products-Seed.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/TestingOnly.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromStringToSingleByte.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromTinyIntToVarchar.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Products/spProducts_GetByCategoryIdPagination.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_Create.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_DeleteAllForUserWithId.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_DeleteById.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
@@ -45,7 +50,11 @@
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Reviews.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Suppliers.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Users.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vProducts.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Addresses/vAddresses.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vAbsProducts.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vBasicsProducts.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vFullProducts.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Users/vActiveUsers_FullInfo.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Users/vActiveUsers_MainInfo.sql" value="efe69488-0307-42d7-ae57-43aa027766c8" />
   </component>
 </project>

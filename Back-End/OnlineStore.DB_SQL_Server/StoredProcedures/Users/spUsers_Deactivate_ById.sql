@@ -1,4 +1,4 @@
-ALTER PROCEDURE spUsers_Deactivate_ById
+CREATE PROCEDURE spUsers_Deactivate_ById
   @UserId UNIQUEIDENTIFIER
 AS
 BEGIN

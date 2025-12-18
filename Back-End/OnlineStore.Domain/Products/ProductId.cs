@@ -1,3 +1,3 @@
 namespace Domain.Products;
 
-public record struct ProductId(Guid Value);
+public record struct ProductId(int Value);

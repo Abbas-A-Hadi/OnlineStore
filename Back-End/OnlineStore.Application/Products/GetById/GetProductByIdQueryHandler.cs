@@ -18,16 +18,17 @@ public sealed class GetProductByIdQueryHandler(IProductRepository productReposit
         }
         
         return new ProductResponse(
-            Id: query.ProductId, 
+            Id: product.Id.Value, 
             Name: product.Name,
-            Sku: product.Sku,
             Price: product.Price,
-            Currency: product.Currency,
-            StockStatus: product.StockStatus,
-            Reviews:  product.Reviews,
+            Currency: product.Currency.Value,
+            Brand: product.Brand,
+            Category: product.Category,
             ShortDescription: product.ShortDescription,
             LongDescription: product.LongDescription,
+            Reviews:  product.Reviews,
+            StockStatus: product.StockStatus,
             Features: product.Features,
-            ImagePaths: product.ImagePaths);
+            ImagesURLs: product.ImagesURLs);
     }
 }

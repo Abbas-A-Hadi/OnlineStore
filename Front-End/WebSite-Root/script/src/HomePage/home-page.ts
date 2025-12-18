@@ -1,10 +1,12 @@
 import type {CartProduct} from "../DataTypes/CartProduct.js";
+import type {Product} from "../../dist/DataTypes/Products/Product.js";
+import {Api} from "../../dist/Global.js";
 
 const HERO_AUTOPLAY_MS: number = 4000;
 let heroIndex : number = 0;
 let heroTimer : number | null = null;
 
-let cart: CartProduct[] = [];
+const cart: CartProduct[] = new Array<CartProduct>();
 
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 
@@ -152,6 +154,56 @@ function slide(dir: number) : void {
     setTimeout(startHeroAutoplay, HERO_AUTOPLAY_MS);
 }
 
+function loadAndPresentProducts() : void {
+    const productsSectionElement = <HTMLTableSectionElement>document.getElementById("products");
+    
+    const productsGrid = <HTMLDivElement> productsSectionElement
+        .children.item(1);
+    
+    let newProductContainerDivElm: HTMLDivElement;
+    
+    for (const product of products) 
+    {
+        newProductContainerDivElm = document.createElement("div");
+        
+        
+        productsGrid.appendChild();
+    }
+    
+    /*
+    <div class="product-card">
+        <div class="img-wrap"><img src="img/images17.jpeg"></div>
+        <h3>Redragon SHIVA</h3>
+        <div class="price">IQD 30,000</div>
+        <div class="card-actions">
+            <button class="add-product-btn">Add to Cart</button>
+            <button name="1" class="show-product-btn">Show Product</button>
+        </div>
+    </div>
+    */
+    
+    const products = loadProductsByCategoryType(1);
+}
+
+async function loadProductsByCategoryType(categoryType: number, page: number = 0, size: number = 20): Product[]
+{
+    try {
+        const results = await Api.Get<Product[]>(`products/${categoryType}?page=${page}&size=${size}`);
+        
+        return results;
+    }
+    catch (e) {
+        console.error(e);
+        alert(e);
+    }
+    
+    return new Array<Product>();
+}
+
+/* 
+    *=* The Event Listeners Delegates *=* 
+*/
+
 function shopNow() : void {
     (<HTMLTableSectionElement> document.getElementById("products"))
         ?.scrollIntoView({ behavior: "smooth" });
@@ -171,7 +223,7 @@ function showProduct(this: HTMLButtonElement, e: Event) : void {
     
     const productId: number = Number(this.name);
     
-    window.location.href = `../.././WebSite-Root/documents/product-page.html?id=${encodeURIComponent(productId)}`;
+    window.location.href = `../../../../.././OnlineStore/Front-End/WebSite-Root/documents/product-page.html?id=${encodeURIComponent(productId)}`;
 }
 
 function addProductToCart(e: Event) : void {

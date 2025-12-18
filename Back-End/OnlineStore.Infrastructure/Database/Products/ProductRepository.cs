@@ -1,23 +1,48 @@
+using System.Data;
+using Application.Products.GetByCategoryPagination;
 using Application.Repository;
-using Domain.Categories;
+using Dapper;
 using Domain.Products;
 
 namespace Infrastructure.Database.Products;
 
 public sealed class ProductRepository(ISqlDataAccess db) : IProductRepository
 {
-    public Task<Product> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<Product?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        using IDbConnection connection = db.GetSqlConnection();
+
+        ProductDbRow? row = await connection.QueryFirstOrDefaultAsync<ProductDbRow>(new CommandDefinition(
+            commandText: "SELECT * FROM dbo.tvfProducts_GetById(@ProductId)",
+            parameters: new { ProductId = id},
+            commandType: CommandType.Text,
+            cancellationToken: cancellationToken));
+
+        return row?.MapToProduct();
     }
 
-    public Task<List<Product>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<List<ProductResponse>> GetByCategoryPaginationAsync(byte categoryType, int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
+        using IDbConnection connection = db.GetSqlConnection();
 
-    public Task<List<Product>> GetByCategoryAsync(CategoryTypes categoryType, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        IEnumerable<ProductDbRow> rows = await connection.QueryAsync<ProductDbRow>(new CommandDefinition(
+            commandText: "SELECT * FROM dbo.tvfProducts_GetByCategoryIdPagination(@CategoryId, @PageNumber, @NumberOfRecords)",
+            parameters: new
+            {
+                CategoryId = categoryType,
+                PageNumber = pageNumber,
+                NumberOfRecords = pageSize,
+            },
+            commandType: CommandType.Text,
+            cancellationToken: cancellationToken));
+
+        List<ProductResponse> products = new (capacity: pageSize);
+        
+        foreach (ProductDbRow row in rows)
+        {
+            products.Add(row.MapToProductResponse());
+        }
+
+        return products;
     }
 }

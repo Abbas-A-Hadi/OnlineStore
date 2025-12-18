@@ -5,10 +5,12 @@ const products = [
         name: "Redragon K512 Neon Gaming Keyboard",
         price: 300000,
         currency: "IQD",
-        stockStatus: "In stock",
-        reviews: 124,
+        brand: "",
+        category: "",
         shortDescription: "Full-size RGB gaming keyboard with neon backlight and programmable keys.",
         longDescription: "The Redragon K512 Neon Gaming Keyboard delivers a full-size layout with vibrant RGB lighting, anti-ghosting keys and a durable metal top plate. Designed for gamers who love a neon cyber look, it features multiple lighting presets, on-the-fly controls and soft-touch keycaps for comfortable long sessions.",
+        reviews: 124,
+        stockStatus: "In stock",
         features: [
             "Full-size layout with dedicated media keys",
             "Dynamic RGB neon backlighting with multiple presets",
@@ -17,9 +19,9 @@ const products = [
             "Durable switches rated for millions of presses"
         ],
         imagesPaths: [
-            "../homePage/img/redragon-k512.jpeg",
-            "../homePage/img/download7.jpeg",
-            "../homePage/img/download17.jpeg"
+            "../images/jpeg/Aero-Cool-Single-Fan.jpeg",
+            //"../homePage/img/download7.jpeg",
+            //"../homePage/img/download17.jpeg"
         ]
     },
     {
@@ -27,10 +29,12 @@ const products = [
         name: "MagicWand Compact RGB Keyboard",
         price: 240000,
         currency: "IQD",
-        stockStatus: "Only a few left",
-        reviews: 67,
+        brand: "",
+        category: "",
         shortDescription: "Compact 68-key layout with per-key RGB and hot-swappable switches.",
         longDescription: "The MagicWand Compact RGB Keyboard brings premium features to a small footprint. With hot-swappable switches, per-key lighting and a rock-solid metal frame, it is perfect for minimalist neon setups and tight desk spaces.",
+        reviews: 67,
+        stockStatus: "Only a few left",
         features: [
             "Compact 68-key neon design",
             "Per-key RGB lighting with custom profiles",
@@ -49,10 +53,12 @@ const products = [
         name: "Venom-2 Cyberpunk Keyboard",
         price: 350000,
         currency: "IQD",
-        stockStatus: "In stock",
-        reviews: 89,
+        brand: "",
+        category: "",
         shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
         longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
         features: [
             "Layered neon RGB with side strips",
             "Dedicated macro column with on-board memory",
@@ -65,7 +71,321 @@ const products = [
             "../homePage/img/lol-logtec.jpeg",
             "../homePage/img/download17.jpeg"
         ]
-    }
+    },
+    {
+        id: 4,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 5,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },    {
+        id: 6,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 7,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 8,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 9,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 10,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 11,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 12,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 13,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 14,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id:15,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    {
+        id: 16,
+        name: "Venom-2 Cyberpunk Keyboard",
+        price: 350000,
+        currency: "IQD",
+        brand: "",
+        category: "",
+        shortDescription: "Aggressive cyberpunk frame with multi-layer RGB lighting and macro row.",
+        longDescription: "The Venom-2 Cyberpunk Keyboard features a bold open-frame design, elevated switch mounts and layered RGB strips that glow through the chassis. Dedicated macro keys let you trigger combos instantly while the metal frame keeps everything solid.",
+        reviews: 89,
+        stockStatus: "In stock",
+        features: [
+            "Layered neon RGB with side strips",
+            "Dedicated macro column with on-board memory",
+            "Aluminum top plate with cyber cutouts",
+            "Detachable USB-C cable",
+            "Tuned stabilizers for smooth large keys"
+        ],
+        imagesPaths: [
+            "../homePage/img/venom-2.jpeg",
+            "../homePage/img/lol-logtec.jpeg",
+            "../homePage/img/download17.jpeg"
+        ]
+    },
+    
+    
+    
 ];
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
