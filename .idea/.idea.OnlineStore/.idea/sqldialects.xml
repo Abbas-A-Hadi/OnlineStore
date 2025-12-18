@@ -3,6 +3,8 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/.idea/.idea.OnlineStore/.idea/queries/Query.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Products/tvfProducts_GetByCategoryIdPagination.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Products/tvfProducts_GetById.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/RefreshTokens/tvfRefreshTokens_GetById.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/RefreshTokens/tvfRefreshTokens_GetByToken.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetAllActiveUsers.sql" dialect="TSQL" />
@@ -10,13 +12,17 @@
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetById.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Inline-Table--Valued-Functions/Users/tvfUsers_GetFullInfoById.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Create-Main-DB.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Brand-Seed.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Categories-Seed.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Countries-Currencies-CountryCurrencies-Seeds.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Countries-Seed.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/ProductImageUrls-Seed.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Seeds/Products-Seed.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Tables-Creation.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/TestingOnly.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Main_SQL/Views-Creation.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromStringToSingleByte.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/ScalarFunctions/ConvertUserRoleFromTinyIntToVarchar.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/Products/spProducts_GetByCategoryIdPagination.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_Create.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_DeleteAllForUserWithId.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/StoredProcedures/RefreshTokens/spRefreshTokens_DeleteById.sql" dialect="TSQL" />
@@ -44,8 +50,12 @@
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/ProductsImagesURLs.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Reviews.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Tables/Users.sql" dialect="TSQL" />
-    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vProducts.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Addresses/vAddresses.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vAbsProducts.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vBasicsProducts.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Products/vFullProducts.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Users/vActiveUsers_FullInfo.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.DB_SQL_Server/Views/Users/vActiveUsers_MainInfo.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Back-End/OnlineStore.Infrastructure/Database/RefreshTokens/RefreshTokenRepository.cs" dialect="GenericSQL" />
   </component>
 </project>

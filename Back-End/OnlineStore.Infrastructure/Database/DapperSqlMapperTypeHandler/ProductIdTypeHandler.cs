@@ -10,5 +10,5 @@ public sealed class ProductIdTypeHandler : SqlMapper.TypeHandler<ProductId>
         =>  parameter.Value = value.Value;
 
     public override ProductId Parse(object value)
-        => new ProductId((Guid)value);
+        => new ProductId((int)value);
 }

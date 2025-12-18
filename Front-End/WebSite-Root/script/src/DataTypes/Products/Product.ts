@@ -3,8 +3,10 @@ export type Product = {
     name: string;
     price: number;
     currency: string;
-    stockStatus: string;
+    brand: string;
     reviews: number;
+    stockStatus: string;
+    category: string;
     shortDescription: string;
     longDescription: string;
     features: string[];

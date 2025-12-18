@@ -35,19 +35,19 @@ public sealed class Register : IEndpoint
             DateOfBirth: request.DateOfBirth,
             Role: request.Role);
         
-        // var validationResult = await validator.ValidateAsync(command, cancellationToken);
-        // if (!validationResult.IsValid)
-        // {
-        //     HttpValidationProblemDetails problemDetails = new(validationResult.ToDictionary())
-        //     {
-        //         Status = StatusCodes.Status400BadRequest,
-        //         Title = "Validation Error",
-        //         Detail = "One or more validation errors occurred.",
-        //         Instance = "RegisterUser"
-        //     };
-        //     
-        //     return Results.Problem(problemDetails);
-        // }
+        var validationResult = await validator.ValidateAsync(command, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            HttpValidationProblemDetails problemDetails = new(validationResult.ToDictionary())
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Validation Error",
+                Detail = "One or more validation errors occurred.",
+                Instance = "RegisterUser"
+            };
+            
+            return Results.Problem(problemDetails);
+        }
                 
         Result<RegisterUserResponse> result = await handler.Handle(command, cancellationToken);
 

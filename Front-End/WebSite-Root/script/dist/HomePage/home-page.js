@@ -1,7 +1,17 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { Api } from "../../dist/Global.js";
 const HERO_AUTOPLAY_MS = 4000;
 let heroIndex = 0;
 let heroTimer = null;
-let cart = [];
+const cart = new Array();
 document.addEventListener("DOMContentLoaded", OnDocumentContentLoaded);
 function OnDocumentContentLoaded() {
     var _a, _b, _c, _d, _e;
@@ -89,6 +99,30 @@ function slide(dir) {
     stopHeroAutoplay();
     setTimeout(startHeroAutoplay, HERO_AUTOPLAY_MS);
 }
+function loadAndPresentProducts() {
+    const productsSectionElement = document.getElementById("products");
+    const productsGrid = productsSectionElement
+        .children.item(1);
+    let newProductContainerDivElm;
+    for (const product of products) {
+        newProductContainerDivElm = document.createElement("div");
+        productsGrid.appendChild();
+    }
+    const products = loadProductsByCategoryType(1);
+}
+function loadProductsByCategoryType(categoryType_1) {
+    return __awaiter(this, arguments, void 0, function* (categoryType, page = 0, size = 20) {
+        try {
+            const results = yield Api.Get(`products/${categoryType}?page=${page}&size=${size}`);
+            return results;
+        }
+        catch (e) {
+            console.error(e);
+            alert(e);
+        }
+        return new Array();
+    });
+}
 function shopNow() {
     var _a;
     (_a = document.getElementById("products")) === null || _a === void 0 ? void 0 : _a.scrollIntoView({ behavior: "smooth" });
@@ -103,7 +137,7 @@ function openAccount() {
 function showProduct(e) {
     e.preventDefault();
     const productId = Number(this.name);
-    window.location.href = `../.././WebSite-Root/documents/product-page.html?id=${encodeURIComponent(productId)}`;
+    window.location.href = `../../../../.././OnlineStore/Front-End/WebSite-Root/documents/product-page.html?id=${encodeURIComponent(productId)}`;
 }
 function addProductToCart(e) {
     var _a, _b;
@@ -187,5 +221,4 @@ function checkout() {
     else
         alert("Proceed to checkout (demo)");
 }
-export {};
 //# sourceMappingURL=home-page.js.map

@@ -28,7 +28,6 @@ CREATE TABLE Products
     CONSTRAINT UQ_Products_Name UNIQUE (Name),
 
 
-    CONSTRAINT CH_Products_Currency_MustItConsistOfThreeLetters CHECK (LEN(Currency) = 3),
     CONSTRAINT CH_Products_Price_MoreThenZero CHECK (Price > 0),
 
     CONSTRAINT CH_Products_StockQuantity_MoreThenOrEqualZero CHECK (StockQuantity >= 0),

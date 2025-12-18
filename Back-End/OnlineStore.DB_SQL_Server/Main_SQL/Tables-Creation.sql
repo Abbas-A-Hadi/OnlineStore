@@ -1,5 +1,11 @@
---USE OnlineStore_DB;
---GO
+USE master;
+GO
+
+CREATE DATABASE OnlineStore_DB;
+GO
+
+USE OnlineStore_DB;
+GO
 
 /*
     ===========================
@@ -178,7 +184,7 @@ GO
 
 CREATE TABLE Categories
 (
-    Id TINYINT NOT NULL IDENTITY,
+    Id TINYINT NOT NULL,
     Name VARCHAR(15) NOT NULL,
     Description VARCHAR(200) NOT NULL
 
@@ -223,11 +229,14 @@ CREATE TABLE Products
 (
     Id INT NOT NULL,
     Name VARCHAR(50) NOT NULL,
-    Description VARCHAR(255) NOT NULL,
     Price DECIMAL(9, 2) NOT NULL, -- 9,999,999.99
-    CurrencyId SMALLINT NOT NULL CONSTRAINT DF_Products_Currency DEFAULT 1, -- 1: AED, 59: IQD, 132: USD, ....
     StockQuantity INT NOT NULL,
+    Reviews INT NOT NULL CONSTRAINT DF_Products_Reviews DEFAULT 0,
+    ShortDescription VARCHAR(100) NOT NULL,
+    LongDescription VARCHAR(255) NOT NULL,
+    Features VARCHAR(800) NOT NULL,
     ---- Foreign Keys Attributes
+    CurrencyId SMALLINT NOT NULL CONSTRAINT DF_Products_CurrencyId DEFAULT 132, -- 1: AED, 59: IQD, 132: USD, ....
     CategoryId TINYINT NOT NULL,
     BrandId SMALLINT NOT NULL,
 --     SupplierId INT NOT NULL, -- For Later Updates.
@@ -236,6 +245,9 @@ CREATE TABLE Products
     CONSTRAINT PK_Products_Id PRIMARY KEY (Id),
 
 
+    CONSTRAINT FK_Products_CurrencyId FOREIGN KEY (CurrencyId)
+        REFERENCES Currencies(Id),
+    
     CONSTRAINT FK_Products_CategoryId FOREIGN KEY (CategoryId)
         REFERENCES Categories(Id),
 
@@ -249,11 +261,40 @@ CREATE TABLE Products
     CONSTRAINT UQ_Products_Name UNIQUE (Name),
 
 
-    CONSTRAINT CH_Products_Currency_MustItConsistOfThreeLetters CHECK (LEN(Currency) = 3),
     CONSTRAINT CH_Products_Price_MoreThenZero CHECK (Price > 0),
 
     CONSTRAINT CH_Products_StockQuantity_MoreThenOrEqualZero CHECK (StockQuantity >= 0),
 );
+GO
+
+----////////////////////////////
+
+CREATE TABLE ProductsImagesURLs
+(
+    Id INT NOT NULL IDENTITY,
+    Url VARCHAR(75) NOT NULL, -- In future it will be 75 size.
+    ---- Foreign Keys Attributes
+    ProductId INT NOT NULL,
+
+    ---- Constraints
+    CONSTRAINT PK_ProductsImagesURLs_Id PRIMARY KEY (Id),
+
+    CONSTRAINT FK_ProductsImagesURLs_ProductId FOREIGN KEY (ProductId)
+        REFERENCES Products(Id)
+);
+/*
+    C:/Users/myUser/OnlineStore/Images/ProductImageName.jpeg
+    
+    ProductImageName it will be a GUID.
+    GUID as string will be 36 characters, example: f8d66900-e3cd-473c-9ef4-6674663828eb
+    
+    Then it will be X of characters.
+    X = 2 + 1 + 5 + 1 + 5 + 1 + 11 + 1 + 6 + 36 (GUID as string) + 1 + 4
+    X = 75.
+    
+    Example on it: 
+        C:/Users/myUser/OnlineStore/Images/f8d66900-e3cd-473c-9ef4-6674663828eb.jpeg
+*/
 GO
 
 ----////////////////////////////
@@ -297,36 +338,6 @@ CREATE TABLE CartItems
 
     CONSTRAINT CH_CartItems_Quantity_MoreThenZero CHECK (Quantity > 0),
 );
-GO
-
-----////////////////////////////
-
-CREATE TABLE ProductsImagesURLs
-(
-    Id INT NOT NULL IDENTITY,
-    Url VARCHAR(75) NOT NULL, -- In future it will be 75 size.
-    ---- Foreign Keys Attributes
-    ProductId INT NOT NULL,
-
-    ---- Constraints
-    CONSTRAINT PK_ProductsImagesURLs_Id PRIMARY KEY (Id),
-
-    CONSTRAINT FK_ProductsImagesURLs_ProductId FOREIGN KEY (ProductId)
-        REFERENCES Products(Id)
-);
-/*
-    C:/Users/myUser/OnlineStore/Images/ProductImageName.jpeg
-    
-    ProductImageName it will be a GUID.
-    GUID as string will be 36 characters, example: f8d66900-e3cd-473c-9ef4-6674663828eb
-    
-    Then it will be X of characters.
-    X = 2 + 1 + 5 + 1 + 5 + 1 + 11 + 1 + 6 + 36 (GUID as string) + 1 + 4
-    X = 75.
-    
-    Example on it: 
-        C:/Users/myUser/OnlineStore/Images/f8d66900-e3cd-473c-9ef4-6674663828eb.jpeg
-*/
 GO
 
 ----////////////////////////////

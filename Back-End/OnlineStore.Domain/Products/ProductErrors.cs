@@ -9,7 +9,7 @@ public static class ProductErrors
         "No product was found.",
         ErrorType.NotFound);
     
-    public static Error NotFound(Guid productId) => Error.NotFound(
+    public static Error NotFound(int productId) => Error.NotFound(
         "Products.NotFound",
         $"Product with Id = '{productId}' not found");
 }
